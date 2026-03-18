@@ -51,7 +51,7 @@ export default function Home() {
             </span>
             {/* FIXED: text-neutral-400 -> text-neutral-600 */}
             <span className="text-xs font-black uppercase tracking-widest text-neutral-600">
-              Se Habla Español
+              Se Habla Español1
             </span>
           </div>
           
