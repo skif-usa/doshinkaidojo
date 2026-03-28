@@ -191,6 +191,12 @@ export default function ClassRegistration() {
                 <input type="hidden" name="selectedPlan" value={selectedPlan || "None Selected"} />
                 <input type="hidden" name="topic" value="Class Registration" />
 
+                {/* HONEYPOT SPAM PROTECTION */}
+                <div className="hidden" aria-hidden="true">
+                  <label htmlFor="botcheck">Do not fill this out if you are human:</label>
+                  <input type="text" id="botcheck" name="botcheck" autoComplete="off" tabIndex={-1} />
+                </div>
+
                 {/* Name Row */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="relative group">

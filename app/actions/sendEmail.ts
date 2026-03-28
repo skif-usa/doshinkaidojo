@@ -2,11 +2,19 @@
 
 import { Resend } from 'resend';
 
-// Initialize Resend with your API key from .env (Hostinger) or .env.local
+// Initialize Resend with your API key
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function sendContactEmail(formData: FormData) {
-  // Extract all possible fields across your 3 different forms
+  // 1. HONEYPOT SPAM CHECK: If this field has text, it's a bot!
+  const botcheck = formData.get('botcheck');
+  if (botcheck !== null && botcheck !== '') {
+    console.log("Spam bot blocked by Honeypot!");
+    // Return success so the bot thinks it worked and leaves us alone
+    return { success: true }; 
+  }
+
+  // 2. Extract all possible fields across your 3 different forms
   const firstName = formData.get('firstName') || '';
   const lastName = formData.get('lastName') || '';
   const email = formData.get('email') || '';
@@ -20,7 +28,7 @@ export async function sendContactEmail(formData: FormData) {
   const experience = formData.get('experience') || formData.get('currentRank');
   const preferredTime = formData.get('preferredTime');
 
-  // Build the email HTML dynamically based on what was submitted
+  // 3. Build the email HTML dynamically based on what was submitted
   let htmlContent = `
     <h2>New Dojo Submission</h2>
     <p><strong>Name:</strong> ${firstName} ${lastName}</p>
@@ -37,19 +45,18 @@ export async function sendContactEmail(formData: FormData) {
   htmlContent += `<br/><p><strong>Message / Notes / Goals:</strong></p><p>${message}</p>`;
 
   try {
+    // 4. Send the email via Resend
     await resend.emails.send({
-      // Resend requires you to use their onboarding email address until you verify your domain
       from: 'Doshinkai Dojo <onboarding@resend.dev>', 
-      to: 'dskdojo1@gmail.com', // Your actual email address
+      to: 'david.herascu@gmail.com', // Your registered Resend email address
       subject: `New Dojo Inquiry: ${firstName} ${lastName}`,
-      // Safety net: if email is blank, default to your email so it doesn't crash the server
-      replyTo: email ? (email as string) : 'dskdojo1@gmail.com',
+      replyTo: email ? (email as string) : 'david.herascu@gmail.com',
       html: htmlContent,
     });
 
     return { success: true };
   } catch (error) {
-    console.error(error);
+    console.error("Resend Error:", error);
     return { success: false, error: 'Failed to send email' };
   }
 }
