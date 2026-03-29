@@ -6,29 +6,27 @@ import { Resend } from 'resend';
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function sendContactEmail(formData: FormData) {
-  // 1. HONEYPOT SPAM CHECK: If this field has text, it's a bot!
+  // 1. SPAM BOT PROTECTION (HONEYPOT)
   const botcheck = formData.get('botcheck');
-  if (botcheck !== null && botcheck !== '') {
-    console.log("Spam bot blocked by Honeypot!");
-    // Return success so the bot thinks it worked and leaves us alone
+  if (typeof botcheck === 'string' && botcheck.trim().length > 0) {
+    console.log("Spam bot blocked!");
     return { success: true }; 
   }
 
-  // 2. Extract all possible fields across your 3 different forms
+  // 2. Extract Data
   const firstName = formData.get('firstName') || '';
   const lastName = formData.get('lastName') || '';
   const email = formData.get('email') || '';
   const phone = formData.get('phone') || 'Not provided';
   const topic = formData.get('topic') || 'New Inquiry';
   
-  // These fields vary depending on which form is submitted
   const message = formData.get('message') || formData.get('medicalNotes') || formData.get('goals') || 'No message provided';
   const selectedPlan = formData.get('selectedPlan');
   const age = formData.get('age');
   const experience = formData.get('experience') || formData.get('currentRank');
   const preferredTime = formData.get('preferredTime');
 
-  // 3. Build the email HTML dynamically based on what was submitted
+  // 3. Build HTML
   let htmlContent = `
     <h2>New Dojo Submission</h2>
     <p><strong>Name:</strong> ${firstName} ${lastName}</p>
@@ -46,17 +44,26 @@ export async function sendContactEmail(formData: FormData) {
 
   try {
     // 4. Send the email via Resend
-    await resend.emails.send({
+    const { data, error } = await resend.emails.send({
       from: 'Doshinkai Dojo <onboarding@resend.dev>', 
-      to: 'david.herascu@gmail.com', // Your registered Resend email address
+      // Sends all emails to the Dojo
+      to: 'dskdojo1@gmail.com', 
       subject: `New Dojo Inquiry: ${firstName} ${lastName}`,
-      replyTo: email ? (email as string) : 'david.herascu@gmail.com',
+      replyTo: email ? (email as string) : 'dskdojo1@gmail.com',
       html: htmlContent,
     });
 
-    return { success: true };
+    // 5. Error Check
+    if (error) {
+      console.error("Resend completely blocked the email:", error);
+      return { success: false, error: error.message }; 
+    }
+
+    console.log("Email successfully sent:", data);
+    return { success: true }; 
+
   } catch (error) {
-    console.error("Resend Error:", error);
+    console.error("Server crashed:", error);
     return { success: false, error: 'Failed to send email' };
   }
 }
