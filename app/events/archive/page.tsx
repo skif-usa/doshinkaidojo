@@ -3,6 +3,12 @@ import Link from 'next/link';
 export default function EventArchive() {
   const events = [
     {
+      title: "2026 SKIF Cincinnati Gasshuku",
+      date: "June 5, 6 & 7, 2026",
+      image: "/2026_Kanazawa_Cincinnati.webp",
+      year: "2026"
+    },
+    {
       title: "Karate Seminar with Ruben Fung",
       date: "February 20 & 21, 2026",
       image: "/seminar_feb_20_21_2026.webp",

@@ -15,15 +15,15 @@ export default function EventsPage() {
     }
   };
 
-  const upcomingEvents = [
-    {
-      id: "kanazawa-gasshuku-2026",
-      title: "2026 SKIF Cincinnati Gasshuku",
-      date: "June 5, 6 & 7, 2026",
-      image: "/2026_Kanazawa_Cincinnati.webp",
-      shortDesc: "Train with Kancho Nobuaki Kanazawa, Director of the Shotokan Karate-Do International Federation, visiting from Tokyo, Japan!",
-      registerLink: "https://docs.google.com/forms/d/e/1FAIpQLSdXt7bkAcAO9mfagk71xQrxT-4r0WhEjzW8rro66eXZFeOMuA/viewform"
-    }
+  const upcomingEvents: {
+    id: string;
+    title: string;
+    date: string;
+    image: string;
+    shortDesc: string;
+    registerLink: string;
+  }[] = [
+    // No upcoming events scheduled at the moment.
     // You can easily add more events to this list in the future!
   ];
 
@@ -51,7 +51,19 @@ export default function EventsPage() {
       {/* 2. EVENTS FEED */}
       <section className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col space-y-12">
-          
+
+          {upcomingEvents.length === 0 && (
+            <div className="border border-neutral-200 bg-neutral-50 py-20 px-8 text-center">
+              <div className="w-16 h-1.5 bg-red-700 mb-8 mx-auto"></div>
+              <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tighter text-black mb-4">
+                No Upcoming Events Right Now
+              </h2>
+              <p className="text-lg text-neutral-500 font-medium max-w-xl mx-auto">
+                We&apos;re busy planning our next seminars and training camps. Check back soon, or explore our past events below.
+              </p>
+            </div>
+          )}
+
           {upcomingEvents.map((event) => {
             const isExpanded = expandedEvent === event.id;
 
