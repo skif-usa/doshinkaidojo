@@ -10,6 +10,7 @@ export default function Registry() {
     { name: "Fung, Rubén", rank: "Rokudan", desc: "6th Degree Black Belt" },
     { name: "Kikuchi Lavalette, Yukiko", rank: "Yondan", desc: "4th Degree Black Belt" },
     { name: "Hayatghaibi, Shireen", rank: "Sandan", desc: "3rd Degree Black Belt" },
+    { name: "Beleño, Jorge", rank: "Shodan", desc: "1st Degree Black Belt" },
     { name: "Guzman, Juan", rank: "Shodan", desc: "1st Degree Black Belt" },
     { name: "Kolachina, Ravi", rank: "Shodan", desc: "1st Degree Black Belt" },
     { name: "Kolachina, Lasya", rank: "Shodan", desc: "1st Degree Black Belt" },

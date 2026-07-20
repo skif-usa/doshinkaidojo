@@ -3,9 +3,20 @@
 import { useState } from 'react';
 import Link from 'next/link';
 
+type EventLangContent = {
+  shortDesc: string;
+  schedule: string[];
+  pricing: string[];
+  note: string;
+  quote: string;
+  labels: { location: string; schedule: string; cost: string; contactInfo: string; register: string };
+};
+
 export default function EventsPage() {
   // We use state to track which event card is currently expanded
   const [expandedEvent, setExpandedEvent] = useState<string | null>(null);
+  // Language toggle per event card (defaults to Spanish for this event)
+  const [eventLang, setEventLang] = useState<Record<string, 'es' | 'en'>>({});
 
   const toggleEvent = (id: string) => {
     if (expandedEvent === id) {
@@ -20,11 +31,50 @@ export default function EventsPage() {
     title: string;
     date: string;
     image: string;
-    shortDesc: string;
     registerLink: string;
+    location: { name: string; address: string[] };
+    contact: { name: string; phone: string; email: string };
+    content: { es: EventLangContent; en: EventLangContent };
   }[] = [
-    // No upcoming events scheduled at the moment.
-    // You can easily add more events to this list in the future!
+    {
+      id: "shugyo-2026",
+      title: "Shug Yo 2026",
+      date: "August 7 & 8, 2026",
+      image: "/shug_yo_2026.webp",
+      registerLink: "https://wa.me/5076842044",
+      location: {
+        name: "Gimnasio del Colegio de La Salle",
+        address: [
+          "Avenida San Juan Bautista de La Salle",
+          "El Cangrejo, Ciudad de Panamá",
+        ],
+      },
+      contact: { name: "Jorge J. Beleño", phone: "+507 6842-2044", email: "jorge.belenos@gmail.com" },
+      content: {
+        es: {
+          shortDesc: "Entrenamiento intenso con propósito: dos días de entrenamiento con el instructor invitado Sensei Rubén Fung, enfocados en biomecánica, precisión y comprensión técnica para practicantes de todos los niveles.",
+          schedule: [
+            "Viernes 7 de Agosto — 6:00 p.m. a 8:00 p.m.",
+            "Sábado 8 de Agosto — 1:00 p.m. a 4:00 p.m.",
+          ],
+          pricing: ["1 Día: US$25", "2 Días: US$40"],
+          note: "Cupos limitados para garantizar una experiencia de aprendizaje dinámica y una atención adecuada para todos los participantes.",
+          quote: "Perfecciona tu técnica, fortalece tu espíritu y comparte el camino del Karate-Do.",
+          labels: { location: "Ubicación y Fechas", schedule: "Horario de Entrenamiento", cost: "Costo de Participación", contactInfo: "Información y Reservaciones", register: "Reservar por WhatsApp" },
+        },
+        en: {
+          shortDesc: "Intense training with purpose: two days of training with guest instructor Sensei Rubén Fung, focused on biomechanics, precision, and technical understanding for practitioners of all levels.",
+          schedule: [
+            "Friday, August 7 — 6:00 p.m. to 8:00 p.m.",
+            "Saturday, August 8 — 1:00 p.m. to 4:00 p.m.",
+          ],
+          pricing: ["1 Day: US$25", "2 Days: US$40"],
+          note: "Space is limited to ensure a dynamic learning experience and proper attention for all participants.",
+          quote: "Perfect your technique, strengthen your spirit, and share the path of Karate-Do.",
+          labels: { location: "Location & Dates", schedule: "Training Schedule", cost: "Cost of Participation", contactInfo: "Information & Reservations", register: "Reserve via WhatsApp" },
+        },
+      },
+    },
   ];
 
   return (
@@ -66,6 +116,8 @@ export default function EventsPage() {
 
           {upcomingEvents.map((event) => {
             const isExpanded = expandedEvent === event.id;
+            const lang = eventLang[event.id] ?? 'es';
+            const t = event.content[lang];
 
             return (
               <div key={event.id} className="bg-neutral-50 border border-neutral-200 hover:border-black transition-colors duration-500 relative group overflow-hidden">
@@ -89,14 +141,32 @@ export default function EventsPage() {
                     
                     {/* Header Info */}
                     <div className="mb-6">
-                      <span className="text-xs font-black uppercase tracking-widest text-red-700 mb-4 block">
-                        {event.date}
-                      </span>
+                      <div className="flex items-center justify-between gap-4 mb-4">
+                        <span className="text-xs font-black uppercase tracking-widest text-red-700 block">
+                          {event.date}
+                        </span>
+                        {/* Language Toggle */}
+                        <div className="flex items-center text-xs font-bold uppercase tracking-widest">
+                          <button
+                            onClick={() => setEventLang((prev) => ({ ...prev, [event.id]: 'es' }))}
+                            className={lang === 'es' ? 'text-black border-b-2 border-red-700 pb-0.5' : 'text-neutral-400 hover:text-black pb-0.5'}
+                          >
+                            ES
+                          </button>
+                          <span className="mx-2 text-neutral-300">|</span>
+                          <button
+                            onClick={() => setEventLang((prev) => ({ ...prev, [event.id]: 'en' }))}
+                            className={lang === 'en' ? 'text-black border-b-2 border-red-700 pb-0.5' : 'text-neutral-400 hover:text-black pb-0.5'}
+                          >
+                            EN
+                          </button>
+                        </div>
+                      </div>
                       <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter text-black mb-4 leading-none">
                         {event.title}
                       </h2>
                       <p className="text-lg text-neutral-600 leading-relaxed font-medium">
-                        {event.shortDesc}
+                        {t.shortDesc}
                       </p>
                     </div>
 
@@ -118,48 +188,49 @@ export default function EventsPage() {
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-10">
                           {/* Location Block */}
                           <div>
-                            <h4 className="text-xs font-bold uppercase tracking-widest text-neutral-400 mb-3">Location & Dates</h4>
-                            <p className="text-black font-bold mb-1">Aikido of Cincinnati Facility</p>
+                            <h4 className="text-xs font-bold uppercase tracking-widest text-neutral-400 mb-3">{t.labels.location}</h4>
+                            <p className="text-black font-bold mb-1">{event.location.name}</p>
                             <p className="text-sm text-neutral-600 leading-relaxed">
-                              6620 Montgomery Rd.<br />
-                              Cincinnati, OH 45213<br />
+                              {event.location.address.map((line) => (
+                                <span key={line}>{line}<br /></span>
+                              ))}
                               <span className="text-red-700 font-bold mt-2 block">{event.date}</span>
                             </p>
                           </div>
 
                           {/* Training Schedule Block */}
                           <div>
-                            <h4 className="text-xs font-bold uppercase tracking-widest text-neutral-400 mb-3">Training Schedule</h4>
-                            <p className="text-black font-bold mb-2">6 Total Sessions:</p>
+                            <h4 className="text-xs font-bold uppercase tracking-widest text-neutral-400 mb-3">{t.labels.schedule}</h4>
                             <ul className="text-sm text-neutral-600 space-y-1">
-                              <li>• 4 General Training Sessions</li>
-                              <li>• 1 Instructor Training Session</li>
-                              <li>• 1 Private Session</li>
+                              {t.schedule.map((session) => (
+                                <li key={session}>• {session}</li>
+                              ))}
                             </ul>
                           </div>
                         </div>
 
-                        {/* Hotel Accommodation Block */}
+                        {/* Pricing & Contact Block */}
                         <div className="bg-white p-6 border border-neutral-100 mb-10">
-                          <h4 className="text-xs font-bold uppercase tracking-widest text-red-700 mb-4">Accommodation</h4>
-                          <p className="text-sm text-neutral-600 mb-4">A special group rate has been arranged at:</p>
-                          
+                          <h4 className="text-xs font-bold uppercase tracking-widest text-red-700 mb-4">{t.labels.cost}</h4>
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                            <div>
-                              <p className="font-bold text-black mb-1">Wingate by Wyndham – Blue Ash</p>
-                              <p className="text-sm text-neutral-600 leading-relaxed">
-                                4320 Glendale-Milford Rd<br />
-                                Blue Ash, OH 45242<br />
-                                Phone: (513) 733-1142
-                              </p>
-                            </div>
+                            <ul className="text-sm text-neutral-600 space-y-1">
+                              {t.pricing.map((price) => (
+                                <li key={price}><strong className="text-black">{price}</strong></li>
+                              ))}
+                            </ul>
                             <div className="text-sm text-neutral-600">
-                              <p><strong className="text-black">Rate:</strong> $119.00/night + tax</p>
-                              <p><strong className="text-black">Code:</strong> 2026 SKIF Karate Camp</p>
-                              <div className="mt-3">
-                                <strong className="text-black block mb-1">Amenities:</strong>
-                                Free parking, Indoor pool, Wi-Fi, Hot buffet breakfast.
-                              </div>
+                              <p className="mb-1"><strong className="text-black">{t.labels.contactInfo}:</strong></p>
+                              <p className="mb-1">{event.contact.name}</p>
+                              <p>
+                                <a href={`tel:${event.contact.phone.replace(/[^+\d]/g, '')}`} className="hover:text-red-700 transition-colors">
+                                  {event.contact.phone}
+                                </a>
+                              </p>
+                              <p>
+                                <a href={`mailto:${event.contact.email}`} className="hover:text-red-700 transition-colors">
+                                  {event.contact.email}
+                                </a>
+                              </p>
                             </div>
                           </div>
                         </div>
@@ -167,17 +238,17 @@ export default function EventsPage() {
                         {/* Closing & CTA */}
                         <div className="bg-red-50 p-6 border-l-4 border-red-700 mb-10">
                           <p className="text-red-900 font-bold text-sm">
-                            🔥 Early Bird Special is available until April 30th. Register early to secure your spot! Open to all styles, ages, and affiliations.
+                            🔥 {t.note}
                           </p>
                         </div>
 
                         <p className="text-xl font-black uppercase tracking-tight text-black mb-8 italic">
-                          "Train hard. Grow together. Experience the true spirit of karate."
+                          "{t.quote}"
                         </p>
 
                         <div className="flex flex-col sm:flex-row items-center gap-4">
                           {/* Register Button (External Link) */}
-                          <a 
+                          <a
                             href={event.registerLink}
                             target="_blank"
                             rel="noopener noreferrer"
@@ -185,7 +256,7 @@ export default function EventsPage() {
                           >
                             <span className="absolute inset-0 w-full h-full bg-red-700 -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
                             <span className="relative flex items-center gap-3">
-                              Register Now
+                              {t.labels.register}
                               <svg className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
                             </span>
                           </a>
