@@ -1,4 +1,10 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Karate History',
+  description: 'From Gichin Funakoshi in Okinawa to Hirokazu Kanazawa and the founding of SKIF: the origins and lineage of traditional Shotokan Karate.',
+};
 
 export default function KarateHistory() {
   const karateLayers = [

@@ -1,3 +1,10 @@
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Global Network',
+  description: 'Doshinkai Dojo is affiliated with SKIF-USA, SKIF World, and the SKIF Yudansha-Kai — explore our network of traditional martial arts organizations.',
+};
+
 export default function Resources() {
   const resources = [
     {

@@ -1,4 +1,10 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Event Archive',
+  description: 'A gallery of past seminars, gasshukus, and clinics hosted by Doshinkai Dojo, including visits from SKIF instructors from Japan and Panama.',
+};
 
 export default function EventArchive() {
   const events = [

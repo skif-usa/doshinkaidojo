@@ -50,6 +50,9 @@ export default function Navbar() {
                 <span className="w-1.5 h-1.5 rounded-full bg-red-600"></span>
                 Cincinnati, OH
               </span>
+              <span className="hover:text-white transition-colors cursor-default">
+                S.K.I.F. Member Dojo
+              </span>
             </div>
             <div className="flex gap-6">
               <a href="tel:+18325130058" className="hover:text-white transition-colors">P: (832) 513-0058</a>

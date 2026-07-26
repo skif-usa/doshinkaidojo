@@ -7,6 +7,7 @@ export default function Home() {
     "@context": "https://schema.org",
     "@type": "SportsActivityLocation",
     "name": "Doshinkai Dojo",
+    "image": "https://doshinkaidojo.com/hero_image.webp",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "6620 Montgomery Road, Suite 3",
@@ -15,8 +16,20 @@ export default function Home() {
       "postalCode": "45213",
       "addressCountry": "US"
     },
+    "areaServed": "Cincinnati, OH",
     "telephone": "+1-832-513-0058",
-    "url": "https://doshinkaidojo.com" 
+    "email": "dskdojo1@gmail.com",
+    "url": "https://doshinkaidojo.com",
+    "memberOf": {
+      "@type": "Organization",
+      "name": "Shotokan Karate-Do International Federation - USA (SKIF-USA)",
+      "url": "https://skifusa.org"
+    },
+    "openingHoursSpecification": [
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "13:30", "closes": "15:30" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": "Wednesday", "opens": "17:15", "closes": "18:15" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "13:30", "closes": "15:30" }
+    ]
   };
 
   return (
@@ -228,7 +241,17 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 4. COMMUNITY / WE SUPPORT BANNER */}
+      {/* 4. AFFILIATION BANNER */}
+      <section className="bg-white py-16 border-t border-neutral-200 text-center">
+        <div className="max-w-4xl mx-auto px-4">
+          <p className="text-xs font-black uppercase tracking-widest text-red-700 mb-4">Affiliation</p>
+          <p className="text-lg md:text-xl text-neutral-700 leading-relaxed max-w-3xl mx-auto">
+            The members of Doshinkai Dojo are proudly affiliated with <strong className="text-black">SKIF-USA</strong>, connecting our students to one of the world&apos;s largest and most respected traditional karate organizations.
+          </p>
+        </div>
+      </section>
+
+      {/* 5. COMMUNITY / WE SUPPORT BANNER */}
       <section className="bg-white py-16 border-t border-neutral-200 text-center">
         <div className="max-w-4xl mx-auto px-4">
           <h4 className="text-xs font-black uppercase tracking-widest text-red-700 mb-4">Community</h4>
