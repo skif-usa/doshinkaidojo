@@ -2,6 +2,28 @@
 
 import { useRef, useState } from 'react';
 import { sendContactEmail } from '@/app/actions/sendEmail';
+import PageHeader from '@/components/PageHeader';
+import FormModal from '@/components/FormModal';
+import { fieldClass, labelClass } from '@/components/formStyles';
+
+const benefits = [
+  {
+    title: 'Tailored Curriculum',
+    desc: 'Every minute is designed around your specific body mechanics, learning speed, and personal martial arts goals.',
+  },
+  {
+    title: 'Accelerated Progress',
+    desc: 'Receive immediate, microscopic corrections on your form and technique that are impossible to provide in a large group setting.',
+  },
+  {
+    title: 'Tournament & Exam Prep',
+    desc: 'Dedicated focus on perfecting your Kata and Kumite for upcoming SKIF belt examinations or competitive tournaments.',
+  },
+  {
+    title: 'Flexible Scheduling',
+    desc: 'Train at times that work for your busy lifestyle. Sessions are scheduled directly with the instructor.',
+  },
+];
 
 export default function PrivateClassForm() {
   const formRef = useRef<HTMLFormElement>(null);
@@ -19,125 +41,79 @@ export default function PrivateClassForm() {
     }
   };
 
-  const benefits = [
-    {
-      title: "Tailored Curriculum",
-      desc: "Every minute is designed around your specific body mechanics, learning speed, and personal martial arts goals."
-    },
-    {
-      title: "Accelerated Progress",
-      desc: "Receive immediate, microscopic corrections on your form and technique that are impossible to provide in a large group setting."
-    },
-    {
-      title: "Tournament & Exam Prep",
-      desc: "Dedicated focus on perfecting your Kata and Kumite for upcoming SKIF belt examinations or competitive tournaments."
-    },
-    {
-      title: "Flexible Scheduling",
-      desc: "Train at times that work for your busy lifestyle. Sessions are scheduled directly with the instructor."
-    }
-  ];
-
   return (
-    <div className="min-h-screen bg-white text-neutral-900 selection:bg-red-700 selection:text-white pb-24 relative">
-
-      {/* --- SUCCESS MODAL OVERLAY --- */}
+    <div className="bg-white text-ink">
       {status === 'success' && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 animate-in fade-in duration-300">
-          <div className="bg-white p-10 max-w-md w-full border-t-8 border-red-700 shadow-2xl relative text-center">
-            <div className="w-20 h-20 bg-red-50 text-red-700 rounded-full flex items-center justify-center mx-auto mb-6">
-              <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>
-            </div>
-            <h3 className="text-3xl font-black uppercase tracking-tighter text-black mb-4">Request Received</h3>
-            <p className="text-neutral-500 mb-8 leading-relaxed">
-              Thank you! Your private session request has been successfully delivered. Sensei Fung will contact you directly to discuss availability and pricing.
-            </p>
-            <button
-              onClick={() => setStatus('idle')}
-              className="w-full bg-black text-white font-bold uppercase tracking-widest py-4 hover:bg-red-700 transition-colors duration-300"
-            >
-              Close Window
-            </button>
-          </div>
-        </div>
+        <FormModal
+          tone="success"
+          title="Request received"
+          body="Thank you! Your private session request has been successfully delivered. Sensei Fung will contact you directly to discuss availability and pricing."
+          actionLabel="Close window"
+          onClose={() => setStatus('idle')}
+        />
       )}
 
-      {/* --- ERROR MODAL OVERLAY --- */}
       {status === 'error' && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 animate-in fade-in duration-300">
-          <div className="bg-white p-10 max-w-md w-full border-t-8 border-black shadow-2xl relative text-center">
-            <div className="w-20 h-20 bg-neutral-100 text-black rounded-full flex items-center justify-center mx-auto mb-6">
-              <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M6 18L18 6M6 6l12 12"></path></svg>
-            </div>
-            <h3 className="text-3xl font-black uppercase tracking-tighter text-black mb-4">Transmission Failed</h3>
-            <p className="text-neutral-500 mb-8 leading-relaxed">
-              Oops! Something went wrong while sending your request. Please try again or contact us directly via email.
-            </p>
-            <button
-              onClick={() => setStatus('idle')}
-              className="w-full bg-red-700 text-white font-bold uppercase tracking-widest py-4 hover:bg-black transition-colors duration-300"
-            >
-              Try Again
-            </button>
-          </div>
-        </div>
+        <FormModal
+          tone="error"
+          title="Something went wrong"
+          body="Oops! Something went wrong while sending your request. Please try again or contact us directly via email."
+          actionLabel="Try again"
+          onClose={() => setStatus('idle')}
+        />
       )}
 
-      {/* 1. CINEMATIC HEADER */}
-      <section className="relative pt-[120px] md:pt-[180px] pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-b border-neutral-200">
-        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8">
-          <div>
-            <div className="w-16 h-1.5 bg-red-700 mb-8"></div>
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black uppercase tracking-tighter leading-[0.9] text-black">
-              Private <br />
-              <span className="text-neutral-300">Instruction</span>
-            </h1>
-          </div>
-          <div className="max-w-md">
-            <p className="text-lg text-neutral-500 font-medium leading-relaxed">
-              Experience the ultimate acceleration in your martial arts journey with exclusive, 1-on-1 training sessions tailored entirely to your goals.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHeader
+        label="Private instruction"
+        title="Private instruction"
+        intro="Experience the ultimate acceleration in your martial arts journey with exclusive, 1-on-1 training sessions tailored entirely to your goals."
+      />
 
-      {/* 2. WHY PRIVATE INSTRUCTION (VIP Section) */}
-      <section className="bg-black text-white py-24 my-16">
+      {/* ── THE ADVANTAGE ────────────────────────────────────── */}
+      <section className="bg-steel text-white py-16 lg:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
-
-            <div className="lg:col-span-4">
-              <h3 className="text-xs font-black uppercase tracking-widest text-red-600 mb-2">The Advantage</h3>
-              <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter mb-6">Mastery, <br /> Accelerated.</h2>
-              <p className="text-neutral-400 text-lg leading-relaxed">
-                Whether you are a beginner wanting to build a flawless foundation, or an advanced practitioner preparing for a Dan grading, private instruction provides the dedicated focus required for elite performance.
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 mb-12">
+            <div className="lg:col-span-5">
+              <p className="label text-white/50 mb-6">The advantage</p>
+              <h2 className="font-display font-extrabold text-3xl lg:text-[2.5rem] leading-[1.1]">
+                Mastery, accelerated
+              </h2>
+            </div>
+            <div className="lg:col-span-7 lg:pt-14">
+              <p className="text-lg text-white/70 leading-relaxed">
+                Whether you are a beginner wanting to build a flawless foundation, or an advanced practitioner preparing
+                for a Dan grading, private instruction provides the dedicated focus required for elite performance.
               </p>
             </div>
+          </div>
 
-            <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-8">
-              {benefits.map((item, index) => (
-                <div key={index} className="border-l-2 border-red-700 pl-6">
-                  <span className="text-red-700 font-black text-sm mb-2 block">0{index + 1}</span>
-                  <h4 className="text-xl font-bold uppercase tracking-tight text-white mb-3">{item.title}</h4>
-                  <p className="text-neutral-400 text-sm leading-relaxed">{item.desc}</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-0">
+            {benefits.map((item, i) => (
+              <div key={item.title} className="flex gap-6 py-7 border-t border-steel-line">
+                <span className="font-display font-bold text-sm text-dojo tnum pt-1 shrink-0">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <div>
+                  <h3 className="font-display font-extrabold text-lg mb-2.5">{item.title}</h3>
+                  <p className="text-white/65 leading-relaxed">{item.desc}</p>
                 </div>
-              ))}
-            </div>
-
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* 3. BOOKING FORM */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
-        <div className="bg-neutral-50 p-8 md:p-12 border border-neutral-200">
-
-          <div className="mb-12 text-center md:text-left">
-            <h2 className="text-xs font-black uppercase tracking-widest text-red-700 mb-2">Request A Session</h2>
-            <h3 className="text-3xl font-black uppercase tracking-tighter text-black">Consultation Inquiry</h3>
+      {/* ── BOOKING FORM ─────────────────────────────────────── */}
+      <section className="py-16 lg:py-24">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-10">
+            <p className="label text-ink-faint mb-6">Request a session</p>
+            <h2 className="font-display font-extrabold text-3xl lg:text-[2.5rem] leading-[1.1]">
+              Consultation inquiry
+            </h2>
           </div>
 
-          <form ref={formRef} action={handleSubmit} className="space-y-10">
+          <form ref={formRef} action={handleSubmit} className="space-y-7">
             <input type="hidden" name="topic" value="Private Class Request" />
 
             {/* HONEYPOT SPAM PROTECTION */}
@@ -146,90 +122,86 @@ export default function PrivateClassForm() {
               <input type="text" id="botcheck" name="botcheck" autoComplete="off" tabIndex={-1} />
             </div>
 
-            {/* Name Row */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="relative group">
-                <input type="text" id="firstName" name="firstName" required className="w-full bg-transparent border-b-2 border-neutral-300 py-3 text-lg font-medium text-black focus:outline-none focus:border-red-700 transition-colors peer" placeholder=" " />
-                <label htmlFor="firstName" className="absolute left-0 top-3 text-neutral-400 text-lg font-medium transition-all duration-300 peer-focus:-top-4 peer-focus:text-xs peer-focus:text-red-700 peer-focus:font-bold peer-focus:uppercase peer-focus:tracking-widest peer-valid:-top-4 peer-valid:text-xs peer-valid:text-black peer-valid:font-bold peer-valid:uppercase peer-valid:tracking-widest cursor-text">
-                  First Name
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label htmlFor="firstName" className={labelClass}>
+                  First name <span className="text-dojo">*</span>
                 </label>
+                <input type="text" id="firstName" name="firstName" required autoComplete="given-name" className={fieldClass} />
               </div>
-              <div className="relative group">
-                <input type="text" id="lastName" name="lastName" required className="w-full bg-transparent border-b-2 border-neutral-300 py-3 text-lg font-medium text-black focus:outline-none focus:border-red-700 transition-colors peer" placeholder=" " />
-                <label htmlFor="lastName" className="absolute left-0 top-3 text-neutral-400 text-lg font-medium transition-all duration-300 peer-focus:-top-4 peer-focus:text-xs peer-focus:text-red-700 peer-focus:font-bold peer-focus:uppercase peer-focus:tracking-widest peer-valid:-top-4 peer-valid:text-xs peer-valid:text-black peer-valid:font-bold peer-valid:uppercase peer-valid:tracking-widest cursor-text">
-                  Last Name
+              <div>
+                <label htmlFor="lastName" className={labelClass}>
+                  Last name <span className="text-dojo">*</span>
                 </label>
-              </div>
-            </div>
-
-            {/* Contact Row */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="relative group">
-                <input type="email" id="email" name="email" required className="w-full bg-transparent border-b-2 border-neutral-300 py-3 text-lg font-medium text-black focus:outline-none focus:border-red-700 transition-colors peer" placeholder=" " />
-                <label htmlFor="email" className="absolute left-0 top-3 text-neutral-400 text-lg font-medium transition-all duration-300 peer-focus:-top-4 peer-focus:text-xs peer-focus:text-red-700 peer-focus:font-bold peer-focus:uppercase peer-focus:tracking-widest peer-valid:-top-4 peer-valid:text-xs peer-valid:text-black peer-valid:font-bold peer-valid:uppercase peer-valid:tracking-widest cursor-text">
-                  Email Address
-                </label>
-              </div>
-              <div className="relative group">
-                <input type="tel" id="phone" name="phone" required className="w-full bg-transparent border-b-2 border-neutral-300 py-3 text-lg font-medium text-black focus:outline-none focus:border-red-700 transition-colors peer" placeholder=" " />
-                <label htmlFor="phone" className="absolute left-0 top-3 text-neutral-400 text-lg font-medium transition-all duration-300 peer-focus:-top-4 peer-focus:text-xs peer-focus:text-red-700 peer-focus:font-bold peer-focus:uppercase peer-focus:tracking-widest peer-valid:-top-4 peer-valid:text-xs peer-valid:text-black peer-valid:font-bold peer-valid:uppercase peer-valid:tracking-widest cursor-text">
-                  Phone Number
-                </label>
+                <input type="text" id="lastName" name="lastName" required autoComplete="family-name" className={fieldClass} />
               </div>
             </div>
 
-            {/* Training Details Row */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="relative group">
-                <select id="currentRank" name="currentRank" required defaultValue="" className="w-full bg-transparent border-b-2 border-neutral-300 py-3 text-lg font-medium text-black focus:outline-none focus:border-red-700 transition-colors appearance-none cursor-pointer">
-                  <option value="" disabled hidden>Current Rank / Experience</option>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label htmlFor="email" className={labelClass}>
+                  Email address <span className="text-dojo">*</span>
+                </label>
+                <input type="email" id="email" name="email" required autoComplete="email" className={fieldClass} />
+              </div>
+              <div>
+                <label htmlFor="phone" className={labelClass}>
+                  Phone number <span className="text-dojo">*</span>
+                </label>
+                <input type="tel" id="phone" name="phone" required autoComplete="tel" className={fieldClass} />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label htmlFor="currentRank" className={labelClass}>
+                  Current rank / experience <span className="text-dojo">*</span>
+                </label>
+                <select id="currentRank" name="currentRank" required defaultValue="" className={`${fieldClass} cursor-pointer`}>
+                  <option value="" disabled>
+                    Select your rank
+                  </option>
                   <option value="None / Beginner">None / Complete Beginner</option>
                   <option value="White/Yellow/Orange">White / Yellow / Orange Belt</option>
                   <option value="Green/Blue/Purple">Green / Blue / Purple Belt</option>
                   <option value="Brown Belt">Brown Belt</option>
                   <option value="Black Belt">Black Belt (Dan)</option>
                 </select>
-                <div className="absolute right-0 top-4 pointer-events-none">
-                  <svg className="w-5 h-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
-                </div>
               </div>
-              <div className="relative group">
-                <input type="text" id="preferredTime" name="preferredTime" required className="w-full bg-transparent border-b-2 border-neutral-300 py-3 text-lg font-medium text-black focus:outline-none focus:border-red-700 transition-colors peer" placeholder=" " />
-                <label htmlFor="preferredTime" className="absolute left-0 top-3 text-neutral-400 text-lg font-medium transition-all duration-300 peer-focus:-top-4 peer-focus:text-xs peer-focus:text-red-700 peer-focus:font-bold peer-focus:uppercase peer-focus:tracking-widest peer-valid:-top-4 peer-valid:text-xs peer-valid:text-black peer-valid:font-bold peer-valid:uppercase peer-valid:tracking-widest cursor-text">
-                  Preferred Days / Times
+              <div>
+                <label htmlFor="preferredTime" className={labelClass}>
+                  Preferred days / times <span className="text-dojo">*</span>
                 </label>
+                <input type="text" id="preferredTime" name="preferredTime" required className={fieldClass} />
               </div>
             </div>
 
-            {/* Goals */}
-            <div className="relative group pt-4">
-              <textarea id="goals" name="goals" required rows={4} className="w-full bg-transparent border-b-2 border-neutral-300 py-3 text-lg font-medium text-black focus:outline-none focus:border-red-700 transition-colors peer resize-none" placeholder=" "></textarea>
-              <label htmlFor="goals" className="absolute left-0 top-6 text-neutral-400 text-lg font-medium transition-all duration-300 peer-focus:-top-4 peer-focus:text-xs peer-focus:text-red-700 peer-focus:font-bold peer-focus:uppercase peer-focus:tracking-widest peer-valid:-top-4 peer-valid:text-xs peer-valid:text-black peer-valid:font-bold peer-valid:uppercase peer-valid:tracking-widest cursor-text">
-                What are your specific training goals?
+            <div>
+              <label htmlFor="goals" className={labelClass}>
+                What are your specific training goals? <span className="text-dojo">*</span>
               </label>
+              <textarea id="goals" name="goals" required rows={5} className={`${fieldClass} resize-y`} />
             </div>
 
-            {/* Submit Button */}
-            <div className="pt-6">
+            <div className="pt-2">
               <button
                 type="submit"
                 disabled={status === 'submitting'}
-                className={`w-full relative inline-flex items-center justify-center px-10 py-5 text-sm font-bold uppercase tracking-widest text-white bg-black overflow-hidden shadow-xl transition-all duration-300 group ${status === 'submitting' ? 'opacity-80 cursor-not-allowed' : 'hover:-translate-y-1'}`}
+                className={`w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-dojo text-white font-semibold px-8 py-4 rounded-md transition-colors duration-200 ${
+                  status === 'submitting' ? 'opacity-70 cursor-not-allowed' : 'hover:bg-dojo-deep cursor-pointer'
+                }`}
               >
-                <span className="absolute inset-0 w-full h-full bg-red-700 -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
-                <span className="relative flex items-center gap-3">
-                  {status === 'submitting' ? 'SENDING...' : 'REQUEST PRIVATE SESSION'}
-                  {status !== 'submitting' && <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>}
-                </span>
+                {status === 'submitting' ? 'Sending…' : 'Request consultation'}
+                {status !== 'submitting' && <span aria-hidden="true">→</span>}
               </button>
-              <p className="text-center text-xs font-bold uppercase tracking-widest text-neutral-400 mt-6">
+
+              <p className="text-sm text-ink-faint mt-5">
                 Sensei Fung will contact you directly to discuss availability and pricing.
               </p>
             </div>
           </form>
         </div>
       </section>
-
     </div>
   );
 }

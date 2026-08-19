@@ -2,6 +2,9 @@
 
 import { useRef, useState } from 'react';
 import { sendContactEmail } from '@/app/actions/sendEmail';
+import PageHeader from '@/components/PageHeader';
+import FormModal from '@/components/FormModal';
+import { fieldClass, labelClass } from '@/components/formStyles';
 
 export default function ContactForm() {
   const formRef = useRef<HTMLFormElement>(null);
@@ -20,216 +23,182 @@ export default function ContactForm() {
   };
 
   return (
-    <div className="min-h-screen bg-white text-neutral-900 selection:bg-red-700 selection:text-white pb-24 relative">
-
-      {/* --- SUCCESS MODAL OVERLAY --- */}
+    <div className="bg-white text-ink">
       {status === 'success' && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 animate-in fade-in duration-300">
-          <div className="bg-white p-10 max-w-md w-full border-t-8 border-red-700 shadow-2xl relative text-center">
-            <div className="w-20 h-20 bg-red-50 text-red-700 rounded-full flex items-center justify-center mx-auto mb-6">
-              <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>
-            </div>
-            <h3 className="text-3xl font-black uppercase tracking-tighter text-black mb-4">Message Sent</h3>
-            <p className="text-neutral-500 mb-8 leading-relaxed">
-              Thank you! Your inquiry has been successfully delivered. Sensei will review it and get back to you shortly.
-            </p>
-            <button
-              onClick={() => setStatus('idle')}
-              className="w-full bg-black text-white font-bold uppercase tracking-widest py-4 hover:bg-red-700 transition-colors duration-300"
-            >
-              Close Window
-            </button>
-          </div>
-        </div>
+        <FormModal
+          tone="success"
+          title="Message sent"
+          body="Thank you! Your inquiry has been successfully delivered. Sensei will review it and get back to you shortly."
+          actionLabel="Close window"
+          onClose={() => setStatus('idle')}
+        />
       )}
 
-      {/* --- ERROR MODAL OVERLAY --- */}
       {status === 'error' && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 animate-in fade-in duration-300">
-          <div className="bg-white p-10 max-w-md w-full border-t-8 border-black shadow-2xl relative text-center">
-            <div className="w-20 h-20 bg-neutral-100 text-black rounded-full flex items-center justify-center mx-auto mb-6">
-              <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M6 18L18 6M6 6l12 12"></path></svg>
-            </div>
-            <h3 className="text-3xl font-black uppercase tracking-tighter text-black mb-4">Transmission Failed</h3>
-            <p className="text-neutral-500 mb-8 leading-relaxed">
-              Oops! Something went wrong while sending your message. Please try again or contact us directly via email.
-            </p>
-            <button
-              onClick={() => setStatus('idle')}
-              className="w-full bg-red-700 text-white font-bold uppercase tracking-widest py-4 hover:bg-black transition-colors duration-300"
-            >
-              Try Again
-            </button>
-          </div>
-        </div>
+        <FormModal
+          tone="error"
+          title="Something went wrong"
+          body="Oops! Something went wrong while sending your message. Please try again or contact us directly via email."
+          actionLabel="Try again"
+          onClose={() => setStatus('idle')}
+        />
       )}
 
+      <PageHeader
+        label="Contact"
+        title="Get in touch"
+        intro="Whether you have questions about our schedule, private training, or joining the dojo, our team is ready to assist you."
+      />
 
-      {/* 1. CINEMATIC HEADER */}
-      <section className="relative pt-[120px] md:pt-[180px] pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-b border-neutral-200">
-        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8">
-          <div>
-            <div className="w-16 h-1.5 bg-red-700 mb-8"></div>
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black uppercase tracking-tighter leading-[0.9] text-black">
-              Get In <br />
-              <span className="text-neutral-300">Touch</span>
-            </h1>
-          </div>
-          <div className="max-w-md">
-            <p className="text-lg text-neutral-500 font-medium leading-relaxed">
-              Whether you have questions about our schedule, private training, or joining the dojo, our team is ready to assist you.
-            </p>
-          </div>
-        </div>
-      </section>
+      <section className="py-16 lg:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
+            {/* FORM */}
+            <div className="lg:col-span-7">
+              <p className="label text-ink-faint mb-6">Direct message</p>
+              <h2 className="font-display font-extrabold text-3xl lg:text-[2.5rem] leading-[1.1] mb-10">
+                Send an inquiry
+              </h2>
 
-      {/* 2. CONTACT LAYOUT */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 lg:pt-24">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+              <form ref={formRef} action={handleSubmit} className="space-y-7">
+                {/* HONEYPOT SPAM PROTECTION */}
+                <div className="hidden" aria-hidden="true">
+                  <label htmlFor="botcheck">Do not fill this out if you are human:</label>
+                  <input type="text" id="botcheck" name="botcheck" autoComplete="off" tabIndex={-1} />
+                </div>
 
-          {/* LEFT COLUMN: The Form */}
-          <div className="lg:col-span-7 flex flex-col">
-            <div className="mb-12">
-              <h2 className="text-xs font-black uppercase tracking-widest text-red-700 mb-2">Direct Message</h2>
-              <h3 className="text-3xl font-black uppercase tracking-tighter text-black">Send an Inquiry</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label htmlFor="firstName" className={labelClass}>
+                      First name <span className="text-dojo">*</span>
+                    </label>
+                    <input type="text" id="firstName" name="firstName" required autoComplete="given-name" className={fieldClass} />
+                  </div>
+                  <div>
+                    <label htmlFor="lastName" className={labelClass}>
+                      Last name <span className="text-dojo">*</span>
+                    </label>
+                    <input type="text" id="lastName" name="lastName" required autoComplete="family-name" className={fieldClass} />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label htmlFor="email" className={labelClass}>
+                      Email address <span className="text-dojo">*</span>
+                    </label>
+                    <input type="email" id="email" name="email" required autoComplete="email" className={fieldClass} />
+                  </div>
+                  <div>
+                    <label htmlFor="phone" className={labelClass}>
+                      Phone number <span className="text-ink-faint font-normal normal-case tracking-normal">(optional)</span>
+                    </label>
+                    <input type="tel" id="phone" name="phone" autoComplete="tel" className={fieldClass} />
+                  </div>
+                </div>
+
+                <div>
+                  <label htmlFor="topic" className={labelClass}>
+                    Subject / topic <span className="text-dojo">*</span>
+                  </label>
+                  <select id="topic" name="topic" required defaultValue="" className={`${fieldClass} cursor-pointer`}>
+                    <option value="" disabled>
+                      Select a topic
+                    </option>
+                    <option value="General Classes">General Classes</option>
+                    <option value="Private Training">Private Training</option>
+                    <option value="Seminars / Events">Seminars / Events</option>
+                    <option value="Other Inquiry">Other Inquiry</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label htmlFor="message" className={labelClass}>
+                    How can we help you? <span className="text-dojo">*</span>
+                  </label>
+                  <textarea id="message" name="message" required rows={5} className={`${fieldClass} resize-y`} />
+                </div>
+
+                <div className="pt-2">
+                  <button
+                    type="submit"
+                    disabled={status === 'submitting'}
+                    className={`inline-flex items-center justify-center gap-2.5 bg-dojo text-white font-semibold px-8 py-4 rounded-md transition-colors duration-200 ${
+                      status === 'submitting' ? 'opacity-70 cursor-not-allowed' : 'hover:bg-dojo-deep cursor-pointer'
+                    }`}
+                  >
+                    {status === 'submitting' ? 'Sending…' : 'Send message'}
+                    {status !== 'submitting' && <span aria-hidden="true">→</span>}
+                  </button>
+                </div>
+              </form>
             </div>
 
-            <form ref={formRef} action={handleSubmit} className="space-y-10">
+            {/* INFO */}
+            <div className="lg:col-span-5">
+              <div className="bg-steel text-white p-8 lg:p-10 rounded-md h-full">
+                <div className="space-y-10">
+                  <div>
+                    <h2 className="label text-white/50 mb-4">Dojo location</h2>
+                    <p className="font-display font-bold text-lg mb-1.5">Doshinkai Dojo</p>
+                    <address className="not-italic text-white/70 leading-relaxed">
+                      6620 Montgomery Road
+                      <br />
+                      Suite 3
+                      <br />
+                      Cincinnati, OH 45213
+                    </address>
+                  </div>
 
-              {/* HONEYPOT SPAM PROTECTION */}
-              <div className="hidden" aria-hidden="true">
-                <label htmlFor="botcheck">Do not fill this out if you are human:</label>
-                <input type="text" id="botcheck" name="botcheck" autoComplete="off" tabIndex={-1} />
-              </div>
+                  <div className="pt-8 border-t border-steel-line">
+                    <h2 className="label text-white/50 mb-4">Mailing address</h2>
+                    <address className="not-italic text-white/70 leading-relaxed">
+                      P.O. Box 42316
+                      <br />
+                      Cincinnati, OH 45242
+                    </address>
+                  </div>
 
-              {/* Name Row */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="relative group">
-                  <input type="text" id="firstName" name="firstName" required className="w-full bg-transparent border-b-2 border-neutral-300 py-3 text-lg font-medium text-black focus:outline-none focus:border-red-700 transition-colors peer" placeholder=" " />
-                  <label htmlFor="firstName" className="absolute left-0 top-3 text-neutral-400 text-lg font-medium transition-all duration-300 peer-focus:-top-4 peer-focus:text-xs peer-focus:text-red-700 peer-focus:font-bold peer-focus:uppercase peer-focus:tracking-widest peer-valid:-top-4 peer-valid:text-xs peer-valid:text-black peer-valid:font-bold peer-valid:uppercase peer-valid:tracking-widest cursor-text">
-                    First Name
-                  </label>
+                  <div className="pt-8 border-t border-steel-line">
+                    <h2 className="label text-white/50 mb-4">Direct contact</h2>
+                    <ul className="space-y-3">
+                      <li>
+                        <a
+                          href="tel:+18325130058"
+                          className="group flex items-center gap-3 text-white/85 hover:text-dojo transition-colors tnum"
+                        >
+                          <span
+                            aria-hidden="true"
+                            className="w-6 h-px bg-steel-line group-hover:bg-dojo group-hover:w-9 transition-all duration-300"
+                          />
+                          (832) 513 – 0058
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href="mailto:dskdojo1@gmail.com"
+                          className="group flex items-center gap-3 text-white/85 hover:text-dojo transition-colors break-all"
+                        >
+                          <span
+                            aria-hidden="true"
+                            className="w-6 h-px bg-steel-line group-hover:bg-dojo group-hover:w-9 transition-all duration-300"
+                          />
+                          dskdojo1@gmail.com
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div className="pt-8 border-t border-steel-line">
+                    <h2 className="label text-white/50 mb-4">Language</h2>
+                    <p className="text-white/70">Se Habla Español</p>
+                  </div>
                 </div>
-                <div className="relative group">
-                  <input type="text" id="lastName" name="lastName" required className="w-full bg-transparent border-b-2 border-neutral-300 py-3 text-lg font-medium text-black focus:outline-none focus:border-red-700 transition-colors peer" placeholder=" " />
-                  <label htmlFor="lastName" className="absolute left-0 top-3 text-neutral-400 text-lg font-medium transition-all duration-300 peer-focus:-top-4 peer-focus:text-xs peer-focus:text-red-700 peer-focus:font-bold peer-focus:uppercase peer-focus:tracking-widest peer-valid:-top-4 peer-valid:text-xs peer-valid:text-black peer-valid:font-bold peer-valid:uppercase peer-valid:tracking-widest cursor-text">
-                    Last Name
-                  </label>
-                </div>
-              </div>
-
-              {/* Contact Row */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="relative group">
-                  <input type="email" id="email" name="email" required className="w-full bg-transparent border-b-2 border-neutral-300 py-3 text-lg font-medium text-black focus:outline-none focus:border-red-700 transition-colors peer" placeholder=" " />
-                  <label htmlFor="email" className="absolute left-0 top-3 text-neutral-400 text-lg font-medium transition-all duration-300 peer-focus:-top-4 peer-focus:text-xs peer-focus:text-red-700 peer-focus:font-bold peer-focus:uppercase peer-focus:tracking-widest peer-valid:-top-4 peer-valid:text-xs peer-valid:text-black peer-valid:font-bold peer-valid:uppercase peer-valid:tracking-widest cursor-text">
-                    Email Address
-                  </label>
-                </div>
-                <div className="relative group">
-                  <input type="tel" id="phone" name="phone" className="w-full bg-transparent border-b-2 border-neutral-300 py-3 text-lg font-medium text-black focus:outline-none focus:border-red-700 transition-colors peer" placeholder=" " />
-                  <label htmlFor="phone" className="absolute left-0 top-3 text-neutral-400 text-lg font-medium transition-all duration-300 peer-focus:-top-4 peer-focus:text-xs peer-focus:text-red-700 peer-focus:font-bold peer-focus:uppercase peer-focus:tracking-widest peer-valid:-top-4 peer-valid:text-xs peer-valid:text-black peer-valid:font-bold peer-valid:uppercase peer-valid:tracking-widest cursor-text">
-                    Phone Number (Optional)
-                  </label>
-                </div>
-              </div>
-
-              {/* Topic Dropdown */}
-              <div className="relative group">
-                <select id="topic" name="topic" required defaultValue="" className="w-full bg-transparent border-b-2 border-neutral-300 py-3 text-lg font-medium text-black focus:outline-none focus:border-red-700 transition-colors appearance-none cursor-pointer">
-                  <option value="" disabled hidden>Subject / Topic</option>
-                  <option value="General Classes">General Classes</option>
-                  <option value="Private Training">Private Training</option>
-                  <option value="Seminars / Events">Seminars / Events</option>
-                  <option value="Other Inquiry">Other Inquiry</option>
-                </select>
-                <div className="absolute right-0 top-4 pointer-events-none">
-                  <svg className="w-5 h-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
-                </div>
-              </div>
-
-              {/* Message */}
-              <div className="relative group pt-4">
-                <textarea id="message" name="message" required rows={4} className="w-full bg-transparent border-b-2 border-neutral-300 py-3 text-lg font-medium text-black focus:outline-none focus:border-red-700 transition-colors peer resize-none" placeholder=" "></textarea>
-                <label htmlFor="message" className="absolute left-0 top-6 text-neutral-400 text-lg font-medium transition-all duration-300 peer-focus:-top-4 peer-focus:text-xs peer-focus:text-red-700 peer-focus:font-bold peer-focus:uppercase peer-focus:tracking-widest peer-valid:-top-4 peer-valid:text-xs peer-valid:text-black peer-valid:font-bold peer-valid:uppercase peer-valid:tracking-widest cursor-text">
-                  How can we help you?
-                </label>
-              </div>
-
-              {/* Submit Button */}
-              <div className="pt-6">
-                <button
-                  type="submit"
-                  disabled={status === 'submitting'}
-                  className={`w-full md:w-auto relative inline-flex items-center justify-center px-12 py-5 text-sm font-bold uppercase tracking-widest text-white bg-black overflow-hidden shadow-xl transition-all duration-300 group ${status === 'submitting' ? 'opacity-80 cursor-not-allowed' : 'hover:-translate-y-1'}`}
-                >
-                  <span className="absolute inset-0 w-full h-full bg-red-700 -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
-                  <span className="relative flex items-center gap-3">
-                    {status === 'submitting' ? 'SENDING...' : 'SEND MESSAGE'}
-                    {status !== 'submitting' && <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>}
-                  </span>
-                </button>
-              </div>
-            </form>
-          </div>
-
-          {/* RIGHT COLUMN: Contact Info Block */}
-          <div className="lg:col-span-5">
-            <div className="bg-black text-white p-10 md:p-14 border-t-8 border-red-700 shadow-2xl relative overflow-hidden h-full">
-
-              {/* Background Watermark */}
-              <div className="absolute -bottom-10 -right-10 text-[150px] font-black uppercase text-neutral-900 opacity-50 pointer-events-none leading-none select-none">
-                OH
-              </div>
-
-              <div className="relative z-10 flex flex-col space-y-12">
-
-                {/* Physical Location */}
-                <div>
-                  <h4 className="text-xs font-black uppercase tracking-widest text-red-600 mb-4">Dojo Location</h4>
-                  <ul className="space-y-1 text-lg text-neutral-300 font-medium">
-                    <li className="text-white font-bold mb-1">Doshinkai Dojo</li>
-                    <li>6620 Montgomery Road</li>
-                    <li>Suite 3</li>
-                    <li>Cincinnati, OH 45213</li>
-                  </ul>
-                </div>
-
-                {/* Mailing Address */}
-                <div>
-                  <h4 className="text-xs font-black uppercase tracking-widest text-red-600 mb-4">Mailing Address</h4>
-                  <ul className="space-y-1 text-lg text-neutral-300 font-medium">
-                    <li>P.O. Box 42316</li>
-                    <li>Cincinnati, OH 45242</li>
-                  </ul>
-                </div>
-
-                {/* Direct Contact */}
-                <div>
-                  <h4 className="text-xs font-black uppercase tracking-widest text-red-600 mb-4">Direct Contact</h4>
-                  <ul className="space-y-4 text-lg text-neutral-300 font-medium">
-                    <li>
-                      <a href="tel:+18325130058" className="hover:text-red-500 transition-colors flex items-center gap-3 group">
-                        <span className="w-8 h-px bg-neutral-700 group-hover:bg-red-500 transition-colors"></span>
-                        (832) 513 – 0058
-                      </a>
-                    </li>
-                    <li>
-                      <a href="mailto:dskdojo1@gmail.com" className="hover:text-red-500 transition-colors flex items-center gap-3 group">
-                        <span className="w-8 h-px bg-neutral-700 group-hover:bg-red-500 transition-colors"></span>
-                        dskdojo1@gmail.com
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-
               </div>
             </div>
           </div>
-
         </div>
       </section>
-
     </div>
   );
 }

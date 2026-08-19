@@ -8,32 +8,29 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen bg-white text-neutral-900 selection:bg-red-700 selection:text-white flex items-center justify-center px-4">
-      <div className="max-w-xl mx-auto text-center py-32">
-        <div className="w-16 h-1.5 bg-red-700 mx-auto mb-8"></div>
-        <span className="text-7xl sm:text-8xl font-black uppercase tracking-tighter text-neutral-200 block mb-4">404</span>
-        <h1 className="text-3xl sm:text-4xl font-black uppercase tracking-tighter text-black mb-6">
-          Off The Mat
-        </h1>
-        <p className="text-lg text-neutral-500 font-medium leading-relaxed mb-10">
-          The page you&apos;re looking for doesn&apos;t exist or has moved. Let&apos;s get you back on track.
+    <div className="bg-white text-ink flex items-center justify-center px-4 min-h-[80vh] pt-32 pb-20">
+      <div className="max-w-xl mx-auto text-center">
+        <p className="font-display font-extrabold text-6xl sm:text-7xl text-bone-deep leading-none mb-4 tnum">404</p>
+
+        <h1 className="font-display font-extrabold text-3xl sm:text-4xl leading-tight mb-5">Off the mat</h1>
+
+        <p className="text-lg text-ink-soft leading-relaxed mb-10">
+          The page you&rsquo;re looking for doesn&rsquo;t exist or has moved. Let&rsquo;s get you back on track.
         </p>
-        <div className="flex flex-col sm:flex-row justify-center gap-4">
+
+        <div className="flex flex-col sm:flex-row justify-center gap-3">
           <Link
             href="/"
-            className="group relative inline-flex items-center justify-center px-8 py-4 text-sm font-bold uppercase tracking-widest text-white bg-black overflow-hidden"
+            className="inline-flex items-center justify-center gap-2.5 bg-dojo text-white font-semibold px-7 py-4 rounded-md hover:bg-dojo-deep transition-colors duration-200"
           >
-            <span className="absolute inset-0 w-full h-full bg-red-700 -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
-            <span className="relative flex items-center gap-3">
-              Return Home
-              <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
-            </span>
+            Return home
+            <span aria-hidden="true">→</span>
           </Link>
           <Link
             href="/schedule"
-            className="inline-flex items-center justify-center px-8 py-4 text-sm font-bold uppercase tracking-widest text-black border-2 border-black hover:bg-neutral-100 transition-colors"
+            className="inline-flex items-center justify-center gap-2.5 border border-line text-ink font-semibold px-7 py-4 rounded-md hover:border-dojo hover:text-dojo transition-colors duration-200"
           >
-            View Schedule
+            View schedule
           </Link>
         </div>
       </div>
