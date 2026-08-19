@@ -49,7 +49,8 @@ Utility classes: `.label` (tracked eyebrow with a red rule), `.tnum` (tabular fi
 | `app/actions/sendEmail.ts` | Server action behind all three forms: validation, spam checks, Resend send. |
 | `components/PageHeader.tsx` | Steel banner every subpage opens with. Emits BreadcrumbList JSON-LD when given `crumbs` and `path`. |
 | `components/HeroSlider.tsx` | Homepage carousel. Only the first slide renders an `h1`. |
-| `components/FormModal.tsx`, `FormTimestamp.tsx`, `formStyles.ts` | Shared form pieces. |
+| `components/FormModal.tsx`, `formStyles.ts` | Shared form pieces. |
+| `lib/useFormTimestamp.ts` | Mount-time stamp behind the anti-spam timing gate. |
 | `lib/seo.ts` | `pageMetadata()` — builds each page's canonical and OG block. |
 | `lib/events.ts` | Upcoming events plus their Event JSON-LD. |
 
@@ -69,7 +70,7 @@ merging them** — a page that omits it inherits the homepage's canonical and si
 Layered, in `app/actions/sendEmail.ts`:
 
 1. **Honeypot** — a hidden `botcheck` field. If filled, the action reports success so bots learn nothing.
-2. **Timing** — `FormTimestamp` stamps mount time in the browser; submissions faster than 2.5s are dropped.
+2. **Timing** — `useFormTimestamp` records mount time in a ref; submissions faster than 2.5s are dropped. Kept out of the DOM so `form.reset()` cannot blank it.
 3. **Rate limit** — 4 submissions per IP per 15 minutes, per server instance.
 4. **Validation** — required fields, email format, length caps on every field.
 5. **Link heuristics** — links in a name field, or more than two in the message, are treated as spam.

@@ -4,7 +4,7 @@ import { useState, useRef } from 'react';
 import { sendContactEmail } from '@/app/actions/sendEmail';
 import PageHeader from '@/components/PageHeader';
 import FormModal from '@/components/FormModal';
-import FormTimestamp from '@/components/FormTimestamp';
+import { useFormTimestamp } from '@/lib/useFormTimestamp';
 import { fieldClass, labelClass } from '@/components/formStyles';
 
 const plans = [
@@ -44,14 +44,17 @@ export default function ClassRegistrationForm() {
   const formRef = useRef<HTMLFormElement>(null);
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const { stamp, restamp } = useFormTimestamp();
 
   const handleSubmit = async (formData: FormData) => {
     setStatus('submitting');
+    stamp(formData);
     const result = await sendContactEmail(formData);
 
     if (result.success) {
       setStatus('success');
       formRef.current?.reset();
+      restamp();
       setSelectedPlan(null); // Clear the selected plan highlight
     } else {
       setErrorMsg('error' in result && result.error ? result.error : null);
@@ -162,9 +165,6 @@ export default function ClassRegistrationForm() {
           <form ref={formRef} action={handleSubmit} className="space-y-7">
             <input type="hidden" name="selectedPlan" value={selectedPlan || 'None Selected'} />
             <input type="hidden" name="topic" value="Class Registration" />
-
-            <FormTimestamp />
-
             {/* HONEYPOT SPAM PROTECTION */}
             <div className="hidden" aria-hidden="true">
               <label htmlFor="botcheck">Do not fill this out if you are human:</label>

@@ -4,7 +4,7 @@ import { useRef, useState } from 'react';
 import { sendContactEmail } from '@/app/actions/sendEmail';
 import PageHeader from '@/components/PageHeader';
 import FormModal from '@/components/FormModal';
-import FormTimestamp from '@/components/FormTimestamp';
+import { useFormTimestamp } from '@/lib/useFormTimestamp';
 import { fieldClass, labelClass } from '@/components/formStyles';
 
 const benefits = [
@@ -30,14 +30,17 @@ export default function PrivateClassForm() {
   const formRef = useRef<HTMLFormElement>(null);
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const { stamp, restamp } = useFormTimestamp();
 
   const handleSubmit = async (formData: FormData) => {
     setStatus('submitting');
+    stamp(formData);
     const result = await sendContactEmail(formData);
 
     if (result.success) {
       setStatus('success');
       formRef.current?.reset();
+      restamp();
     } else {
       setErrorMsg('error' in result && result.error ? result.error : null);
       setStatus('error');
@@ -118,9 +121,6 @@ export default function PrivateClassForm() {
 
           <form ref={formRef} action={handleSubmit} className="space-y-7">
             <input type="hidden" name="topic" value="Private Class Request" />
-
-            <FormTimestamp />
-
             {/* HONEYPOT SPAM PROTECTION */}
             <div className="hidden" aria-hidden="true">
               <label htmlFor="botcheck">Do not fill this out if you are human:</label>

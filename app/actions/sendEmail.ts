@@ -76,9 +76,14 @@ export async function sendContactEmail(formData: FormData) {
     return { success: true };
   }
   const elapsed = Date.now() - stamp;
-  if (elapsed < MIN_FILL_MS || elapsed > MAX_FILL_MS) {
-    console.warn(`[spam] implausible fill time: ${elapsed}ms`);
+  if (elapsed < MIN_FILL_MS) {
+    console.warn(`[spam] submitted after only ${elapsed}ms`);
     return { success: true };
+  }
+  // A long-idle tab is a real visitor, not a bot — tell them how to recover
+  // rather than silently discarding what they typed.
+  if (elapsed > MAX_FILL_MS) {
+    return { success: false, error: 'This page has been open for a while. Please reload it and send again.' };
   }
 
   // 3. RATE LIMIT per client address.
