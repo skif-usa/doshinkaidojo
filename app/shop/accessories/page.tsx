@@ -1,10 +1,12 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Dojo Gear & Accessories',
   description: 'Official Doshinkai Dojo apparel, including premium t-shirts featuring our Tiger and Kanji crest. Represent the tradition on and off the mat.',
-};
+  path: '/shop/accessories',
+});
 
 export default function Accessories() {
   return (

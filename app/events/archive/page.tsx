@@ -1,10 +1,12 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Event Archive',
   description: 'A gallery of past seminars, gasshukus, and clinics hosted by Doshinkai Dojo, including visits from SKIF instructors from Japan and Panama.',
-};
+  path: '/events/archive',
+});
 
 export default function EventArchive() {
   const events = [

@@ -1,10 +1,12 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Shotokan Karate',
   description: 'Discover the benefits of traditional Shotokan Karate: physical fitness, self-defense, discipline, and character development for all ages in Cincinnati, OH.',
-};
+  path: '/about/shotokan',
+});
 
 export default function ShotokanKarate() {
   const benefits = [

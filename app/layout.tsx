@@ -17,9 +17,6 @@ export const metadata: Metadata = {
     'traditional Japanese martial arts',
     'Doshinkai Dojo',
   ],
-  alternates: {
-    canonical: '/',
-  },
   robots: {
     index: true,
     follow: true,
@@ -34,7 +31,6 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Doshinkai Dojo | Cincinnati Shotokan Karate',
     description: 'Join Doshinkai Dojo for traditional Shotokan Karate classes in Cincinnati. All ages and experience levels welcome.',
-    url: 'https://doshinkaidojo.com',
     siteName: 'Doshinkai Dojo',
     locale: 'en_US',
     type: 'website',

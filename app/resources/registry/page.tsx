@@ -1,9 +1,12 @@
+import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 import Link from 'next/link';
 
-export const metadata = {
-  title: 'Dan & Kyu Registry | Doshinkai Dojo',
+export const metadata: Metadata = pageMetadata({
+  title: 'Dan & Kyu Registry',
   description: 'Official registry of Dan (Black Belt) and Kyu (Color Belt) ranked members at Doshinkai Dojo.',
-};
+  path: '/resources/registry',
+});
 
 export default function Registry() {
   const danRanks = [

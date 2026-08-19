@@ -1,5 +1,14 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
+
+export const metadata: Metadata = pageMetadata({
+  title: 'Doshinkai Dojo | Traditional Shotokan Karate in Cincinnati',
+  description: 'Traditional Shotokan Karate in Cincinnati, OH. We build character, discipline, and strength through strict adherence to Japanese martial arts roots.',
+  path: '/',
+  absoluteTitle: true,
+});
 
 export default function Home() {
   // This is the invisible SEO data that tells Google you are a local business

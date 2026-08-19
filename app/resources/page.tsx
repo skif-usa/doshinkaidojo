@@ -1,9 +1,11 @@
 import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Global Network',
   description: 'Doshinkai Dojo is affiliated with SKIF-USA, SKIF World, and the SKIF Yudansha-Kai — explore our network of traditional martial arts organizations.',
-};
+  path: '/resources',
+});
 
 export default function Resources() {
   const resources = [

@@ -1,9 +1,12 @@
+import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 import Link from 'next/link';
 
-export const metadata = {
-  title: 'Affiliated Dojos | Doshinkai Dojo',
+export const metadata: Metadata = pageMetadata({
+  title: 'Affiliated Dojos',
   description: 'Explore the official network of SKIF affiliated dojos in Kentucky and Panama City.',
-};
+  path: '/resources/affiliated',
+});
 
 export default function AffiliatedDojos() {
   const kentuckyDojos = [

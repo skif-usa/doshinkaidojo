@@ -1,10 +1,12 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Meet Sensei Rubén Fung',
   description: 'Sensei Rubén Fung, 6th Dan SKIF Black Belt and Secretary of SKIF-USA, brings over 35 years of traditional Shotokan Karate experience to Doshinkai Dojo.',
-};
+  path: '/about/instructor',
+});
 
 export default function InstructorProfile() {
   const highlights = [
