@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 const linkColumns = [
   {
@@ -39,7 +40,7 @@ export default function Footer() {
           <div className="lg:col-span-4">
             <Link href="/" className="flex items-center gap-3 mb-6">
               <span className="block w-14 h-14 shrink-0">
-                <img src="/doshinkai_logo.png" alt="" aria-hidden="true" className="w-full h-full object-contain" />
+                <Image src="/doshinkai_logo.png" alt="" aria-hidden="true" width={56} height={56} className="w-full h-full object-contain" />
               </span>
               <span className="flex flex-col leading-none">
                 <span className="font-display font-bold text-xl">Doshinkai Dojo</span>

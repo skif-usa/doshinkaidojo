@@ -1,6 +1,7 @@
 "use client";
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState, useEffect } from 'react';
 
 type NavItem = {
@@ -134,7 +135,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link href="/" onClick={close} className="flex items-center gap-2.5 group shrink-0">
             <span className="block w-10 h-10 lg:w-12 lg:h-12 shrink-0">
-              <img src="/doshinkai_logo.png" alt="" aria-hidden="true" className="w-full h-full object-contain" />
+              <Image src="/doshinkai_logo.png" alt="" aria-hidden="true" width={56} height={56} priority className="w-full h-full object-contain" />
             </span>
             <span className="flex flex-col leading-none">
               <span className="font-display font-bold text-[17px] lg:text-xl text-ink group-hover:text-dojo transition-colors">

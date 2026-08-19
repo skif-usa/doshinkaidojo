@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { pageMetadata } from '@/lib/seo';
 import EventsList from './EventsList';
+import { upcomingEvents, eventJsonLd } from '@/lib/events';
 
 export const metadata: Metadata = pageMetadata({
   title: 'Upcoming Events',
@@ -9,5 +10,17 @@ export const metadata: Metadata = pageMetadata({
 });
 
 export default function EventsPage() {
-  return <EventsList />;
+  return (
+    <>
+      {/* Event structured data, so seminars can appear as event rich results */}
+      {upcomingEvents.map((event) => (
+        <script
+          key={event.id}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(eventJsonLd(event)) }}
+        />
+      ))}
+      <EventsList />
+    </>
+  );
 }

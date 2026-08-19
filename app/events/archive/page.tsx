@@ -29,6 +29,7 @@ export default function EventArchive() {
         title="Event archive"
         intro="A historical gallery of our past and upcoming seminars, clinics, and special events hosted by Doshinkai Dojo."
         crumbs={[{ label: 'Upcoming Events', href: '/events' }]}
+        path="/events/archive"
       />
 
       {/* ── GALLERY ──────────────────────────────────────────── */}

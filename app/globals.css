@@ -13,7 +13,6 @@
 
   /* Deep steel navy — used for solid full-width blocks */
   --color-steel: #16222f;
-  --color-steel-soft: #22303d;
   --color-steel-line: #33414e;
 
   /* Text */
@@ -98,16 +97,6 @@
     flex-shrink: 0;
   }
 
-  .chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    border-radius: 999px;
-    padding: 0.4rem 0.9rem;
-    font-size: 0.8125rem;
-    font-weight: 600;
-    line-height: 1;
-  }
 
   /* Tabular figures for the timetable */
   .tnum {

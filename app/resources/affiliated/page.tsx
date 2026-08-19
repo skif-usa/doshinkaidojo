@@ -148,6 +148,7 @@ export default function AffiliatedDojos() {
         title="Affiliated dojos"
         intro="Doshinkai Dojo is proud to be connected with a strong network of dedicated instructors and traditional Shotokan schools across the Americas."
         crumbs={[{ label: 'Global Network', href: '/resources' }]}
+        path="/resources/affiliated"
       />
 
       {/* ── KENTUCKY ─────────────────────────────────────────── */}

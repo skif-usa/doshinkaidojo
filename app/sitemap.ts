@@ -12,20 +12,20 @@ type Route = {
 };
 
 const routes: Route[] = [
-  { path: '', priority: 1, changeFrequency: 'weekly', lastModified: '2026-07-25' },
-  { path: '/schedule', priority: 0.9, changeFrequency: 'weekly', lastModified: '2026-03-18' },
-  { path: '/join/class-registration', priority: 0.9, changeFrequency: 'monthly', lastModified: '2026-07-25' },
-  { path: '/join/private-class', priority: 0.7, changeFrequency: 'monthly', lastModified: '2026-07-25' },
-  { path: '/about/shotokan', priority: 0.7, changeFrequency: 'monthly', lastModified: '2026-07-25' },
-  { path: '/about/history', priority: 0.6, changeFrequency: 'monthly', lastModified: '2026-07-25' },
-  { path: '/about/instructor', priority: 0.7, changeFrequency: 'monthly', lastModified: '2026-07-25' },
-  { path: '/events', priority: 0.8, changeFrequency: 'weekly', lastModified: '2026-07-25' },
-  { path: '/events/archive', priority: 0.5, changeFrequency: 'monthly', lastModified: '2026-07-25' },
-  { path: '/resources', priority: 0.6, changeFrequency: 'monthly', lastModified: '2026-07-25' },
-  { path: '/resources/registry', priority: 0.5, changeFrequency: 'monthly', lastModified: '2026-07-19' },
-  { path: '/resources/affiliated', priority: 0.5, changeFrequency: 'monthly', lastModified: '2026-03-18' },
-  { path: '/shop/accessories', priority: 0.5, changeFrequency: 'monthly', lastModified: '2026-07-25' },
-  { path: '/contact', priority: 0.6, changeFrequency: 'yearly', lastModified: '2026-07-25' },
+  { path: '', priority: 1, changeFrequency: 'weekly', lastModified: '2026-08-19' },
+  { path: '/schedule', priority: 0.9, changeFrequency: 'weekly', lastModified: '2026-08-19' },
+  { path: '/join/class-registration', priority: 0.9, changeFrequency: 'monthly', lastModified: '2026-08-19' },
+  { path: '/join/private-class', priority: 0.7, changeFrequency: 'monthly', lastModified: '2026-08-19' },
+  { path: '/about/shotokan', priority: 0.7, changeFrequency: 'monthly', lastModified: '2026-08-19' },
+  { path: '/about/history', priority: 0.6, changeFrequency: 'monthly', lastModified: '2026-08-19' },
+  { path: '/about/instructor', priority: 0.7, changeFrequency: 'monthly', lastModified: '2026-08-19' },
+  { path: '/events', priority: 0.8, changeFrequency: 'weekly', lastModified: '2026-08-19' },
+  { path: '/events/archive', priority: 0.5, changeFrequency: 'monthly', lastModified: '2026-08-19' },
+  { path: '/resources', priority: 0.6, changeFrequency: 'monthly', lastModified: '2026-08-19' },
+  { path: '/resources/registry', priority: 0.5, changeFrequency: 'monthly', lastModified: '2026-08-19' },
+  { path: '/resources/affiliated', priority: 0.5, changeFrequency: 'monthly', lastModified: '2026-08-19' },
+  { path: '/shop/accessories', priority: 0.5, changeFrequency: 'monthly', lastModified: '2026-08-19' },
+  { path: '/contact', priority: 0.6, changeFrequency: 'yearly', lastModified: '2026-08-19' },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

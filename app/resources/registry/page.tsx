@@ -35,6 +35,7 @@ export default function Registry() {
         title="Official registry"
         intro="The official Dan (Black Belt) and Kyu (Color Belt) registry of Doshinkai Dojo practitioners."
         crumbs={[{ label: 'Global Network', href: '/resources' }]}
+        path="/resources/registry"
       />
 
       {/* ── DAN RANKS ────────────────────────────────────────── */}

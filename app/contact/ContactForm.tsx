@@ -4,11 +4,13 @@ import { useRef, useState } from 'react';
 import { sendContactEmail } from '@/app/actions/sendEmail';
 import PageHeader from '@/components/PageHeader';
 import FormModal from '@/components/FormModal';
+import FormTimestamp from '@/components/FormTimestamp';
 import { fieldClass, labelClass } from '@/components/formStyles';
 
 export default function ContactForm() {
   const formRef = useRef<HTMLFormElement>(null);
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   const handleSubmit = async (formData: FormData) => {
     setStatus('submitting');
@@ -18,6 +20,7 @@ export default function ContactForm() {
       setStatus('success');
       formRef.current?.reset();
     } else {
+      setErrorMsg('error' in result && result.error ? result.error : null);
       setStatus('error');
     }
   };
@@ -38,7 +41,7 @@ export default function ContactForm() {
         <FormModal
           tone="error"
           title="Something went wrong"
-          body="Oops! Something went wrong while sending your message. Please try again or contact us directly via email."
+          body={errorMsg ?? 'Oops! Something went wrong while sending your message. Please try again or contact us directly via email.'}
           actionLabel="Try again"
           onClose={() => setStatus('idle')}
         />
@@ -61,6 +64,8 @@ export default function ContactForm() {
               </h2>
 
               <form ref={formRef} action={handleSubmit} className="space-y-7">
+                <FormTimestamp />
+
                 {/* HONEYPOT SPAM PROTECTION */}
                 <div className="hidden" aria-hidden="true">
                   <label htmlFor="botcheck">Do not fill this out if you are human:</label>

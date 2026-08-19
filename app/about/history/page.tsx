@@ -255,7 +255,7 @@ export default function KarateHistory() {
       {/* ── CLOSING ──────────────────────────────────────────── */}
       <section className="relative overflow-hidden py-20 lg:py-28 text-center">
         <span aria-hidden="true" className="absolute inset-0 flex items-center justify-center opacity-[0.03] pointer-events-none">
-          <img src="/doshinkai_logo.png" alt="" className="h-[120%] object-contain" />
+          <Image src="/doshinkai_logo.png" alt="" width={900} height={900} className="h-[120%] w-auto object-contain" />
         </span>
 
         <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
