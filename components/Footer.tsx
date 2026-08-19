@@ -110,7 +110,17 @@ export default function Footer() {
           <p className="text-xs text-white/45">
             &copy; {new Date().getFullYear()} Doshinkai Dojo. All rights reserved.
           </p>
-          <p className="text-xs text-white/45">Member dojo, Shotokan Karate-Do International Federation</p>
+          <p className="text-xs text-white/45">
+            We proudly support{' '}
+            <a
+              href="https://aikidocincy.org"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/70 hover:text-dojo transition-colors"
+            >
+              Aikido of Cincinnati ↗
+            </a>
+          </p>
         </div>
       </div>
     </footer>
