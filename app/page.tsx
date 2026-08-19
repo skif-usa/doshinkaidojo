@@ -5,79 +5,164 @@ import { pageMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = pageMetadata({
   title: 'Doshinkai Dojo | Traditional Shotokan Karate in Cincinnati',
-  description: 'Traditional Shotokan Karate in Cincinnati, OH. We build character, discipline, and strength through strict adherence to Japanese martial arts roots.',
+  description: 'Shotokan Karate classes for kids, teens, and adults in Cincinnati, OH. Youth classes from age 5, a free trial class, and certified SKIF-USA instruction.',
   path: '/',
   absoluteTitle: true,
 });
 
-const heroMeta = [
-  { label: 'Location', value: 'Cincinnati, Ohio' },
-  { label: 'Affiliation', value: 'S.K.I.F. Member Dojo' },
-  { label: 'Language', value: 'Se Habla Español' },
+/* ── Real class groups, from the dojo schedule ───────────────── */
+const classGroups = [
+  {
+    age: 'Ages 5–7',
+    name: 'Youth Karate',
+    length: '45-minute classes',
+    when: 'Wednesdays, 5:15 PM',
+    belt: 'bg-belt-yellow',
+    blurb: 'A shorter first class built for younger beginners — games, basics, and plenty of encouragement.',
+  },
+  {
+    age: 'Ages 8–11',
+    name: 'Youth Karate',
+    length: '60-minute classes',
+    when: 'Wednesdays, 5:15 PM',
+    belt: 'bg-belt-orange',
+    blurb: 'A full-length youth class focused on technique, focus, and steady progress through the belt ranks.',
+  },
+  {
+    age: 'Ages 12 & up',
+    name: 'All Levels',
+    length: 'In-person & on Zoom',
+    when: 'Sun & Sat 1:30 PM · Mon & Wed 7:30 PM',
+    belt: 'bg-belt-green',
+    blurb: 'Teens and adults train together. Brand-new students are welcome — no experience needed.',
+  },
+  {
+    age: 'Ages 12 & up',
+    name: 'Intermediate & Advanced',
+    length: 'In-person',
+    when: 'Sun & Sat, 2:30 PM',
+    belt: 'bg-belt-brown',
+    blurb: 'For students ready to sharpen kata, kumite, and exam preparation at a faster pace.',
+  },
 ];
 
-const marqueeWords = ['Kihon', '空手道', 'Kata', '道場', 'Kumite', '精神', 'Karate-Dō', '鍛錬', 'Discipline'];
+/* ── Real schedule, from the schedule page ───────────────────── */
+const week = [
+  {
+    day: 'Sunday',
+    classes: [
+      { time: '1:30 – 2:30 PM', name: 'All Levels', type: 'In-Person' },
+      { time: '2:30 – 3:30 PM', name: 'Intermediate / Advance', type: 'In-Person' },
+    ],
+  },
+  {
+    day: 'Monday',
+    classes: [{ time: '7:30 – 8:30 PM', name: 'All Levels', type: 'Zoom' }],
+  },
+  {
+    day: 'Wednesday',
+    classes: [
+      { time: '5:15 – 6:15 PM', name: 'Youth · Ages 5–11', type: 'In-Person' },
+      { time: '7:30 – 8:30 PM', name: 'All Levels', type: 'Zoom' },
+    ],
+  },
+  {
+    day: 'Saturday',
+    classes: [
+      { time: '1:30 – 2:30 PM', name: 'All Levels', type: 'In-Person' },
+      { time: '2:30 – 3:30 PM', name: 'Intermediate / Advance', type: 'In-Person' },
+    ],
+  },
+];
+
+const benefits = [
+  {
+    title: 'Physical Fitness',
+    body: 'Punching, kicking, and blocking build strength, flexibility, agility, and cardiovascular health.',
+    tint: 'bg-belt-yellow/20 text-belt-orange',
+    icon: 'M12 3v18M5 8l14 8M19 8L5 16',
+  },
+  {
+    title: 'Self-Defense Skills',
+    body: 'Students learn to defend themselves against real physical threats using strikes and blocks.',
+    tint: 'bg-belt-blue/15 text-belt-blue',
+    icon: 'M12 3l7 3v6c0 4-3 7.5-7 9-4-1.5-7-5-7-9V6l7-3z',
+  },
+  {
+    title: 'Discipline & Focus',
+    body: 'Following the rules and etiquette of the dojo develops self-control and concentration.',
+    tint: 'bg-belt-green/15 text-belt-green',
+    icon: 'M12 4a8 8 0 100 16 8 8 0 000-16zm0 4v4l3 2',
+  },
+  {
+    title: 'Confidence Building',
+    body: 'Confidence earned on the mat carries into school, work, and friendships.',
+    tint: 'bg-dojo/10 text-dojo',
+    icon: 'M12 3l2.6 5.6 6.1.8-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6L3.3 9.4l6.1-.8L12 3z',
+  },
+  {
+    title: 'Character Development',
+    body: 'Respect, humility, perseverance, and integrity are practised in every class.',
+    tint: 'bg-belt-brown/15 text-belt-brown',
+    icon: 'M12 21s-7-4.4-7-9.6A4.4 4.4 0 0112 8a4.4 4.4 0 017 3.4C19 16.6 12 21 12 21z',
+  },
+  {
+    title: 'Community & Friendship',
+    body: 'Training together builds strong bonds in a supportive, welcoming environment.',
+    tint: 'bg-belt-blue/15 text-belt-blue',
+    icon: 'M9 11a3 3 0 100-6 3 3 0 000 6zm8 0a3 3 0 100-6 3 3 0 000 6zM3 20c0-2.8 2.7-5 6-5s6 2.2 6 5m2-5c2.8.4 5 2.4 5 5',
+  },
+];
+
+const promises = [
+  {
+    title: 'Safety First',
+    body: 'Your safety is our top priority. Our experienced instructors provide comprehensive safety instruction and a controlled, secure environment.',
+  },
+  {
+    title: 'Expert Instruction',
+    body: 'Learn from certified instructors who bring years of experience and expertise to each class, guiding proper technique every step of the way.',
+  },
+  {
+    title: 'Inclusive Atmosphere',
+    body: 'Beginner or experienced, our classes accommodate all ages, fitness levels, and backgrounds. Everyone is welcome and encouraged to thrive.',
+  },
+  {
+    title: 'Free Trial Class',
+    body: 'Try Shotokan Karate for yourself before committing. Sign up for a free trial class and take the first step.',
+  },
+];
 
 const pillars = [
-  {
-    numeral: '一',
-    subject: 'The body',
-    body: 'is cultivated through training in stamina, coordination, strength, and agility.',
-  },
-  {
-    numeral: '二',
-    subject: 'The mind',
-    body: 'is sharpened through practices fostering concentration and memory.',
-  },
-  {
-    numeral: '三',
-    subject: 'The spirit',
-    body: 'is nurtured through lessons in perseverance, humility, and self-confidence.',
-  },
+  { numeral: '一', subject: 'Body', body: 'Cultivated through stamina, coordination, strength, and agility.', belt: 'bg-belt-yellow' },
+  { numeral: '二', subject: 'Mind', body: 'Sharpened through practices fostering concentration and memory.', belt: 'bg-belt-green' },
+  { numeral: '三', subject: 'Spirit', body: 'Nurtured through perseverance, humility, and self-confidence.', belt: 'bg-belt-blue' },
 ];
 
-const index = [
-  {
-    n: '01',
-    href: '/join/class-registration',
-    title: 'Class Registration',
-    kicker: 'Enroll',
-    body: 'Join our upcoming training sessions. Suitable for all skill levels.',
-    image: '/introduction.webp',
-  },
-  {
-    n: '02',
-    href: '/schedule',
-    title: 'Dojo Schedule',
-    kicker: 'Calendar',
-    body: 'Find the right training times for you and your family.',
-    image: '/pexels-cottonbro-studio-8038508_web.webp',
-  },
-  {
-    n: '03',
-    href: '/about/shotokan',
-    title: 'The Way of Shotokan',
-    kicker: 'Philosophy',
-    body: 'Learn the history, roots, and benefits of traditional Japanese Karate.',
-    image: '/skif_instructor_japan.webp',
-  },
-  {
-    n: '04',
-    href: '/about/instructor',
-    title: 'Meet the Sensei',
-    kicker: 'Instruction',
-    body: 'Rubén Fung, 6th Dan, Secretary of SKIF-USA and international technical advisor.',
-    image: '/ruben_profil.webp',
-  },
-  {
-    n: '05',
-    href: '/events',
-    title: 'Seminars & Gasshuku',
-    kicker: 'Gatherings',
-    body: 'Train under world-renowned SKIF instructors visiting Cincinnati.',
-    image: '/2026_Kanazawa_Cincinnati.webp',
-  },
+const facts = [
+  { value: 'Age 5+', label: 'Youth classes' },
+  { value: '6th Dan', label: 'Head instructor' },
+  { value: '130+', label: 'SKIF countries' },
+  { value: 'Free', label: 'First class' },
 ];
+
+function Icon({ path, className = 'w-6 h-6' }: { path: string; className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" d={path} />
+    </svg>
+  );
+}
+
+function Check() {
+  return (
+    <span className="shrink-0 w-6 h-6 rounded-full bg-belt-green/15 text-belt-green flex items-center justify-center mt-0.5">
+      <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3.5" d="M5 13l4 4L19 7" />
+      </svg>
+    </span>
+  );
+}
 
 export default function Home() {
   // This is the invisible SEO data that tells Google you are a local business
@@ -111,279 +196,433 @@ export default function Home() {
   };
 
   return (
-    <div className="bg-void text-chalk">
+    <div className="bg-cream text-charcoal overflow-x-clip">
       {/* INJECT LOCAL SEO SCHEMA */}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      {/* ── FULL-BLEED HERO ─────────────────────────────────── */}
-      <section className="relative min-h-[100svh] flex flex-col justify-end overflow-hidden">
-        <Image
-          src="/hero_image.webp"
-          alt="Karate training at Doshinkai Dojo in Cincinnati"
-          fill
-          sizes="100vw"
-          priority
-          className="object-cover object-center"
-        />
-        {/* Scrims: vertical for text legibility, horizontal for depth */}
-        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-void via-void/70 to-void/25" />
-        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-void/85 via-transparent to-transparent" />
+      {/* ── HERO ─────────────────────────────────────────────── */}
+      <section className="relative pt-32 lg:pt-40 pb-16 lg:pb-24">
+        {/* Soft background shapes */}
+        <span aria-hidden="true" className="absolute -top-16 -right-24 w-[28rem] h-[28rem] rounded-full bg-belt-yellow/20 blur-3xl" />
+        <span aria-hidden="true" className="absolute top-52 -left-32 w-[24rem] h-[24rem] rounded-full bg-dojo/10 blur-3xl" />
 
-        {/* Meta column, pinned to the upper right */}
-        <div className="hidden lg:flex absolute top-36 right-10 flex-col items-end gap-6 z-10">
-          {heroMeta.map((m) => (
-            <div key={m.label} className="text-right">
-              <p className="eyebrow text-chalk-faint mb-1.5">{m.label}</p>
-              <p className="text-sm text-chalk-soft">{m.value}</p>
-              <span aria-hidden="true" className="block ml-auto mt-3 w-10 h-px bg-edge" />
-            </div>
-          ))}
-        </div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div>
+              <span className="chip bg-dojo-tint text-dojo mb-6">
+                <span aria-hidden="true" className="w-2 h-2 rounded-full bg-dojo" />
+                Now enrolling · Ages 5 &amp; up
+              </span>
 
-        <div className="relative z-10 px-5 lg:px-10 pb-14 lg:pb-20 pt-32">
-          <p className="eyebrow text-chalk-soft mb-7 flex items-center gap-3">
-            <span aria-hidden="true" className="w-10 h-px bg-seal" />
-            Traditional Shotokan Karate
-          </p>
-
-          <h1 className="font-display font-light text-[3.5rem] sm:text-8xl lg:text-[9.5rem] xl:text-[11rem] leading-[0.86] tracking-[-0.02em] mb-9 max-w-6xl">
-            Master
-            <span className="text-seal"> the </span>
-            form.
-          </h1>
-
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-10 max-w-7xl">
-            <p className="text-base lg:text-lg text-chalk-soft leading-relaxed max-w-lg">
-              Traditional Shotokan Karate in Cincinnati. We build character, discipline, and strength through strict
-              adherence to Japanese martial arts roots.
-            </p>
-
-            <div className="flex flex-wrap items-center gap-4 lg:gap-6 shrink-0">
-              <Link
-                href="/join/class-registration"
-                className="group inline-flex items-center gap-3 bg-chalk text-void px-8 py-4 eyebrow hover:bg-seal hover:text-chalk transition-colors duration-500"
-              >
-                Start Training
-                <span aria-hidden="true" className="group-hover:translate-x-1 transition-transform duration-500">
-                  &rarr;
+              <h1 className="font-display font-extrabold text-[2.75rem] sm:text-6xl lg:text-[4.25rem] leading-[1.02] mb-6">
+                Karate classes for{' '}
+                <span className="relative inline-block text-dojo">
+                  kids
+                  <svg
+                    className="absolute -bottom-2 left-0 w-full h-3 text-belt-yellow"
+                    viewBox="0 0 100 10"
+                    preserveAspectRatio="none"
+                    aria-hidden="true"
+                  >
+                    <path d="M1 7c20-5 60-6 98-3" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
+                  </svg>
                 </span>
-              </Link>
-              <Link
-                href="/schedule"
-                className="group inline-flex items-center gap-3 border border-chalk/25 px-8 py-4 eyebrow text-chalk hover:border-seal hover:text-seal transition-colors duration-500"
+                , teens &amp; adults in Cincinnati
+              </h1>
+
+              <p className="text-lg text-slate leading-relaxed mb-8 max-w-xl">
+                Traditional Shotokan Karate that builds confidence, focus, and respect — taught by certified SKIF-USA
+                instructors in a safe, welcoming dojo. Your first class is free.
+              </p>
+
+              <div className="flex flex-wrap gap-4 mb-8">
+                <Link
+                  href="/join/class-registration"
+                  className="inline-flex items-center gap-2.5 bg-dojo text-white font-extrabold text-base px-7 py-4 rounded-full shadow-soft hover:bg-dojo-deep hover:-translate-y-0.5 transition-all duration-200"
+                >
+                  Book a Free Trial Class
+                  <span aria-hidden="true">→</span>
+                </Link>
+                <Link
+                  href="/schedule"
+                  className="inline-flex items-center gap-2.5 bg-card border-2 border-line text-charcoal font-extrabold text-base px-7 py-4 rounded-full hover:border-dojo hover:text-dojo transition-colors duration-200"
+                >
+                  See Class Times
+                </Link>
+              </div>
+
+              <ul className="flex flex-wrap gap-x-6 gap-y-3">
+                {['SKIF-USA certified', 'All levels welcome', 'Se Habla Español'].map((item) => (
+                  <li key={item} className="flex items-center gap-2 text-sm font-bold text-slate">
+                    <Check />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Photo with friendly floating badges */}
+            <div className="relative">
+              <div className="relative aspect-4/5 sm:aspect-square lg:aspect-4/5 rounded-[2rem] overflow-hidden shadow-lift">
+                <Image
+                  src="/hero_image.webp"
+                  alt="Students training in Shotokan Karate at Doshinkai Dojo in Cincinnati"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  priority
+                  className="object-cover"
+                />
+              </div>
+
+              <div className="absolute -bottom-5 -left-3 sm:left-6 bg-card rounded-2xl shadow-lift px-5 py-4 flex items-center gap-3">
+                <span aria-hidden="true" className="w-11 h-11 rounded-full bg-belt-green/15 text-belt-green flex items-center justify-center">
+                  <Icon path="M9 11a3 3 0 100-6 3 3 0 000 6zm8 0a3 3 0 100-6 3 3 0 000 6zM3 20c0-2.8 2.7-5 6-5s6 2.2 6 5m2-5c2.8.4 5 2.4 5 5" className="w-5 h-5" />
+                </span>
+                <span>
+                  <span className="block font-display font-extrabold text-lg leading-none">All ages</span>
+                  <span className="block text-xs font-bold text-muted mt-1">Kids, teens &amp; adults</span>
+                </span>
+              </div>
+
+              <div
+                className="absolute -top-4 -right-2 sm:right-4 bg-belt-yellow text-charcoal rounded-2xl shadow-lift px-4 py-3 rotate-6"
+                aria-hidden="true"
               >
-                View Schedule
-              </Link>
+                <span className="block font-display font-extrabold text-base leading-none">1st class free!</span>
+              </div>
+
+              <span
+                aria-hidden="true"
+                className="absolute top-1/2 -right-4 sm:right-2 -translate-y-1/2 w-16 h-16 rounded-full bg-card shadow-lift flex items-center justify-center font-jp text-2xl text-dojo"
+              >
+                空手
+              </span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── MARQUEE BAND ────────────────────────────────────── */}
-      <div className="bg-shell border-y border-edge py-5 overflow-hidden" aria-hidden="true">
-        <div className="marquee-track">
-          {[0, 1].map((copy) => (
-            <div key={copy} className="flex shrink-0 items-center">
-              {marqueeWords.map((word) => (
-                <span key={`${copy}-${word}`} className="flex items-center shrink-0">
-                  <span
-                    className={`px-8 text-2xl lg:text-3xl font-light text-chalk-faint ${
-                      /[　-鿿]/.test(word) ? 'font-jp' : 'font-display'
-                    }`}
-                  >
-                    {word}
-                  </span>
-                  <span className="w-1 h-1 bg-seal rotate-45 shrink-0" />
-                </span>
-              ))}
+      {/* ── QUICK FACTS ──────────────────────────────────────── */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 lg:pb-24">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-5">
+          {facts.map((fact) => (
+            <div key={fact.label} className="rise bg-card rounded-2xl border border-line p-5 lg:p-6 text-center">
+              <p className="font-display font-extrabold text-3xl lg:text-4xl text-dojo leading-none">{fact.value}</p>
+              <p className="text-sm font-bold text-muted mt-2">{fact.label}</p>
             </div>
           ))}
         </div>
-      </div>
+      </section>
 
-      {/* ── STICKY TWO-PANE PHILOSOPHY ──────────────────────── */}
-      <section className="relative border-b border-edge">
-        <div className="grid grid-cols-1 lg:grid-cols-12">
-          {/* Left pane sticks while the right pane scrolls past it */}
-          <div className="lg:col-span-5 lg:sticky lg:top-20 lg:h-[calc(100vh-5rem)] flex flex-col justify-center px-5 lg:px-10 py-16 lg:py-0 border-b lg:border-b-0 lg:border-r border-edge">
-            <p className="eyebrow text-chalk-faint mb-8 flex items-center gap-3">
-              <span aria-hidden="true" className="w-8 h-px bg-seal" />
-              Philosophy &amp; Story
+      {/* ── FIND YOUR CLASS ──────────────────────────────────── */}
+      <section className="bg-card border-y border-line py-16 lg:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <span className="chip bg-belt-green/15 text-belt-green mb-4">Find your class</span>
+            <h2 className="font-display font-extrabold text-4xl lg:text-5xl mb-4">Which class is right for you?</h2>
+            <p className="text-lg text-slate leading-relaxed">
+              Youth classes are divided by age so every student gets the right attention. Teens and adults train
+              together in our All Levels sessions.
             </p>
-            <h2 className="font-display font-light text-5xl lg:text-6xl xl:text-7xl leading-[0.95] mb-10">
-              The way of
-              <br />
-              body, mind,
-              <br />
-              <span className="text-seal">and spirit</span>
-            </h2>
-            <span aria-hidden="true" className="font-jp text-7xl xl:text-8xl text-chalk/10 select-none">
-              空手道
-            </span>
           </div>
 
-          <div className="lg:col-span-7">
-            <div className="px-5 lg:px-14 py-16 lg:py-28 border-b border-edge rise">
-              <p className="font-display font-light text-3xl lg:text-4xl xl:text-5xl leading-[1.15]">
-                DOSHINKAI means <span className="text-seal">&lsquo;The Way of Body, Mind, and Spirit&rsquo;.</span>
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
+            {classGroups.map((group) => (
+              <div
+                key={group.age + group.name}
+                className="rise group bg-cream rounded-3xl border border-line p-6 flex flex-col hover:shadow-lift hover:-translate-y-1 transition-all duration-300"
+              >
+                {/* Belt tab */}
+                <span aria-hidden="true" className={`block w-12 h-2.5 rounded-full mb-5 ${group.belt}`} />
+
+                <p className="font-display font-extrabold text-2xl leading-none mb-1.5">{group.age}</p>
+                <p className="text-sm font-extrabold text-dojo mb-4">{group.name}</p>
+
+                <p className="text-sm text-slate leading-relaxed mb-5 flex-grow">{group.blurb}</p>
+
+                <dl className="space-y-2 text-sm border-t border-line pt-4">
+                  <div className="flex gap-2">
+                    <dt className="font-bold text-muted shrink-0">Length</dt>
+                    <dd className="font-bold text-charcoal text-right ml-auto">{group.length}</dd>
+                  </div>
+                  <div className="flex gap-2">
+                    <dt className="font-bold text-muted shrink-0">When</dt>
+                    <dd className="font-bold text-charcoal text-right ml-auto">{group.when}</dd>
+                  </div>
+                </dl>
+              </div>
+            ))}
+          </div>
+
+          <p className="text-sm text-muted text-center mt-8 max-w-2xl mx-auto leading-relaxed">
+            Students aged 12 and over may join the Wednesday Youth class, and students 11 and under may join All Levels
+            sessions — both subject to instructor permission and schedule availability.
+          </p>
+        </div>
+      </section>
+
+      {/* ── WEEKLY SCHEDULE ──────────────────────────────────── */}
+      <section className="py-16 lg:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-wrap items-end justify-between gap-6 mb-10">
+            <div>
+              <span className="chip bg-belt-blue/15 text-belt-blue mb-4">Weekly schedule</span>
+              <h2 className="font-display font-extrabold text-4xl lg:text-5xl">Train four days a week</h2>
+            </div>
+            <Link
+              href="/schedule"
+              className="inline-flex items-center gap-2 py-2.5 -my-2.5 font-extrabold text-dojo hover:gap-3 transition-all duration-200"
+            >
+              Full schedule &amp; details
+              <span aria-hidden="true">→</span>
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
+            {week.map((day) => (
+              <div key={day.day} className="rise bg-card rounded-3xl border border-line overflow-hidden">
+                <p className="font-display font-extrabold text-xl bg-cream-deep px-6 py-4 border-b border-line">
+                  {day.day}
+                </p>
+                <ul className="p-4 space-y-3">
+                  {day.classes.map((cls) => (
+                    <li key={cls.time} className="rounded-2xl bg-cream p-4">
+                      <p className="font-extrabold text-charcoal">{cls.time}</p>
+                      <p className="text-sm font-bold text-slate mt-1">{cls.name}</p>
+                      <span
+                        className={`chip mt-2.5 text-[11px] ${
+                          cls.type === 'Zoom' ? 'bg-belt-blue/15 text-belt-blue' : 'bg-belt-green/15 text-belt-green'
+                        }`}
+                      >
+                        {cls.type}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── WHAT STUDENTS LEARN ──────────────────────────────── */}
+      <section className="bg-card border-y border-line py-16 lg:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <span className="chip bg-dojo-tint text-dojo mb-4">What students gain</span>
+            <h2 className="font-display font-extrabold text-4xl lg:text-5xl mb-4">
+              More than kicks and punches
+            </h2>
+            <p className="text-lg text-slate leading-relaxed">
+              Karate shapes the whole student. Here is what parents notice first.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {benefits.map((benefit) => (
+              <div key={benefit.title} className="rise bg-cream rounded-3xl border border-line p-6">
+                <span className={`inline-flex w-12 h-12 rounded-2xl items-center justify-center mb-5 ${benefit.tint}`}>
+                  <Icon path={benefit.icon} />
+                </span>
+                <h3 className="font-display font-extrabold text-xl mb-2">{benefit.title}</h3>
+                <p className="text-sm text-slate leading-relaxed">{benefit.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── PARENT PROMISES ─────────────────────────────────── */}
+      <section className="py-16 lg:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+            <div className="lg:col-span-5">
+              <span className="chip bg-belt-yellow/25 text-belt-brown mb-4">For parents</span>
+              <h2 className="font-display font-extrabold text-4xl lg:text-5xl mb-5 leading-[1.05]">
+                A dojo you can feel good about
+              </h2>
+              <p className="text-lg text-slate leading-relaxed mb-8">
+                We know handing your child over to a new activity takes trust. Here is what we promise every family who
+                walks through our door.
               </p>
-              <p className="text-chalk-soft leading-relaxed mt-10 max-w-xl">
-                The name was bestowed upon our director by the founder of our organization, Hirokazu Kanazawa, Soke. The
-                name of our dojo exemplifies the philosophy and teachings of SKIF. The word &lsquo;DOJO&rsquo; means
-                &lsquo;the place where the Way is taught and learned&rsquo;.
-              </p>
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2.5 bg-charcoal text-white font-extrabold px-7 py-4 rounded-full hover:bg-dojo transition-colors duration-200"
+              >
+                Ask us a question
+                <span aria-hidden="true">→</span>
+              </Link>
             </div>
 
-            {/* Pillars as full-width numbered rows, not columns */}
-            <div className="px-5 lg:px-14 py-14 lg:py-20 border-b border-edge">
-              <p className="eyebrow text-chalk-faint mb-12 max-w-md leading-relaxed">
-                At Doshinkai Dojo, we emphasize the holistic development of our practitioners
-              </p>
-              {pillars.map((pillar) => (
-                <div
-                  key={pillar.subject}
-                  className="rise flex items-baseline gap-6 lg:gap-10 py-8 border-t border-edge first:border-t-0"
-                >
-                  <span aria-hidden="true" className="font-jp text-3xl lg:text-4xl text-seal/80 shrink-0 select-none">
-                    {pillar.numeral}
-                  </span>
-                  <p className="text-lg lg:text-xl leading-relaxed text-chalk-soft">
-                    <span className="font-display text-2xl lg:text-3xl text-chalk">{pillar.subject}</span>{' '}
-                    {pillar.body}
-                  </p>
+            <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {promises.map((promise) => (
+                <div key={promise.title} className="rise bg-card rounded-3xl border border-line p-6">
+                  <div className="flex items-start gap-3 mb-3">
+                    <Check />
+                    <h3 className="font-display font-extrabold text-lg leading-tight">{promise.title}</h3>
+                  </div>
+                  <p className="text-sm text-slate leading-relaxed">{promise.body}</p>
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
 
-            <div className="px-5 lg:px-14 py-16 lg:py-24 rise">
-              <p className="eyebrow text-seal mb-7">Federation</p>
-              <p className="text-chalk-soft leading-relaxed max-w-xl">
-                Doshinkai Dojo is proudly affiliated with the Shotokan Karate-Do International Federation-United States
-                of America (SKIF-USA) and the Shotokan Karate-Do International Federation (SKIF) based in Japan. SKIF is
-                one of the world&rsquo;s largest traditional karate organizations, boasting over 2 million members across
-                more than 130 countries.
+      {/* ── MEET THE SENSEI ─────────────────────────────────── */}
+      <section className="bg-cream-deep py-16 lg:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+            <div className="lg:col-span-5">
+              <div className="relative aspect-4/5 max-w-sm mx-auto lg:mx-0 rounded-[2rem] overflow-hidden shadow-lift">
+                <Image
+                  src="/ruben_profil.webp"
+                  alt="Sensei Rubén Fung, head instructor at Doshinkai Dojo"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 40vw"
+                  className="object-cover"
+                />
+              </div>
+            </div>
+
+            <div className="lg:col-span-7">
+              <span className="chip bg-card text-dojo mb-4">Meet your instructor</span>
+              <h2 className="font-display font-extrabold text-4xl lg:text-5xl mb-5">Sensei Rubén Fung</h2>
+              <p className="text-lg text-slate leading-relaxed mb-7">
+                Over 35 years of traditional Shotokan Karate experience, 6th Dan SKIF Black Belt, and Secretary of
+                SKIF-USA. Sensei Fung has spent 13 years shaping the Cincinnati karate community and serves as an
+                international technical advisor.
               </p>
+              <ul className="space-y-3 mb-8">
+                {[
+                  '6th Dan SKIF Black Belt (Rokudan)',
+                  'Secretary of SKIF-USA',
+                  'International technical advisor & champion developer',
+                  'Teaches youth, adult, and advanced classes',
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-3 text-charcoal font-bold">
+                    <Check />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <Link
+                href="/about/instructor"
+                className="inline-flex items-center gap-2 py-2.5 -my-2.5 font-extrabold text-dojo hover:gap-3 transition-all duration-200"
+              >
+                Read the full profile
+                <span aria-hidden="true">→</span>
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── INDEXED ROWS (inverted block) ───────────────────── */}
-      <section className="bg-bone text-ink">
-        <div className="px-5 lg:px-10 pt-20 lg:pt-28 pb-6">
-          <div className="flex flex-wrap items-end justify-between gap-6">
-            <div>
-              <p className="eyebrow text-ink-faint mb-6 flex items-center gap-3">
-                <span aria-hidden="true" className="w-8 h-px bg-seal" />
-                Your Path
+      {/* ── WHAT DOSHINKAI MEANS ────────────────────────────── */}
+      <section className="py-16 lg:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-card rounded-[2rem] border border-line p-8 lg:p-14 shadow-soft">
+            <div className="text-center max-w-3xl mx-auto mb-12">
+              <span aria-hidden="true" className="font-jp block text-4xl text-dojo mb-5">
+                道心会
+              </span>
+              <h2 className="font-display font-extrabold text-3xl lg:text-4xl mb-5">
+                Doshinkai means &lsquo;The Way of Body, Mind, and Spirit&rsquo;
+              </h2>
+              <p className="text-slate leading-relaxed">
+                The name was bestowed upon our director by the founder of our organization, Hirokazu Kanazawa, Soke. The
+                word &lsquo;DOJO&rsquo; means &lsquo;the place where the Way is taught and learned&rsquo;. We emphasize
+                the holistic development of every practitioner.
               </p>
-              <h2 className="font-display font-light text-5xl lg:text-7xl leading-[0.95]">Where to begin</h2>
             </div>
-            <span className="index-num text-ink-faint">05 Entries</span>
-          </div>
-        </div>
 
-        <div className="border-t border-edge-light">
-          {index.map((row) => (
-            <Link
-              key={row.href}
-              href={row.href}
-              className="group/row relative flex items-center gap-6 lg:gap-12 px-5 lg:px-10 py-8 lg:py-11 border-b border-edge-light overflow-hidden hover:bg-bone-warm transition-colors duration-500"
-            >
-              {/* Thumbnail slides in from the right on hover */}
-              <span
-                aria-hidden="true"
-                className="hidden lg:block absolute right-0 top-0 bottom-0 w-72 opacity-0 translate-x-6 group-hover/row:opacity-100 group-hover/row:translate-x-0 transition-all duration-700 ease-zen"
-              >
-                <span className="relative block w-full h-full">
-                  <Image src={row.image} alt="" fill sizes="288px" className="object-cover" />
-                  <span className="absolute inset-0 bg-gradient-to-r from-bone-warm to-transparent" />
-                </span>
-              </span>
-
-              <span className="index-num text-ink-faint group-hover/row:text-seal transition-colors duration-300 shrink-0">
-                {row.n}
-              </span>
-
-              <span className="min-w-0 flex-1 relative z-10">
-                <span className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-                  <span className="font-display text-3xl lg:text-5xl font-light leading-none group-hover/row:text-seal group-hover/row:translate-x-2 transition-all duration-500 ease-zen">
-                    {row.title}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+              {pillars.map((pillar) => (
+                <div key={pillar.subject} className="rise bg-cream rounded-3xl p-6 text-center">
+                  <span aria-hidden="true" className="font-jp block text-3xl text-dojo mb-3">
+                    {pillar.numeral}
                   </span>
-                  <span className="eyebrow text-ink-faint">{row.kicker}</span>
-                </span>
-                <span className="block text-sm text-ink-soft mt-3 max-w-md">{row.body}</span>
-              </span>
-
-              <span
-                aria-hidden="true"
-                className="relative z-10 shrink-0 text-2xl text-ink-faint group-hover/row:text-seal group-hover/row:translate-x-2 transition-all duration-500"
-              >
-                &rarr;
-              </span>
-            </Link>
-          ))}
+                  <span aria-hidden="true" className={`block w-10 h-2 rounded-full mx-auto mb-4 ${pillar.belt}`} />
+                  <h3 className="font-display font-extrabold text-2xl mb-2">{pillar.subject}</h3>
+                  <p className="text-sm text-slate leading-relaxed">{pillar.body}</p>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* ── AFFILIATION, offset editorial ───────────────────── */}
-      <section className="bg-bone text-ink border-b border-edge-light">
-        <div className="grid grid-cols-1 lg:grid-cols-12">
-          <div className="lg:col-span-3 px-5 lg:px-10 pt-16 lg:pt-24">
-            <p className="eyebrow text-seal">Affiliation</p>
-          </div>
-          <div className="lg:col-span-8 px-5 lg:px-10 py-10 lg:py-24">
-            <p className="font-display font-light text-3xl lg:text-5xl leading-[1.15] text-ink">
-              The members of Doshinkai Dojo are proudly affiliated with{' '}
-              <span className="text-seal">SKIF-USA</span>, connecting our students to one of the world&rsquo;s largest
-              and most respected traditional karate organizations.
+      {/* ── AFFILIATION + COMMUNITY ─────────────────────────── */}
+      <section className="pb-16 lg:pb-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-5">
+          <div className="rise bg-card rounded-3xl border border-line p-8 lg:p-10">
+            <span className="chip bg-dojo-tint text-dojo mb-5">Affiliation</span>
+            <h3 className="font-display font-extrabold text-2xl lg:text-3xl mb-4">Part of a global federation</h3>
+            <p className="text-slate leading-relaxed mb-6">
+              Doshinkai Dojo is proudly affiliated with SKIF-USA and the Shotokan Karate-Do International Federation
+              based in Japan — one of the world&rsquo;s largest traditional karate organizations, with over 2 million
+              members across more than 130 countries.
             </p>
+            <Link
+              href="/resources"
+              className="inline-flex items-center gap-2 py-2.5 -my-2.5 font-extrabold text-dojo hover:gap-3 transition-all duration-200"
+            >
+              Explore our network
+              <span aria-hidden="true">→</span>
+            </Link>
           </div>
-        </div>
-      </section>
 
-      {/* ── COMMUNITY + CLOSING ─────────────────────────────── */}
-      <section className="bg-void">
-        <div className="grid grid-cols-1 lg:grid-cols-12 border-b border-edge">
-          <div className="lg:col-span-6 px-5 lg:px-10 py-16 lg:py-24 border-b lg:border-b-0 lg:border-r border-edge">
-            <p className="eyebrow text-chalk-faint mb-8">We Proudly Support</p>
-            <a href="https://aikidocincy.org" target="_blank" rel="noopener noreferrer" className="group inline-block">
-              <span className="block font-display font-light text-4xl lg:text-5xl text-chalk group-hover:text-seal transition-colors duration-500">
+          <div className="rise bg-card rounded-3xl border border-line p-8 lg:p-10">
+            <span className="chip bg-belt-green/15 text-belt-green mb-5">Community</span>
+            <h3 className="font-display font-extrabold text-2xl lg:text-3xl mb-4">We proudly support</h3>
+            <a
+              href="https://aikidocincy.org"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex flex-col"
+            >
+              <span className="font-display font-extrabold text-xl text-charcoal group-hover:text-dojo transition-colors">
                 Aikido of Cincinnati
               </span>
-              <span className="flex items-center gap-3 mt-4">
-                <span className="index-num text-seal">aikidocincy.org</span>
-                <span aria-hidden="true" className="w-10 h-px bg-edge group-hover:bg-seal group-hover:w-16 transition-all duration-500" />
-              </span>
+              <span className="text-sm font-bold text-dojo mt-1">aikidocincy.org ↗</span>
             </a>
           </div>
+        </div>
+      </section>
 
-          <div className="lg:col-span-6 px-5 lg:px-10 py-16 lg:py-24 flex flex-col justify-center">
-            <h2 className="font-display font-light text-4xl lg:text-6xl leading-[0.95] mb-8">
-              Step onto
-              <br />
-              <span className="text-seal">the mat.</span>
-            </h2>
-            <p className="text-chalk-soft leading-relaxed max-w-md mb-10">
-              All ages and experience levels are welcome. Begin with a class registration, or reach out with any
-              questions.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <Link
-                href="/join/class-registration"
-                className="group inline-flex items-center gap-3 bg-chalk text-void px-8 py-4 eyebrow hover:bg-seal hover:text-chalk transition-colors duration-500"
-              >
-                Class Registration
-                <span aria-hidden="true" className="group-hover:translate-x-1 transition-transform duration-500">
-                  &rarr;
-                </span>
-              </Link>
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-3 border border-chalk/25 px-8 py-4 eyebrow text-chalk hover:border-seal hover:text-seal transition-colors duration-500"
-              >
-                Contact Us
-              </Link>
+      {/* ── CLOSING CTA ─────────────────────────────────────── */}
+      <section className="pb-16 lg:pb-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="relative overflow-hidden rounded-[2rem] bg-dojo px-6 py-14 lg:px-16 lg:py-20 text-center">
+            <span aria-hidden="true" className="absolute -top-20 -left-16 w-72 h-72 rounded-full bg-white/10" />
+            <span aria-hidden="true" className="absolute -bottom-24 -right-12 w-80 h-80 rounded-full bg-white/10" />
+            <span aria-hidden="true" className="font-jp absolute top-6 right-8 text-7xl text-white/10 select-none">
+              空手道
+            </span>
+
+            <div className="relative max-w-2xl mx-auto">
+              <h2 className="font-display font-extrabold text-4xl lg:text-5xl text-white mb-5 leading-[1.05]">
+                Ready to try your first class?
+              </h2>
+              <p className="text-lg text-white/85 leading-relaxed mb-9">
+                It&rsquo;s completely free. Bring comfortable clothes, and we&rsquo;ll take care of the rest. All ages
+                and experience levels are welcome.
+              </p>
+              <div className="flex flex-wrap justify-center gap-4">
+                <Link
+                  href="/join/class-registration"
+                  className="inline-flex items-center gap-2.5 bg-white text-dojo font-extrabold text-base px-8 py-4 rounded-full shadow-soft hover:-translate-y-0.5 transition-transform duration-200"
+                >
+                  Book a Free Trial Class
+                  <span aria-hidden="true">→</span>
+                </Link>
+                <a
+                  href="tel:+18325130058"
+                  className="inline-flex items-center gap-2.5 border-2 border-white/50 text-white font-extrabold text-base px-8 py-4 rounded-full hover:bg-white/10 transition-colors duration-200"
+                >
+                  Call (832) 513-0058
+                </a>
+              </div>
             </div>
           </div>
         </div>

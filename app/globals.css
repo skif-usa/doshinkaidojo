@@ -1,118 +1,119 @@
 @import "tailwindcss";
 
 /* ============================================================
-   Doshinkai Dojo — dark editorial design system
-   Near-black ground, bone-white inverted blocks, one vermillion
-   accent. Additive only: the Tailwind default palette still
-   resolves, so pages not yet restyled keep painting bg-white.
+   Doshinkai Dojo — warm, family-friendly design system
+   Cream paper, white cards, energetic dojo red, and the belt
+   colours as a supporting palette. Additive only: the Tailwind
+   default palette still resolves, so pages not yet restyled
+   keep painting bg-white.
    ============================================================ */
 @theme {
-  /* Dark ground */
-  --color-void: #0d0d0c;
-  --color-shell: #161614;
-  --color-shell-2: #1f1f1b;
+  /* Page + surfaces */
+  --color-cream: #fffaf2;
+  --color-cream-deep: #fdf1e0;
+  --color-card: #ffffff;
 
-  /* Light ground, for inverted sections */
-  --color-bone: #f1eee7;
-  --color-bone-warm: #e6e1d5;
+  /* Text — warm charcoal rather than hard black */
+  --color-charcoal: #322f3d;
+  --color-slate: #5f5b6e;
+  --color-muted: #918da1;
 
-  /* Text on dark */
-  --color-chalk: #f4f2ec;
-  --color-chalk-soft: #a9a49a;
-  --color-chalk-faint: #6f6a61;
+  /* Primary dojo red */
+  --color-dojo: #e0402c;
+  --color-dojo-deep: #b82f1e;
+  --color-dojo-tint: #fdece8;
 
-  /* Text on light */
-  --color-ink: #14140f;
-  --color-ink-soft: #4b463c;
-  --color-ink-faint: #7d7767;
+  /* Belt colours — used for accents and category dots */
+  --color-belt-white: #f4efe4;
+  --color-belt-yellow: #f7c343;
+  --color-belt-orange: #ef8a37;
+  --color-belt-green: #52a55f;
+  --color-belt-blue: #3d84c6;
+  --color-belt-brown: #8a5a3b;
+  --color-belt-black: #2f2d38;
 
-  /* Accent */
-  --color-seal: #c9432b;
-  --color-seal-soft: #e07052;
+  /* Lines */
+  --color-line: #ede3d4;
+  --color-line-soft: #f5eee2;
 
-  /* Hairlines */
-  --color-edge: #2b2b26;
-  --color-edge-light: #d4cec0;
-
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-cormorant), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-nunito), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-baloo), var(--font-nunito), ui-rounded, system-ui, sans-serif;
   --font-jp: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", serif;
-  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
 
-  --ease-zen: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.4, 0.64, 1);
+
+  /* Soft, friendly elevation */
+  --shadow-soft: 0 2px 4px rgba(50, 47, 61, 0.04), 0 12px 28px -12px rgba(50, 47, 61, 0.14);
+  --shadow-lift: 0 4px 8px rgba(50, 47, 61, 0.05), 0 22px 44px -16px rgba(50, 47, 61, 0.2);
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
   }
 
   body {
-    background-color: var(--color-void);
-    color: var(--color-chalk);
+    background-color: var(--color-cream);
+    color: var(--color-charcoal);
     font-family: var(--font-sans);
   }
 
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+  }
+
   ::selection {
-    background-color: var(--color-seal);
-    color: var(--color-chalk);
+    background-color: var(--color-dojo);
+    color: #fff;
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-seal);
+    outline: 3px solid var(--color-dojo);
     outline-offset: 3px;
+    border-radius: 4px;
   }
 }
 
 @layer components {
-  /* Wide-tracked micro label */
-  .eyebrow {
-    font-size: 0.625rem;
-    font-weight: 500;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
+  /* Small rounded label chip */
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 999px;
+    padding: 0.4rem 0.9rem;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    line-height: 1;
   }
 
-  /* Monospace index numeral, e.g. 01 / 02 */
-  .index-num {
-    font-family: var(--font-mono);
-    font-size: 0.6875rem;
-    letter-spacing: 0.16em;
-    font-variant-numeric: tabular-nums;
-  }
-
-  .vertical-jp {
-    writing-mode: vertical-rl;
-    font-family: var(--font-jp);
-    letter-spacing: 0.4em;
-  }
-}
-
-/* Running marquee band. The track holds two identical copies, so
-   translating by -50% loops seamlessly. */
-@keyframes marquee-drift {
-  from {
-    transform: translate3d(0, 0, 0);
-  }
-  to {
-    transform: translate3d(-50%, 0, 0);
+  /* The obi: a row of belt colours, used as a page-top accent */
+  .belt-stripe {
+    height: 6px;
+    background: linear-gradient(
+      to right,
+      var(--color-belt-white) 0 14.28%,
+      var(--color-belt-yellow) 14.28% 28.56%,
+      var(--color-belt-orange) 28.56% 42.84%,
+      var(--color-belt-green) 42.84% 57.12%,
+      var(--color-belt-blue) 57.12% 71.4%,
+      var(--color-belt-brown) 71.4% 85.68%,
+      var(--color-belt-black) 85.68% 100%
+    );
   }
 }
 
-.marquee-track {
-  display: flex;
-  width: max-content;
-  animation: marquee-drift 48s linear infinite;
-}
-
-/* Scroll reveal with no JavaScript. Browsers without scroll-driven
-   animations render content in place. */
-@keyframes zen-rise {
+/* Gentle rise-in on scroll, no JavaScript. Browsers without
+   scroll-driven animations render content in place. */
+@keyframes pop-rise {
   from {
     opacity: 0;
-    transform: translateY(1.75rem);
+    transform: translateY(1.5rem);
   }
   to {
     opacity: 1;
@@ -123,9 +124,9 @@
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
     .rise {
-      animation: zen-rise linear both;
+      animation: pop-rise linear both;
       animation-timeline: view();
-      animation-range: entry 5% cover 26%;
+      animation-range: entry 4% cover 24%;
     }
   }
 }
@@ -133,9 +134,5 @@
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
-  }
-
-  .marquee-track {
-    animation: none;
   }
 }

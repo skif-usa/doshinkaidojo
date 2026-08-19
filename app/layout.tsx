@@ -1,20 +1,20 @@
 import type { Metadata } from 'next';
-import { Cormorant_Garamond, Inter } from 'next/font/google';
+import { Baloo_2, Nunito } from 'next/font/google';
 import "./globals.css";
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
-const cormorant = Cormorant_Garamond({
+const baloo = Baloo_2({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600'],
-  style: ['normal', 'italic'],
-  variable: '--font-cormorant',
+  weight: ['500', '600', '700', '800'],
+  variable: '--font-baloo',
   display: 'swap',
 });
 
-const inter = Inter({
+const nunito = Nunito({
   subsets: ['latin'],
-  variable: '--font-inter',
+  weight: ['400', '600', '700', '800'],
+  variable: '--font-nunito',
   display: 'swap',
 });
 
@@ -67,19 +67,16 @@ export const metadata: Metadata = {
 };
 
 export const viewport = {
-  themeColor: '#0d0d0c',
+  themeColor: '#fffaf2',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${cormorant.variable} ${inter.variable}`}>
-      <body className="min-h-screen bg-void text-chalk antialiased">
+    <html lang="en" className={`${baloo.variable} ${nunito.variable}`}>
+      <body className="min-h-screen flex flex-col bg-cream text-charcoal antialiased">
         <Navbar />
-        {/* Offset past the fixed identity rail */}
-        <div className="lg:pl-20 min-h-screen flex flex-col">
-          <main className="flex-grow">{children}</main>
-          <Footer />
-        </div>
+        <main className="flex-grow">{children}</main>
+        <Footer />
       </body>
     </html>
   );
