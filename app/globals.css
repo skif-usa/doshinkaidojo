@@ -1,35 +1,44 @@
 @import "tailwindcss";
 
 /* ============================================================
-   Doshinkai Dojo — "Zen" design tokens
-   Warm washi paper, sumi ink, a single vermillion seal accent.
-   Only additive: the Tailwind default palette still resolves, so
-   pages not yet restyled keep working.
+   Doshinkai Dojo — dark editorial design system
+   Near-black ground, bone-white inverted blocks, one vermillion
+   accent. Additive only: the Tailwind default palette still
+   resolves, so pages not yet restyled keep painting bg-white.
    ============================================================ */
 @theme {
-  /* Surfaces — warm paper tones */
-  --color-paper: #faf8f4;
-  --color-paper-warm: #f4f0e8;
-  --color-paper-deep: #ebe4d7;
+  /* Dark ground */
+  --color-void: #0d0d0c;
+  --color-shell: #161614;
+  --color-shell-2: #1f1f1b;
 
-  /* Sumi ink text ramp */
-  --color-ink: #1a1815;
-  --color-ink-soft: #514b41;
-  --color-ink-faint: #7d7568;
+  /* Light ground, for inverted sections */
+  --color-bone: #f1eee7;
+  --color-bone-warm: #e6e1d5;
+
+  /* Text on dark */
+  --color-chalk: #f4f2ec;
+  --color-chalk-soft: #a9a49a;
+  --color-chalk-faint: #6f6a61;
+
+  /* Text on light */
+  --color-ink: #14140f;
+  --color-ink-soft: #4b463c;
+  --color-ink-faint: #7d7767;
+
+  /* Accent */
+  --color-seal: #c9432b;
+  --color-seal-soft: #e07052;
 
   /* Hairlines */
-  --color-rule: #ded7c9;
-  --color-rule-soft: #eae4d8;
-
-  /* Vermillion seal accent — used sparingly, like a stamp */
-  --color-seal: #b4432f;
-  --color-seal-deep: #8f3120;
+  --color-edge: #2b2b26;
+  --color-edge-light: #d4cec0;
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-cormorant), Georgia, "Times New Roman", serif;
   --font-jp: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
 
-  /* Slow, calm easing */
   --ease-zen: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -41,14 +50,14 @@
   }
 
   body {
-    background-color: var(--color-paper);
-    color: var(--color-ink);
+    background-color: var(--color-void);
+    color: var(--color-chalk);
     font-family: var(--font-sans);
   }
 
   ::selection {
     background-color: var(--color-seal);
-    color: var(--color-paper);
+    color: var(--color-chalk);
   }
 
   :focus-visible {
@@ -58,25 +67,48 @@
 }
 
 @layer components {
-  /* Small wide-tracked label used above headings */
+  /* Wide-tracked micro label */
   .eyebrow {
-    font-size: 0.6875rem;
+    font-size: 0.625rem;
     font-weight: 500;
-    letter-spacing: 0.28em;
+    letter-spacing: 0.3em;
     text-transform: uppercase;
-    color: var(--color-ink-faint);
   }
 
-  /* Vertical Japanese text rail */
+  /* Monospace index numeral, e.g. 01 / 02 */
+  .index-num {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.16em;
+    font-variant-numeric: tabular-nums;
+  }
+
   .vertical-jp {
     writing-mode: vertical-rl;
     font-family: var(--font-jp);
-    letter-spacing: 0.35em;
+    letter-spacing: 0.4em;
   }
 }
 
+/* Running marquee band. The track holds two identical copies, so
+   translating by -50% loops seamlessly. */
+@keyframes marquee-drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-drift 48s linear infinite;
+}
+
 /* Scroll reveal with no JavaScript. Browsers without scroll-driven
-   animations simply render the content in place. */
+   animations render content in place. */
 @keyframes zen-rise {
   from {
     opacity: 0;
@@ -95,5 +127,15 @@
       animation-timeline: view();
       animation-range: entry 5% cover 26%;
     }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .marquee-track {
+    animation: none;
   }
 }

@@ -67,16 +67,19 @@ export const metadata: Metadata = {
 };
 
 export const viewport = {
-  themeColor: '#faf8f4',
+  themeColor: '#0d0d0c',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${cormorant.variable} ${inter.variable}`}>
-      <body className="min-h-screen flex flex-col bg-paper text-ink antialiased">
+      <body className="min-h-screen bg-void text-chalk antialiased">
         <Navbar />
-        <main className="flex-grow">{children}</main>
-        <Footer />
+        {/* Offset past the fixed identity rail */}
+        <div className="lg:pl-20 min-h-screen flex flex-col">
+          <main className="flex-grow">{children}</main>
+          <Footer />
+        </div>
       </body>
     </html>
   );

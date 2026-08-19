@@ -1,84 +1,95 @@
 import Link from 'next/link';
 
+const columns = [
+  {
+    title: 'Dojo Location',
+    lines: ['Doshinkai Dojo', '6620 Montgomery Road', 'Suite 3', 'Cincinnati, OH 45213'],
+  },
+  {
+    title: 'Mailing Address',
+    lines: ['P.O. Box 42316', 'Cincinnati, OH 45242'],
+  },
+];
+
+const quickLinks = [
+  { label: 'Class Schedule', href: '/schedule' },
+  { label: 'Class Registration', href: '/join/class-registration' },
+  { label: 'Upcoming Events', href: '/events' },
+  { label: 'Contact Us', href: '/contact' },
+];
+
 export default function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-paper-warm text-ink border-t border-rule">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-12 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-14 lg:gap-10 mb-16">
-          <div>
-            <span className="block w-14 h-14 mb-6">
-              <img src="/doshinkai_logo.png" alt="" aria-hidden="true" className="w-full h-full object-contain" />
-            </span>
-            <h3 className="font-display text-2xl font-normal tracking-[0.06em] mb-4">Doshinkai Dojo</h3>
-            <p className="text-sm text-ink-soft leading-relaxed pr-4">
-              Dedicated to the strict preservation of traditional Shotokan technique, discipline, and philosophy in
-              Cincinnati.
-            </p>
-          </div>
-
-          <div>
-            <h4 className="eyebrow text-seal mb-6">Dojo Location</h4>
-            <ul className="space-y-2 text-sm text-ink-soft">
-              <li className="text-ink font-medium">Doshinkai Dojo</li>
-              <li>6620 Montgomery Road</li>
-              <li>Suite 3</li>
-              <li>Cincinnati, OH 45213</li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="eyebrow text-seal mb-6">Mailing Address</h4>
-            <ul className="space-y-2 text-sm text-ink-soft">
-              <li>P.O. Box 42316</li>
-              <li>Cincinnati, OH 45242</li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="eyebrow text-seal mb-6">Contact Us</h4>
-            <ul className="space-y-4 text-sm text-ink-soft">
-              <li>
-                <a href="tel:+18325130058" className="group flex items-center gap-3 hover:text-seal transition-colors">
-                  <span aria-hidden="true" className="w-6 h-px bg-rule group-hover:bg-seal group-hover:w-9 transition-all duration-500" />
-                  +1 (832) 513 &ndash; 0058
-                </a>
-              </li>
-              <li>
-                <a href="mailto:dskdojo1@gmail.com" className="group flex items-center gap-3 hover:text-seal transition-colors">
-                  <span aria-hidden="true" className="w-6 h-px bg-rule group-hover:bg-seal group-hover:w-9 transition-all duration-500" />
-                  dskdojo1@gmail.com
-                </a>
-              </li>
-            </ul>
-            <Link
-              href="/join/class-registration"
-              className="inline-block mt-8 bg-ink text-paper text-[11px] uppercase tracking-[0.24em] px-6 py-3.5 hover:bg-seal transition-colors duration-500"
-            >
-              Begin Training
-            </Link>
-          </div>
-        </div>
-
-        <div className="pt-8 border-t border-rule flex flex-col md:flex-row justify-between items-center gap-4 text-[11px] uppercase tracking-[0.2em] text-ink-faint">
-          <p>&copy; {new Date().getFullYear()} Doshinkai Dojo. All rights reserved.</p>
-          <div className="flex gap-8">
-            <Link href="/schedule" className="hover:text-seal transition-colors">
-              Schedule
-            </Link>
-            <Link href="/contact" className="hover:text-seal transition-colors">
-              Contact
-            </Link>
-          </div>
+    <footer className="bg-void text-chalk">
+      {/* Oversized wordmark as the closing gesture */}
+      <div className="px-5 lg:px-10 pt-16 lg:pt-24 pb-10 border-b border-edge">
+        <span className="block font-display font-light text-[15vw] lg:text-[11vw] leading-[0.82] tracking-[-0.02em] text-chalk">
+          Doshinkai
+        </span>
+        <div className="flex flex-wrap items-end justify-between gap-6 mt-4">
+          <span className="font-jp text-3xl lg:text-5xl text-seal/80 select-none" aria-hidden="true">
+            道心会
+          </span>
+          <p className="eyebrow text-chalk-faint">Shotokan Karate &nbsp;·&nbsp; Cincinnati, Ohio</p>
         </div>
       </div>
 
-      {/* Oversized 道 ("the Way") as a quiet watermark */}
-      <span
-        aria-hidden="true"
-        className="font-jp pointer-events-none select-none absolute -bottom-16 right-4 md:right-16 text-[16rem] md:text-[22rem] leading-none text-ink opacity-[0.04]"
-      >
-        道
-      </span>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border-b border-edge">
+        {columns.map((col) => (
+          <div key={col.title} className="px-5 lg:px-10 py-12 border-b sm:border-b-0 sm:border-r border-edge">
+            <h3 className="eyebrow text-seal mb-6">{col.title}</h3>
+            <ul className="space-y-1.5 text-sm text-chalk-soft">
+              {col.lines.map((line, i) => (
+                <li key={line} className={i === 0 && col.title === 'Dojo Location' ? 'text-chalk' : undefined}>
+                  {line}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+
+        <div className="px-5 lg:px-10 py-12 border-b sm:border-b-0 lg:border-r border-edge">
+          <h3 className="eyebrow text-seal mb-6">Contact Us</h3>
+          <ul className="space-y-3 text-sm">
+            <li>
+              <a href="tel:+18325130058" className="group flex items-center gap-3 text-chalk-soft hover:text-seal transition-colors">
+                <span aria-hidden="true" className="w-5 h-px bg-edge group-hover:bg-seal group-hover:w-8 transition-all duration-500" />
+                +1 (832) 513 &ndash; 0058
+              </a>
+            </li>
+            <li>
+              <a href="mailto:dskdojo1@gmail.com" className="group flex items-center gap-3 text-chalk-soft hover:text-seal transition-colors">
+                <span aria-hidden="true" className="w-5 h-px bg-edge group-hover:bg-seal group-hover:w-8 transition-all duration-500" />
+                dskdojo1@gmail.com
+              </a>
+            </li>
+          </ul>
+          <p className="text-sm text-chalk-soft mt-6">Se Habla Español</p>
+        </div>
+
+        <div className="px-5 lg:px-10 py-12">
+          <h3 className="eyebrow text-seal mb-6">Quick Links</h3>
+          <ul className="space-y-3 text-sm">
+            {quickLinks.map((link) => (
+              <li key={link.href}>
+                <Link href={link.href} className="group flex items-center gap-3 text-chalk-soft hover:text-seal transition-colors">
+                  {link.label}
+                  <span aria-hidden="true" className="opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+                    &rarr;
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <div className="px-5 lg:px-10 py-7 flex flex-col sm:flex-row justify-between items-center gap-3">
+        <p className="index-num text-chalk-faint">
+          &copy; {new Date().getFullYear()} Doshinkai Dojo &nbsp;·&nbsp; All rights reserved
+        </p>
+        <p className="index-num text-chalk-faint">Dedicated to traditional Shotokan technique</p>
+      </div>
     </footer>
   );
 }
