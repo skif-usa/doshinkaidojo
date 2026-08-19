@@ -1,20 +1,20 @@
 import type { Metadata } from 'next';
-import { Baloo_2, Nunito } from 'next/font/google';
+import { Archivo, Inter } from 'next/font/google';
 import "./globals.css";
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
-const baloo = Baloo_2({
+const archivo = Archivo({
   subsets: ['latin'],
-  weight: ['500', '600', '700', '800'],
-  variable: '--font-baloo',
+  weight: ['600', '700', '800'],
+  variable: '--font-archivo',
   display: 'swap',
 });
 
-const nunito = Nunito({
+const inter = Inter({
   subsets: ['latin'],
-  weight: ['400', '600', '700', '800'],
-  variable: '--font-nunito',
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-inter',
   display: 'swap',
 });
 
@@ -67,13 +67,13 @@ export const metadata: Metadata = {
 };
 
 export const viewport = {
-  themeColor: '#fffaf2',
+  themeColor: '#ffffff',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${baloo.variable} ${nunito.variable}`}>
-      <body className="min-h-screen flex flex-col bg-cream text-charcoal antialiased">
+    <html lang="en" className={`${archivo.variable} ${inter.variable}`}>
+      <body className="min-h-screen flex flex-col bg-white text-ink antialiased">
         <Navbar />
         <main className="flex-grow">{children}</main>
         <Footer />
