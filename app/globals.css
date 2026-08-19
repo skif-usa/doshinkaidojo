@@ -1,1 +1,99 @@
 @import "tailwindcss";
+
+/* ============================================================
+   Doshinkai Dojo — "Zen" design tokens
+   Warm washi paper, sumi ink, a single vermillion seal accent.
+   Only additive: the Tailwind default palette still resolves, so
+   pages not yet restyled keep working.
+   ============================================================ */
+@theme {
+  /* Surfaces — warm paper tones */
+  --color-paper: #faf8f4;
+  --color-paper-warm: #f4f0e8;
+  --color-paper-deep: #ebe4d7;
+
+  /* Sumi ink text ramp */
+  --color-ink: #1a1815;
+  --color-ink-soft: #514b41;
+  --color-ink-faint: #7d7568;
+
+  /* Hairlines */
+  --color-rule: #ded7c9;
+  --color-rule-soft: #eae4d8;
+
+  /* Vermillion seal accent — used sparingly, like a stamp */
+  --color-seal: #b4432f;
+  --color-seal-deep: #8f3120;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-cormorant), Georgia, "Times New Roman", serif;
+  --font-jp: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", serif;
+
+  /* Slow, calm easing */
+  --ease-zen: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+  }
+
+  ::selection {
+    background-color: var(--color-seal);
+    color: var(--color-paper);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-seal);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  /* Small wide-tracked label used above headings */
+  .eyebrow {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--color-ink-faint);
+  }
+
+  /* Vertical Japanese text rail */
+  .vertical-jp {
+    writing-mode: vertical-rl;
+    font-family: var(--font-jp);
+    letter-spacing: 0.35em;
+  }
+}
+
+/* Scroll reveal with no JavaScript. Browsers without scroll-driven
+   animations simply render the content in place. */
+@keyframes zen-rise {
+  from {
+    opacity: 0;
+    transform: translateY(1.75rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .rise {
+      animation: zen-rise linear both;
+      animation-timeline: view();
+      animation-range: entry 5% cover 26%;
+    }
+  }
+}
