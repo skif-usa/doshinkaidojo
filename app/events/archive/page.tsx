@@ -11,6 +11,7 @@ export const metadata: Metadata = pageMetadata({
 });
 
 const events = [
+  { title: 'Shug Yo 2026', date: 'August 7 & 8, 2026', image: '/shug_yo_2026.webp', year: '2026' },
   { title: '2026 SKIF Cincinnati Gasshuku', date: 'June 5, 6 & 7, 2026', image: '/2026_Kanazawa_Cincinnati.webp', year: '2026' },
   { title: 'Karate Seminar with Ruben Fung', date: 'February 20 & 21, 2026', image: '/seminar_feb_20_21_2026.webp', year: '2026' },
   { title: 'Seminar with Hiyori Kanazawa', date: 'September 20 & 21, 2025', image: '/SKIF_Cincinnati_September_2025.webp', year: '2025' },
