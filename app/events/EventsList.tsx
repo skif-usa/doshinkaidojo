@@ -9,7 +9,7 @@ import { upcomingEvents } from '@/lib/events';
 export default function EventsList() {
   // We use state to track which event card is currently expanded
   const [expandedEvent, setExpandedEvent] = useState<string | null>(null);
-  // Language toggle per event card (defaults to Spanish for this event)
+  // Language toggle per event card (defaults to Spanish when the event has it)
   const [eventLang, setEventLang] = useState<Record<string, 'es' | 'en'>>({});
 
   const toggleEvent = (id: string) => {
@@ -44,8 +44,9 @@ export default function EventsList() {
           <div className="space-y-10">
             {upcomingEvents.map((event) => {
               const isExpanded = expandedEvent === event.id;
-              const lang = eventLang[event.id] ?? 'es';
-              const t = event.content[lang];
+              const hasEs = Boolean(event.content.es);
+              const lang = eventLang[event.id] ?? (hasEs ? 'es' : 'en');
+              const t = (lang === 'es' && event.content.es) || event.content.en;
 
               return (
                 <article key={event.id} className="border border-line rounded-md overflow-hidden">
@@ -66,8 +67,8 @@ export default function EventsList() {
                       <div className="flex items-center justify-between gap-4 mb-5">
                         <span className="label text-ink-faint">{event.date}</span>
 
-                        {/* Language toggle */}
-                        <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.14em]">
+                        {/* Language toggle, only for bilingual events */}
+                        {hasEs && <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.14em]">
                           <button
                             onClick={() => setEventLang((prev) => ({ ...prev, [event.id]: 'es' }))}
                             aria-pressed={lang === 'es'}
@@ -86,7 +87,7 @@ export default function EventsList() {
                           >
                             EN
                           </button>
-                        </div>
+                        </div>}
                       </div>
 
                       <h2 className="font-display font-extrabold text-3xl lg:text-[2.5rem] leading-[1.08] mb-4">
@@ -145,7 +146,7 @@ export default function EventsList() {
                                   </li>
                                 ))}
                               </ul>
-                              <div className="text-ink-soft">
+                              {event.contact && <div className="text-ink-soft">
                                 <p className="font-semibold text-ink mb-1.5">{t.labels.contactInfo}</p>
                                 <p>{event.contact.name}</p>
                                 <p>
@@ -164,7 +165,7 @@ export default function EventsList() {
                                     {event.contact.email}
                                   </a>
                                 </p>
-                              </div>
+                              </div>}
                             </div>
                           </div>
 
@@ -175,7 +176,7 @@ export default function EventsList() {
                           </p>
 
                           <div className="flex flex-col sm:flex-row sm:items-center gap-4">
-                            <a
+                            {event.registerLink && <a
                               href={event.registerLink}
                               target="_blank"
                               rel="noopener noreferrer"
@@ -183,7 +184,7 @@ export default function EventsList() {
                             >
                               {t.labels.register}
                               <span aria-hidden="true">→</span>
-                            </a>
+                            </a>}
 
                             <button
                               onClick={() => toggleEvent(event.id)}

@@ -3,6 +3,7 @@ import Image from 'next/image';
 import type { Metadata } from 'next';
 import { pageMetadata } from '@/lib/seo';
 import HeroSlider from '@/components/HeroSlider';
+import EventPopup from '@/components/EventPopup';
 
 export const metadata: Metadata = pageMetadata({
   title: 'Doshinkai Dojo | Traditional Shotokan Karate in Cincinnati',
@@ -75,6 +76,7 @@ export default function Home() {
       {/* INJECT LOCAL SEO SCHEMA */}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
+      <EventPopup />
       <HeroSlider />
 
       {/* ── CREDENTIAL BAR ───────────────────────────────────── */}
