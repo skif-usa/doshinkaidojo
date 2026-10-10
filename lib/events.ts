@@ -70,6 +70,47 @@ export const upcomingEvents: UpcomingEvent[] = [
       },
     },
   },
+  {
+    id: 'skif-gasshuku-2027',
+    title: 'Annual SKIF Gasshuku Houston',
+    date: 'March 6–7, 2027',
+    startIso: '2027-03-06',
+    endIso: '2027-03-07',
+    offers: [],
+    currency: 'USD',
+    image: '/Houston_Gasshuku_2027.webp',
+    registerLink: 'https://forms.gle/uAkYtjLMUjMnr6Xt8',
+    performer: 'Manabu Murakami',
+    location: {
+      name: 'Trotter Family YMCA',
+      address: ['Houston, Texas'],
+      city: 'Houston',
+      country: 'US',
+    },
+    contact: { name: 'Rubén Fung', phone: '832-513-0058', email: 'shotokankaratedocenter@gmail.com' },
+    content: {
+      en: {
+        shortDesc:
+          'A weekend of traditional Karate-Do training, learning, and friendship with guest instructor Shuseki Shihan Manabu Murakami (8th Dan), Chief Instructor of SKIF. Open to adults, teens, and youth from all traditional karate styles and affiliations.',
+        schedule: [
+          'Saturday, March 6, 2027 — Training',
+          'Sunday, March 7, 2027 — Training',
+          'Guest Instructor: Shuseki Shihan Manabu Murakami (8th Dan), Chief Instructor of SKIF',
+          'Hosted by Shotokan Karate-Do Center, endorsed by SKIF USA',
+        ],
+        pricing: ['Open to all traditional karate styles', 'Adults, teens, and youth'],
+        note: 'Train with a world-renowned instructor, improve your skills, and connect with fellow karateka. Register today to secure your place, and invite your students to be part of this special event.',
+        quote: 'Come train with us in Houston and celebrate the true spirit of Karate-Do! OSS!',
+        labels: {
+          location: 'Location & Date',
+          schedule: 'Schedule',
+          cost: 'Who Can Attend',
+          contactInfo: 'Contact: Rubén Fung',
+          register: 'Register Now',
+        },
+      },
+    },
+  },
 ];
 
 const BASE_URL = 'https://doshinkaidojo.com';
@@ -87,7 +128,7 @@ export function eventJsonLd(event: UpcomingEvent) {
     eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
     image: [`${BASE_URL}${event.image}`],
     url: `${BASE_URL}/events`,
-    isAccessibleForFree: event.offers.every((offer) => offer.price === '0'),
+    isAccessibleForFree: event.offers.length > 0 && event.offers.every((offer) => offer.price === '0'),
     location: {
       '@type': 'Place',
       name: event.location.name,
