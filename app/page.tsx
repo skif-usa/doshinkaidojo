@@ -3,6 +3,9 @@ import Image from 'next/image';
 import type { Metadata } from 'next';
 import { pageMetadata } from '@/lib/seo';
 import HeroSlider from '@/components/HeroSlider';
+import Reveal from '@/components/Reveal';
+import ClassTabs from '@/components/ClassTabs';
+import ShrinkOnScroll from '@/components/ShrinkOnScroll';
 
 export const metadata: Metadata = pageMetadata({
   title: 'Doshinkai Dojo | Traditional Shotokan Karate in Cincinnati',
@@ -11,32 +14,57 @@ export const metadata: Metadata = pageMetadata({
   absoluteTitle: true,
 });
 
-const credentials = [
-  { value: 'Age 5+', label: 'Youth classes' },
+const stats = [
+  { value: 'Age 5+', label: 'Starting age' },
   { value: '6th Dan', label: 'Head instructor' },
   { value: '130+', label: 'SKIF countries' },
   { value: '35 yrs', label: 'Teaching experience' },
 ];
 
-/* ── Real class groups, from the dojo schedule ───────────────── */
-const programs = [
-  { n: '01', age: 'Ages 5–7', name: 'Youth Karate', length: '45 minutes', when: 'Wednesdays, 5:15 PM' },
-  { n: '02', age: 'Ages 8–11', name: 'Youth Karate', length: '60 minutes', when: 'Wednesdays, 5:15 PM' },
-  { n: '03', age: 'Ages 12 & up', name: 'All Levels', length: 'In person & Zoom', when: 'Sun & Sat 1:30 PM · Mon & Wed 7:30 PM' },
-  { n: '04', age: 'Ages 12 & up', name: 'Intermediate & Advanced', length: '60 minutes', when: 'Sun & Sat, 2:30 PM' },
-];
-
 const reasons = [
-  { n: '01', title: 'Safety first', body: 'Experienced instructors, comprehensive safety instruction, and a controlled environment.' },
-  { n: '02', title: 'Certified instruction', body: 'Taught under SKIF-USA certification, with proper technique guided at every step.' },
-  { n: '03', title: 'Confidence and discipline', body: 'Students build focus, self-control, and character that carries well beyond the dojo.' },
-  { n: '04', title: 'A free first class', body: 'Try traditional Shotokan before committing. Bring comfortable clothing; we do the rest.' },
+  { title: 'Safety first', body: 'Experienced instructors, comprehensive safety instruction, and a controlled environment.' },
+  { title: 'Certified instruction', body: 'Taught under SKIF-USA certification, with proper technique guided at every step.' },
+  { title: 'Confidence and discipline', body: 'Students build focus, self-control, and character that carries well beyond the dojo.' },
+  { title: 'A free first class', body: 'Try traditional Shotokan before committing. Bring comfortable clothing; we do the rest.' },
 ];
 
 const pillars = [
   { numeral: '一', subject: 'Body', body: 'Stamina, coordination, strength, and agility.' },
   { numeral: '二', subject: 'Mind', body: 'Concentration, memory, and presence.' },
   { numeral: '三', subject: 'Spirit', body: 'Perseverance, humility, and self-confidence.' },
+];
+
+const names = [
+  { kanji: '道心会', size: '3.25rem', reading: 'Dōshinkai', meaning: 'The Way of Body, Mind, and Spirit' },
+  { kanji: '国際松濤館空手道連盟', size: '1.5rem', reading: 'SKIF', meaning: 'Shotokan Karate-Do International Federation' },
+  { kanji: '金澤弘和', size: '2.25rem', reading: 'Kanazawa Hirokazu', meaning: 'Soke, founder of SKIF' },
+];
+
+const faqs = [
+  {
+    q: 'What age can my child start?',
+    a: 'Classes begin at age five. Youth classes are divided into ages 5–7 and 8–11 so every child receives the attention they need. Age exceptions are possible with instructor permission.',
+  },
+  {
+    q: 'Do I need any experience?',
+    a: 'No. All Levels classes welcome students aged twelve and over, with no experience needed, in person and on Zoom.',
+  },
+  {
+    q: 'Is the first class really free?',
+    a: 'Yes. Try traditional Shotokan before committing. Bring comfortable clothing; we do the rest.',
+  },
+  {
+    q: 'Can I train online?',
+    a: 'All Levels classes also run on Zoom for students aged twelve and over. Secure links are provided directly to registered students before class.',
+  },
+  {
+    q: 'Do you offer private lessons?',
+    a: 'Yes. Private instruction is one-on-one with Sensei. You can request a session from the Private Instruction page.',
+  },
+  {
+    q: 'Where is the dojo?',
+    a: '6620 Montgomery Road, Suite 3, Cincinnati, OH 45213.',
+  },
 ];
 
 export default function Home() {
@@ -46,6 +74,7 @@ export default function Home() {
     "@type": "SportsActivityLocation",
     "name": "Doshinkai Dojo",
     "image": "https://doshinkaidojo.com/hero_image.webp",
+    "logo": "https://doshinkaidojo.com/doshinkai_logo.png",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "6620 Montgomery Road, Suite 3",
@@ -70,111 +99,118 @@ export default function Home() {
     ]
   };
 
+  const faqLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  };
+
   return (
     <div className="bg-white text-ink">
       {/* INJECT LOCAL SEO SCHEMA */}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
 
       <HeroSlider />
 
-      {/* ── CREDENTIAL BAR ───────────────────────────────────── */}
-      <section className="bg-steel">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <dl className="grid grid-cols-2 lg:grid-cols-4">
-            {credentials.map((item, i) => (
-              <div
-                key={item.label}
-                className={`py-7 lg:py-9 px-2 lg:px-8 ${i > 0 ? 'lg:border-l border-steel-line' : ''} ${
-                  i % 2 === 1 ? 'border-l border-steel-line lg:border-l' : ''
-                } ${i < 2 ? 'border-b border-steel-line lg:border-b-0' : ''}`}
-              >
-                <dt className="font-display font-extrabold text-3xl lg:text-4xl text-white leading-none">
-                  {item.value}
-                </dt>
-                <dd className="text-[11px] font-semibold uppercase tracking-[0.16em] text-white/55 mt-2.5">
-                  {item.label}
-                </dd>
-              </div>
-            ))}
-          </dl>
+      {/* ── INTRO ────────────────────────────────────────────── */}
+      <section className="relative overflow-hidden py-24 lg:py-36">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Reveal className="max-w-4xl mx-auto text-center">
+            <p
+              aria-hidden="true"
+              className="brush text-6xl sm:text-7xl lg:text-8xl tracking-[0.12em] pl-[0.12em] text-ink select-none mb-6 lg:mb-8"
+            >
+              空手道
+            </p>
+            <h2 className="font-display font-semibold text-3xl sm:text-4xl lg:text-[3.25rem] leading-[1.15]">
+              Traditional Shotokan, taught with patience, precision, and respect.
+            </h2>
+            <p className="text-lg lg:text-xl text-ink-soft leading-relaxed mt-7 max-w-2xl mx-auto">
+              Doshinkai means &lsquo;The Way of Body, Mind, and Spirit&rsquo;. We are a member dojo of the Shotokan
+              Karate-Do International Federation, one of the world&rsquo;s largest traditional karate organizations.
+            </p>
+            <div className="flex flex-wrap justify-center gap-3 mt-9">
+              <Link href="/about/shotokan" className="btn-dark">
+                About Shotokan Karate
+                <span aria-hidden="true">→</span>
+              </Link>
+              <Link href="/schedule" className="btn-line">
+                See the schedule
+              </Link>
+            </div>
+          </Reveal>
+
+          <Reveal delay={100} className="mt-20 lg:mt-24">
+            <dl className="grid grid-cols-2 lg:grid-cols-4 gap-y-10 text-center">
+              {stats.map((item, i) => (
+                <div key={item.label} className={`px-4 ${i > 0 ? 'lg:border-l lg:border-line' : ''} ${i % 2 === 1 ? 'border-l border-line lg:border-l' : ''}`}>
+                  <dt className="font-display font-semibold text-3xl lg:text-5xl">{item.value}</dt>
+                  <dd className="text-sm text-ink-faint mt-2">{item.label}</dd>
+                </div>
+              ))}
+            </dl>
+          </Reveal>
         </div>
       </section>
 
-      {/* ── PROGRAMS ─────────────────────────────────────────── */}
-      <section className="py-16 lg:py-24">
+      {/* ── PHOTO THAT SHRINKS AS YOU SCROLL ─────────────────── */}
+      <ShrinkOnScroll
+        src="/technique-family-kick.webp"
+        alt="Students of all ages performing Shotokan blocks, stances and kicks"
+        title="Meet Doshinkai."
+        text="Traditional Shotokan for children, teens, and adults at 6620 Montgomery Road in Cincinnati."
+        cta={{ label: 'About the dojo', href: '/about/shotokan' }}
+      />
+
+      {/* ── CLASSES ──────────────────────────────────────────── */}
+      <section className="pb-24 lg:pb-36">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap items-end justify-between gap-6 mb-10">
-            <div className="max-w-xl">
-              <p className="label text-ink-faint mb-6">Classes</p>
-              <h2 className="font-display font-extrabold text-3xl lg:text-[2.75rem] leading-[1.1]">
-                Four classes, divided by age and rank
-              </h2>
-            </div>
-            <Link
-              href="/schedule"
-              className="inline-flex items-center gap-2 py-2.5 -my-2.5 font-semibold text-dojo hover:gap-3 transition-all duration-200"
-            >
-              Full schedule and guidelines
-              <span aria-hidden="true">→</span>
-            </Link>
-          </div>
-
-          <div className="border-t border-line">
-            {programs.map((program) => (
-              <Link
-                key={program.n}
-                href="/schedule"
-                className="rise group grid grid-cols-1 sm:grid-cols-12 gap-2 sm:gap-8 items-baseline py-6 lg:py-7 border-b border-line hover:bg-bone transition-colors duration-200 px-2 -mx-2"
-              >
-                <span className="sm:col-span-1 font-display font-bold text-sm text-dojo tnum">{program.n}</span>
-
-                <span className="sm:col-span-3 font-display font-extrabold text-xl lg:text-2xl group-hover:text-dojo transition-colors">
-                  {program.age}
-                </span>
-
-                <span className="sm:col-span-3 font-semibold text-ink-soft">{program.name}</span>
-
-                <span className="sm:col-span-2 text-sm text-ink-faint">{program.length}</span>
-
-                <span className="sm:col-span-3 text-sm text-ink-faint sm:text-right tnum">{program.when}</span>
-              </Link>
-            ))}
-          </div>
-
-          <p className="text-sm text-ink-faint mt-6">
-            Age exceptions are possible with instructor permission.
-          </p>
+          <Reveal className="text-center max-w-2xl mx-auto mb-12">
+            <h2 className="font-display font-semibold text-3xl lg:text-5xl leading-[1.1] mb-4">
+              One dojo. A class for every age.
+            </h2>
+            <p className="text-lg text-ink-soft">Choose a group to see when and how we train.</p>
+          </Reveal>
+          <Reveal delay={80}>
+            <ClassTabs />
+          </Reveal>
         </div>
       </section>
 
       {/* ── WHY TRAIN HERE ───────────────────────────────────── */}
-      <section className="bg-bone border-y border-line py-16 lg:py-24">
+      <section className="pb-24 lg:pb-36">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-xl mb-12">
-            <p className="label text-ink-faint mb-6">Why Doshinkai</p>
-            <h2 className="font-display font-extrabold text-3xl lg:text-[2.75rem] leading-[1.1]">
-              What every family can expect
+          <Reveal className="text-center max-w-2xl mx-auto mb-12">
+            <h2 className="font-display font-semibold text-3xl lg:text-5xl leading-[1.1]">
+              What every family can expect.
             </h2>
-          </div>
+          </Reveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-x-10 gap-y-0">
-            {reasons.map((reason) => (
-              <div key={reason.n} className="rise py-7 border-t border-line">
-                <span className="font-display font-bold text-sm text-dojo tnum">{reason.n}</span>
-                <h3 className="font-display font-extrabold text-xl mt-3 mb-2.5">{reason.title}</h3>
-                <p className="text-ink-soft leading-relaxed">{reason.body}</p>
-              </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-5">
+            {reasons.map((reason, i) => (
+              <Reveal key={reason.title} delay={i * 70}>
+                <div className="h-full rounded-[2rem] bg-bone p-8 lg:p-12">
+                  <span className="font-display text-sm text-ink-faint tnum">0{i + 1}</span>
+                  <h3 className="font-display font-semibold text-2xl lg:text-3xl mt-10 mb-3">{reason.title}</h3>
+                  <p className="text-ink-soft leading-relaxed max-w-md">{reason.body}</p>
+                </div>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
       {/* ── INSTRUCTOR ───────────────────────────────────────── */}
-      <section className="py-16 lg:py-24">
+      <section className="pb-24 lg:pb-36">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-            <div className="lg:col-span-5">
-              <div className="relative aspect-4/5 max-w-sm">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-20 items-center">
+            <Reveal className="lg:col-span-5">
+              <div className="relative aspect-4/5 max-w-md rounded-[2rem] overflow-hidden">
                 <Image
                   src="/ruben_profil.webp"
                   alt="Sensei Rubén Fung, head instructor at Doshinkai Dojo"
@@ -183,11 +219,11 @@ export default function Home() {
                   className="object-cover"
                 />
               </div>
-            </div>
+            </Reveal>
 
-            <div className="lg:col-span-7">
+            <Reveal delay={100} className="lg:col-span-7">
               <p className="label text-ink-faint mb-6">Head instructor</p>
-              <h2 className="font-display font-extrabold text-3xl lg:text-[2.75rem] leading-[1.1] mb-6">
+              <h2 className="font-display font-semibold text-3xl lg:text-5xl leading-[1.1] mb-6">
                 Sensei Rubén Fung
               </h2>
               <p className="text-lg text-ink-soft leading-relaxed mb-8 max-w-xl">
@@ -195,96 +231,148 @@ export default function Home() {
                 SKIF-USA. He has spent thirteen years shaping the Cincinnati karate community and serves as an
                 international technical advisor.
               </p>
-              <Link
-                href="/about/instructor"
-                className="inline-flex items-center gap-2 py-2.5 -my-2.5 font-semibold text-dojo hover:gap-3 transition-all duration-200"
-              >
+              <Link href="/about/instructor" className="btn-dark">
                 Read the full profile
                 <span aria-hidden="true">→</span>
               </Link>
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
 
-      {/* ── OUR NAME — solid band ────────────────────────────── */}
-      <section className="bg-steel text-white py-16 lg:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 mb-12">
-            <div className="lg:col-span-5">
-              <p className="label text-white/50 mb-6">Our name</p>
-              <span aria-hidden="true" className="font-jp block text-5xl text-white/25 mb-6 select-none">
-                道心会
-              </span>
-              <h2 className="font-display font-extrabold text-3xl lg:text-[2.375rem] leading-[1.12]">
-                Doshinkai means &lsquo;The Way of Body, Mind, and Spirit&rsquo;
-              </h2>
-            </div>
-
-            <div className="lg:col-span-7 lg:pt-16">
-              <p className="text-white/70 leading-relaxed max-w-xl">
-                The name was bestowed upon our director by Hirokazu Kanazawa, Soke, founder of our organization. We are
-                a member dojo of the Shotokan Karate-Do International Federation, one of the world&rsquo;s largest
-                traditional karate organizations.
-              </p>
-              <Link
-                href="/about/shotokan"
-                className="inline-flex items-center gap-2 mt-7 py-2.5 -my-2.5 font-semibold text-white hover:text-dojo transition-colors duration-200"
-              >
-                About Shotokan Karate
-                <span aria-hidden="true">→</span>
-              </Link>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 border-t border-steel-line">
-            {pillars.map((pillar, i) => (
-              <div
-                key={pillar.subject}
-                className={`py-8 md:px-10 md:first:pl-0 md:last:pr-0 border-b md:border-b-0 border-steel-line last:border-b-0 ${
-                  i > 0 ? 'md:border-l md:border-steel-line' : ''
-                }`}
-              >
-                <span aria-hidden="true" className="font-jp text-xl text-dojo mr-3 select-none">
-                  {pillar.numeral}
-                </span>
-                <h3 className="font-display font-extrabold text-xl inline align-middle">{pillar.subject}</h3>
-                <p className="text-white/65 leading-relaxed mt-2.5">{pillar.body}</p>
+      {/* ── BODY · MIND · SPIRIT (dark) ──────────────────────── */}
+      <section className="px-3 sm:px-4 lg:px-6 pb-24 lg:pb-36">
+        <Reveal className="max-w-[96rem] mx-auto">
+          <div className="relative overflow-hidden rounded-[2rem] lg:rounded-[2.5rem] bg-steel text-white px-6 sm:px-10 lg:px-16 py-16 lg:py-24">
+            <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 mb-14 items-center">
+              <div className="lg:col-span-6">
+                <p className="label text-white/50 mb-5">Our name</p>
+                <h2 className="font-display font-semibold text-3xl lg:text-5xl leading-[1.1] mb-5">
+                  The way of body, mind, and spirit.
+                </h2>
+                <p className="text-white/70 text-lg leading-relaxed max-w-xl">
+                  The name was bestowed upon our director by Hirokazu Kanazawa, Soke, founder of our organization.
+                </p>
               </div>
-            ))}
+
+              <dl className="lg:col-span-6 rounded-3xl bg-steel-2 border border-white/10 divide-y divide-white/10">
+                {names.map((n) => (
+                  <div key={n.kanji} className="flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:gap-6 px-6 sm:px-8 py-6 lg:py-7">
+                    <dt className="brush text-white shrink-0 min-w-[5.5rem]" lang="ja" style={{ fontSize: n.size }}>
+                      {n.kanji}
+                    </dt>
+                    <dd className="text-sm leading-snug">
+                      <span className="block font-medium text-white">{n.reading}</span>
+                      <span className="block text-white/55 mt-1">{n.meaning}</span>
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+
+            <div className="relative grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-5">
+              {pillars.map((pillar) => (
+                <div key={pillar.subject} className="rounded-3xl bg-steel-2 border border-white/10 p-8 lg:p-10">
+                  <span aria-hidden="true" className="font-jp text-4xl text-white/40 block mb-10 select-none">
+                    {pillar.numeral}
+                  </span>
+                  <h3 className="font-display font-semibold text-2xl mb-3">{pillar.subject}</h3>
+                  <p className="text-white/65 leading-relaxed">{pillar.body}</p>
+                </div>
+              ))}
+            </div>
           </div>
+        </Reveal>
+      </section>
+
+      {/* ── TWO WAYS TO TRAIN ────────────────────────────────── */}
+      <section className="pb-24 lg:pb-36">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Reveal className="text-center max-w-2xl mx-auto mb-12">
+            <h2 className="font-display font-semibold text-3xl lg:text-5xl leading-[1.1]">Two ways to train.</h2>
+          </Reveal>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-5">
+            <Reveal>
+              <div className="h-full rounded-[2rem] border border-line p-8 lg:p-12 flex flex-col">
+                <p className="text-sm font-medium text-ink-faint mb-3">Group classes</p>
+                <h3 className="font-display font-semibold text-2xl lg:text-3xl mb-3">Start with a free trial.</h3>
+                <p className="text-ink-soft leading-relaxed mb-8">
+                  Join a class for your age and level. Your first class is on us.
+                </p>
+                <Link href="/join/class-registration" className="btn-dark self-start mt-auto">
+                  Class registration
+                  <span aria-hidden="true">→</span>
+                </Link>
+              </div>
+            </Reveal>
+            <Reveal delay={80}>
+              <div className="h-full rounded-[2rem] border border-line p-8 lg:p-12 flex flex-col">
+                <p className="text-sm font-medium text-ink-faint mb-3">Private instruction</p>
+                <h3 className="font-display font-semibold text-2xl lg:text-3xl mb-3">One-on-one with Sensei.</h3>
+                <p className="text-ink-soft leading-relaxed mb-8">
+                  Focused, personal training at your own pace.
+                </p>
+                <Link href="/join/private-class" className="btn-line text-ink self-start mt-auto">
+                  Request a session
+                  <span aria-hidden="true">→</span>
+                </Link>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ── FAQ ──────────────────────────────────────────────── */}
+      <section className="pb-24 lg:pb-36">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Reveal>
+            <h2 className="font-display font-semibold text-3xl lg:text-5xl leading-[1.1] text-center mb-12">
+              Questions, answered.
+            </h2>
+          </Reveal>
+          <Reveal delay={80}>
+            <div className="border-t border-line">
+              {faqs.map((f) => (
+                <details key={f.q} className="group border-b border-line">
+                  <summary className="flex items-center justify-between gap-6 py-6 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+                    <span className="font-display font-medium text-lg lg:text-xl">{f.q}</span>
+                    <span
+                      aria-hidden="true"
+                      className="text-2xl leading-none text-ink-faint transition-transform duration-300 group-open:rotate-45"
+                    >
+                      +
+                    </span>
+                  </summary>
+                  <p className="pb-7 pr-10 text-ink-soft leading-relaxed">{f.a}</p>
+                </details>
+              ))}
+            </div>
+          </Reveal>
         </div>
       </section>
 
       {/* ── CLOSING CTA ─────────────────────────────────────── */}
-      <section className="border-b border-line">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
-            <div className="lg:col-span-7">
-              <h2 className="font-display font-extrabold text-3xl lg:text-[2.75rem] leading-[1.1] mb-4">
-                Your first class is free
-              </h2>
-              <p className="text-ink-soft leading-relaxed max-w-lg">
-                Students of all ages and experience levels are welcome to train with us at 6620 Montgomery Road.
-              </p>
-            </div>
-            <div className="lg:col-span-5 flex flex-wrap gap-3 lg:justify-end">
-              <Link
-                href="/join/class-registration"
-                className="inline-flex items-center gap-2.5 bg-dojo text-white font-semibold px-7 py-4 rounded-md hover:bg-dojo-deep transition-colors duration-200"
-              >
+      <section className="px-3 sm:px-4 lg:px-6 pb-16 lg:pb-24">
+        <Reveal className="max-w-[96rem] mx-auto">
+          <div className="rounded-[2rem] lg:rounded-[2.5rem] bg-bone px-6 py-16 lg:py-24 text-center">
+            <h2 className="font-display font-semibold text-4xl lg:text-6xl leading-[1.05] mb-5">
+              Your first class is free.
+            </h2>
+            <p className="text-lg text-ink-soft leading-relaxed max-w-lg mx-auto mb-9">
+              Students of all ages and experience levels are welcome to train with us at 6620 Montgomery Road.
+            </p>
+            <div className="flex flex-wrap justify-center gap-3">
+              <Link href="/join/class-registration" className="btn-dark">
                 Register now
                 <span aria-hidden="true">→</span>
               </Link>
-              <a
-                href="tel:+18325130058"
-                className="inline-flex items-center gap-2.5 border border-line text-ink font-semibold px-7 py-4 rounded-md hover:border-dojo hover:text-dojo transition-colors duration-200 tnum"
-              >
+              <a href="tel:+18325130058" className="btn-line text-ink tnum">
                 (832) 513-0058
               </a>
             </div>
           </div>
-        </div>
+        </Reveal>
       </section>
     </div>
   );

@@ -2,13 +2,12 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 type Slide = {
   image: string;
   /** Describe the photograph itself, for screen readers. */
   alt: string;
-  eyebrow: string;
   heading: string;
   body: string;
   cta: { label: string; href: string };
@@ -17,27 +16,24 @@ type Slide = {
 
 const slides: Slide[] = [
   {
-    image: '/hero_image.webp',
-    alt: 'Students training in traditional Shotokan Karate at Doshinkai Dojo',
-    eyebrow: 'Children · Teens · Adults',
+    image: '/technique-stance.webp',
+    alt: 'A black belt in a deep front stance delivering a straight punch, the foundation of Shotokan technique',
     heading: 'Traditional Shotokan Karate in Cincinnati',
     body: 'Classical technique, discipline, and philosophy taught under certified SKIF-USA instruction.',
     cta: { label: 'Register for a free class', href: '/join/class-registration' },
     secondary: { label: 'View the schedule', href: '/schedule' },
   },
   {
-    image: '/introduction.webp',
-    alt: 'A Doshinkai Dojo instructor guiding students through technique',
-    eyebrow: 'Youth classes',
+    image: '/technique-kids.webp',
+    alt: 'Four young students in colored belts practicing stances and punches',
     heading: 'Training begins at age five',
     body: 'Youth classes are divided by age so every child receives the attention they need.',
     cta: { label: 'See youth classes', href: '/schedule' },
     secondary: { label: 'Register now', href: '/join/class-registration' },
   },
   {
-    image: '/skif_instructor_japan.webp',
-    alt: 'Doshinkai Dojo instruction within the international SKIF federation',
-    eyebrow: 'Teens & adults',
+    image: '/technique-family.webp',
+    alt: 'Adults and children of different ranks training side by side in kicks, blocks and punches',
     heading: 'Every level, no experience needed',
     body: 'All Levels and Advanced sessions run in person and on Zoom for students aged twelve and over.',
     cta: { label: 'Explore classes', href: '/schedule' },
@@ -45,13 +41,12 @@ const slides: Slide[] = [
   },
 ];
 
-const INTERVAL = 6500;
+const INTERVAL = 7000;
 
 export default function HeroSlider() {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const [reduced, setReduced] = useState(false);
-  const region = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -86,7 +81,6 @@ export default function HeroSlider() {
 
   return (
     <section
-      ref={region}
       role="region"
       aria-roledescription="carousel"
       aria-label="Doshinkai Dojo highlights"
@@ -95,136 +89,121 @@ export default function HeroSlider() {
       onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
       onBlur={() => setPaused(false)}
-      className="relative h-[86svh] min-h-[32rem] max-h-[52rem] overflow-hidden bg-steel"
+      data-hero
+      className="relative overflow-hidden bg-steel pt-[72px] lg:pt-0 lg:h-[calc(100svh-2.75rem)] lg:min-h-[36rem] lg:max-h-[60rem]"
     >
-      {slides.map((slide, i) => {
-        const active = i === index;
-        // All slides stay mounted for the crossfade, so only the first one may
-        // carry the h1 — otherwise the page ships three competing h1s.
-        const Heading = i === 0 ? 'h1' : 'p';
-        return (
-          <div
-            key={slide.image}
-            role="group"
-            aria-roledescription="slide"
-            aria-label={`${i + 1} of ${slides.length}`}
-            aria-hidden={!active}
-            className={`absolute inset-0 transition-opacity duration-700 ease-out ${
-              active ? 'opacity-100' : 'opacity-0 pointer-events-none'
-            }`}
-          >
-            <Image
-              src={slide.image}
-              alt={slide.alt}
-              fill
-              sizes="100vw"
-              priority={i === 0}
-              className="object-cover"
-            />
-            {/* Scrims: vertical for legibility, horizontal for depth */}
-            <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-steel via-steel/70 to-steel/25" />
-            <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-steel/80 via-transparent to-transparent" />
+      <div className="grid lg:block">
+        {slides.map((slide, i) => {
+          const active = i === index;
+          // All slides stay mounted for the crossfade, so only the first one may
+          // carry the h1: otherwise the page ships three competing h1s.
+          const Heading = i === 0 ? 'h1' : 'p';
+          return (
+            <div
+              key={slide.image}
+              role="group"
+              aria-roledescription="slide"
+              aria-label={`${i + 1} of ${slides.length}`}
+              aria-hidden={!active}
+              className={`[grid-area:1/1] lg:absolute lg:inset-0 transition-opacity duration-1000 ease-out ${
+                active ? 'opacity-100' : 'opacity-0 pointer-events-none'
+              }`}
+            >
+              {/* Photo: a 3:2 strip on phones so nobody is cropped, full-bleed on desktop */}
+              <div className="relative aspect-[3/2] lg:absolute lg:inset-0 lg:aspect-auto">
+                <Image
+                  src={slide.image}
+                  alt={slide.alt}
+                  fill
+                  sizes="100vw"
+                  priority={i === 0}
+                  className="object-cover"
+                />
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-0 bg-gradient-to-t from-steel via-transparent to-transparent lg:from-black/70 lg:via-black/15"
+                />
+                <div aria-hidden="true" className="hidden lg:block absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-black/50 to-transparent" />
+                <div aria-hidden="true" className="hidden lg:block absolute inset-0 bg-gradient-to-r from-black/45 via-transparent to-transparent" />
+              </div>
 
-            <div className="absolute inset-0 flex items-end">
-              <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 lg:pb-28">
-                <div className="max-w-2xl">
-                  <p className="label text-white/60 mb-6">{slide.eyebrow}</p>
-                  <Heading className="font-display font-extrabold text-4xl sm:text-5xl lg:text-[3.75rem] leading-[1.05] text-white mb-5">
-                    {slide.heading}
-                  </Heading>
-                  <p className="text-lg text-white/75 leading-relaxed mb-8 max-w-lg">{slide.body}</p>
-                  <div className="flex flex-wrap gap-3">
-                    <Link
-                      href={slide.cta.href}
-                      tabIndex={active ? 0 : -1}
-                      className="inline-flex items-center gap-2.5 bg-dojo text-white font-semibold px-7 py-4 rounded-md hover:bg-dojo-deep transition-colors duration-200"
-                    >
-                      {slide.cta.label}
-                      <span aria-hidden="true">→</span>
-                    </Link>
-                    {slide.secondary && (
-                      <Link
-                        href={slide.secondary.href}
-                        tabIndex={active ? 0 : -1}
-                        className="inline-flex items-center gap-2.5 border border-white/30 text-white font-semibold px-7 py-4 rounded-md hover:border-white transition-colors duration-200"
-                      >
-                        {slide.secondary.label}
-                      </Link>
+              <div className="lg:absolute lg:inset-0 lg:flex lg:items-end">
+                <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-2 pb-24 lg:pt-0 lg:pb-20">
+                  <div className="max-w-3xl">
+                    {i === 0 && (
+                      <p className="inline-block rounded-full bg-[#6b1010] px-4 py-1.5 text-sm font-medium text-white mb-4">
+                        Se Habla Español
+                      </p>
                     )}
+                    <Heading
+                      className={`font-display font-semibold text-white leading-[1.1] mb-4 lg:mb-5 ${
+                        i === 1
+                          ? 'text-[clamp(1.2rem,5.6vw,1.75rem)] whitespace-nowrap sm:text-[clamp(1.75rem,4.6vw,4rem)]'
+                          : 'text-[1.75rem] sm:text-5xl lg:text-[4rem]'
+                      }`}
+                    >
+                      {slide.heading}
+                    </Heading>
+                    <p className="text-base lg:text-lg text-white/85 leading-relaxed mb-6 lg:mb-8 max-w-xl">{slide.body}</p>
+                    <div className="flex flex-wrap items-center gap-3">
+                      <Link href={slide.cta.href} tabIndex={active ? 0 : -1} className="btn-light">
+                        {slide.cta.label}
+                        <span aria-hidden="true">→</span>
+                      </Link>
+                      {slide.secondary && (
+                        <Link
+                          href={slide.secondary.href}
+                          tabIndex={active ? 0 : -1}
+                          className="btn-line text-white border-white/60 hover:!bg-white hover:!text-ink hover:!border-white"
+                        >
+                          {slide.secondary.label}
+                        </Link>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
 
       {/* Controls */}
-      <div className="absolute bottom-0 inset-x-0 z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-6 lg:pb-8 flex items-center gap-4">
-          {/* Progress dots */}
-          <div className="flex items-center gap-2.5">
-            {slides.map((slide, i) => (
-              <button
-                key={slide.image}
-                type="button"
-                onClick={() => go(i)}
-                aria-label={`Show slide ${i + 1}: ${slide.heading}`}
-                aria-current={i === index}
-                className="group py-2 cursor-pointer"
-              >
-                <span
-                  className={`block h-[3px] transition-all duration-500 ${
-                    i === index ? 'w-12 bg-dojo' : 'w-6 bg-white/35 group-hover:bg-white/70'
-                  }`}
-                />
-              </button>
-            ))}
-          </div>
-
-          <span className="label text-white/45 tnum ml-1">
-            {String(index + 1).padStart(2, '0')} / {String(slides.length).padStart(2, '0')}
-          </span>
-
-          <div className="ml-auto flex items-center gap-2">
+      <div className="absolute bottom-5 left-4 right-4 sm:left-6 sm:right-6 lg:left-auto lg:bottom-8 lg:right-8 z-10 flex items-center justify-between lg:justify-end gap-3">
+        <div className="flex items-center gap-1.5">
+          {slides.map((slide, i) => (
             <button
+              key={slide.image}
               type="button"
-              onClick={() => setPaused((p) => !p)}
-              aria-label={paused ? 'Resume slideshow' : 'Pause slideshow'}
-              className="w-11 h-11 flex items-center justify-center border border-white/25 text-white rounded-md hover:border-white transition-colors cursor-pointer"
+              onClick={() => go(i)}
+              aria-label={`Show slide ${i + 1}: ${slide.heading}`}
+              aria-current={i === index}
+              className="py-3 px-0.5 cursor-pointer"
             >
-              {paused ? (
-                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              ) : (
-                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" />
-                </svg>
-              )}
+              <span
+                className={`block h-1.5 rounded-full transition-all duration-500 ${
+                  i === index ? 'w-8 bg-white' : 'w-1.5 bg-white/50 hover:bg-white/80'
+                }`}
+              />
             </button>
-            <button
-              type="button"
-              onClick={() => go(index - 1)}
-              aria-label="Previous slide"
-              className="w-11 h-11 flex items-center justify-center border border-white/25 text-white rounded-md hover:border-white transition-colors cursor-pointer"
-            >
-              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
-              </svg>
-            </button>
-            <button
-              type="button"
-              onClick={() => go(index + 1)}
-              aria-label="Next slide"
-              className="w-11 h-11 flex items-center justify-center border border-white/25 text-white rounded-md hover:border-white transition-colors cursor-pointer"
-            >
-              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
-          </div>
+          ))}
         </div>
+        <button
+          type="button"
+          onClick={() => setPaused((p) => !p)}
+          aria-label={paused ? 'Resume slideshow' : 'Pause slideshow'}
+          className="w-10 h-10 flex items-center justify-center rounded-full bg-white/15 backdrop-blur text-white hover:bg-white/30 transition-colors cursor-pointer"
+        >
+          {paused ? (
+            <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M8 5v14l11-7z" />
+            </svg>
+          ) : (
+            <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" />
+            </svg>
+          )}
+        </button>
       </div>
     </section>
   );

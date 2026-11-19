@@ -12,7 +12,7 @@ type Route = {
 };
 
 const routes: Route[] = [
-  { path: '', priority: 1, changeFrequency: 'weekly', lastModified: '2026-08-19' },
+  { path: '', priority: 1, changeFrequency: 'weekly', lastModified: '2026-11-18' },
   { path: '/schedule', priority: 0.9, changeFrequency: 'weekly', lastModified: '2026-08-19' },
   { path: '/join/class-registration', priority: 0.9, changeFrequency: 'monthly', lastModified: '2026-08-19' },
   { path: '/join/private-class', priority: 0.7, changeFrequency: 'monthly', lastModified: '2026-08-19' },

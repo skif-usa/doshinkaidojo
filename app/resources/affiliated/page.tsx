@@ -5,7 +5,7 @@ import PageHeader from '@/components/PageHeader';
 
 export const metadata: Metadata = pageMetadata({
   title: 'Affiliated Dojos',
-  description: 'Explore the official network of SKIF affiliated dojos in Kentucky and Panama City.',
+  description: 'Explore the official network of SKIF affiliated dojos in Kentucky and Panama City, part of the Shotokan Karate-Do International Federation.',
   path: '/resources/affiliated',
 });
 

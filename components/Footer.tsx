@@ -34,12 +34,12 @@ const linkColumns = [
 export default function Footer() {
   return (
     <footer className="bg-steel text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 lg:pt-20 pb-10">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 lg:pt-20 pb-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 pb-12 border-b border-steel-line">
           {/* Identity */}
           <div className="lg:col-span-4">
             <Link href="/" className="flex items-center gap-3 mb-6">
-              <span className="block w-14 h-14 shrink-0">
+              <span className="block w-16 h-16 shrink-0 rounded-full bg-white p-1.5 shadow-lift">
                 <Image src="/doshinkai_logo.png" alt="" aria-hidden="true" width={56} height={56} className="w-full h-full object-contain" />
               </span>
               <span className="flex flex-col leading-none">
@@ -55,7 +55,7 @@ export default function Footer() {
             </p>
             <Link
               href="/join/class-registration"
-              className="inline-flex items-center gap-2 bg-dojo text-white font-semibold text-sm px-6 py-3.5 rounded-md hover:bg-dojo-deep transition-colors duration-200"
+              className="btn-light text-sm !px-6 !py-3"
             >
               Register for a free class
               <span aria-hidden="true">→</span>
@@ -69,7 +69,7 @@ export default function Footer() {
               <ul className="space-y-3">
                 {col.links.map((link) => (
                   <li key={link.href}>
-                    <Link href={link.href} className="text-sm text-white/75 hover:text-white transition-colors">
+                    <Link href={link.href} className="text-sm text-white/75 hover:text-white hover:pl-1.5 transition-all duration-200 inline-block">
                       {link.label}
                     </Link>
                   </li>

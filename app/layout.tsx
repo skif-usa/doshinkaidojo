@@ -1,20 +1,30 @@
 import type { Metadata } from 'next';
-import { Archivo, Inter } from 'next/font/google';
+import { Sora, Outfit, Yuji_Boku } from 'next/font/google';
 import "./globals.css";
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
-const archivo = Archivo({
+const sora = Sora({
   subsets: ['latin'],
-  weight: ['700', '800'],
-  variable: '--font-archivo',
+  weight: ['500', '600'],
+  variable: '--font-sora',
   display: 'swap',
 });
 
-const inter = Inter({
+// Ink-brush calligraphy for the large kanji. Only the Latin slice is preloaded; the Japanese
+// glyph slices are still self-hosted and load on demand where kanji appear.
+const brush = Yuji_Boku({
   subsets: ['latin'],
-  weight: ['400', '600', '700'],
-  variable: '--font-inter',
+  weight: '400',
+  variable: '--font-brush-face',
+  display: 'swap',
+  preload: false,
+});
+
+const outfit = Outfit({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600'],
+  variable: '--font-outfit',
   display: 'swap',
 });
 
@@ -32,6 +42,14 @@ export const metadata: Metadata = {
     'traditional Japanese martial arts',
     'Doshinkai Dojo',
   ],
+  // Search Console / Bing Webmaster ownership tags. Set the env vars to the token each tool gives you;
+  // nothing is rendered while they are empty.
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+    other: process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION
+      ? { 'msvalidate.01': process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION }
+      : undefined,
+  },
   robots: {
     index: true,
     follow: true,
@@ -72,8 +90,9 @@ export const viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${archivo.variable} ${inter.variable}`}>
-      <body className="min-h-screen flex flex-col bg-white text-ink antialiased">
+    <html lang="en" className={`${sora.variable} ${outfit.variable} ${brush.variable}`}>
+      {/* suppressHydrationWarning: browser extensions (e.g. ColorZilla) inject attributes into <body> before React loads */}
+      <body suppressHydrationWarning className="min-h-screen flex flex-col bg-white text-ink antialiased">
         <Navbar />
         <main className="flex-grow">{children}</main>
         <Footer />

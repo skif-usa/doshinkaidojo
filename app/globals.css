@@ -1,40 +1,58 @@
 @import "tailwindcss";
 
 /* ============================================================
-   Doshinkai Dojo — solid, established design system
-   Three hues only: warm neutral, deep steel navy, and one dojo
-   red accent. No pastel tints, no rainbow.
-   Additive only, so pages not yet restyled keep painting bg-white.
+   Doshinkai Dojo: calm, photo-led design
+   White canvas, near-black text, soft grey surfaces, pill
+   buttons and full-bleed photography. A single red accent is
+   kept for small marks. Token names are shared with earlier
+   designs, so every subpage picks up the new look.
    ============================================================ */
 @theme {
-  /* Warm neutral grounds */
-  --color-bone: #f5f3f0;
-  --color-bone-deep: #e9e5df;
+  /* Surfaces */
+  --color-bone: #f5f5f3;
+  --color-bone-deep: #ebebe8;
 
-  /* Deep steel navy — used for solid full-width blocks */
-  --color-steel: #16222f;
-  --color-steel-line: #33414e;
+  /* Near-black blocks */
+  --color-steel: #1c1c1c;
+  --color-steel-2: #262626;
+  --color-steel-line: #3a3a3a;
 
   /* Text */
-  --color-ink: #17222e;
-  --color-ink-soft: #4c5967;
-  --color-ink-faint: #808a97;
+  --color-ink: #202020;
+  --color-ink-soft: #55555a;
+  --color-ink-faint: #8b8b90;
 
   /* The single accent */
-  --color-dojo: #c3372a;
-  --color-dojo-deep: #9c2a1f;
-  --color-dojo-soft: #f7ebe9;
+  --color-dojo: #d9392b;
+  --color-dojo-deep: #b52a1e;
+  --color-dojo-soft: #fbebe9;
+  --color-glow: #ff7a59;
 
-  --color-line: #e3ded7;
-  --color-line-soft: #eeeae4;
+  --color-line: #e6e6e3;
+  --color-line-soft: #efefec;
 
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-archivo), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  /* Softer type: the heavy weights render as semibold */
+  --font-weight-extrabold: 600;
+  --font-weight-bold: 600;
+
+  --font-sans: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-sora), var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+  --font-brush: var(--font-brush-face), "Yuji Boku", "Hiragino Mincho ProN", "Yu Mincho", serif;
   --font-jp: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", serif;
 
-  --shadow-soft: 0 1px 3px rgba(23, 34, 46, 0.05), 0 10px 24px -12px rgba(23, 34, 46, 0.16);
-  --shadow-lift: 0 2px 6px rgba(23, 34, 46, 0.06), 0 22px 44px -18px rgba(23, 34, 46, 0.22);
-  --shadow-float: 0 4px 10px rgba(23, 34, 46, 0.07), 0 18px 36px -14px rgba(23, 34, 46, 0.18);
+  --shadow-soft: 0 1px 2px rgba(32, 32, 32, 0.04), 0 8px 24px -12px rgba(32, 32, 32, 0.12);
+  --shadow-lift: 0 2px 6px rgba(32, 32, 32, 0.05), 0 24px 48px -20px rgba(32, 32, 32, 0.2);
+  --shadow-float: 0 4px 10px rgba(32, 32, 32, 0.06), 0 18px 36px -14px rgba(32, 32, 32, 0.16);
+}
+
+:root {
+  /* Height of the fixed announcement bar + navigation */
+  --nav-h: 116px;
+}
+@media (min-width: 1024px) {
+  :root {
+    --nav-h: 132px;
+  }
 }
 
 @layer base {
@@ -58,75 +76,111 @@
   }
 
   ::selection {
-    background-color: var(--color-dojo);
+    background-color: var(--color-ink);
     color: #fff;
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-dojo);
+    outline: 2px solid var(--color-ink);
     outline-offset: 3px;
   }
 }
 
 @layer components {
-  /* Section eyebrow: small, tracked, with a short rule */
+  /* Eyebrow: small tracked caps with a short rule */
   .label {
     display: inline-flex;
     align-items: center;
     gap: 0.75rem;
-    font-size: 0.6875rem;
-    font-weight: 700;
-    letter-spacing: 0.18em;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
   }
-
   .label::before {
     content: "";
-    width: 1.75rem;
-    height: 2px;
-    background-color: var(--color-dojo);
+    width: 1.5rem;
+    height: 1px;
+    background-color: currentColor;
     flex-shrink: 0;
   }
-
-  /* Centred variant gets rules on both sides */
   .label-center::after {
     content: "";
-    width: 1.75rem;
-    height: 2px;
-    background-color: var(--color-dojo);
+    width: 1.5rem;
+    height: 1px;
+    background-color: currentColor;
     flex-shrink: 0;
   }
 
+  .tnum { font-variant-numeric: tabular-nums; }
 
-  /* Tabular figures for the timetable */
-  .tnum {
-    font-variant-numeric: tabular-nums;
+  /* Ink-brush kanji, kept crisp */
+  .brush {
+    font-family: var(--font-brush);
+    font-weight: 400;
+    line-height: 1;
   }
+
+  /* Pill buttons */
+  .btn-dark,
+  .btn-light,
+  .btn-line {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0.9rem 1.6rem;
+    border-radius: 9999px;
+    font-weight: 500;
+    font-size: 0.975rem;
+    transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+  }
+  .btn-dark { background: var(--color-ink); color: #fff; border: 1px solid var(--color-ink); }
+  .btn-dark:hover { background: #000; transform: translateY(-1px); }
+  .btn-light { background: #fff; color: var(--color-ink); border: 1px solid #fff; }
+  .btn-light:hover { background: var(--color-bone); transform: translateY(-1px); }
+  .btn-line { background: transparent; color: inherit; border: 1px solid currentColor; }
+  .btn-line:hover { background: var(--color-ink); color: #fff; border-color: var(--color-ink); }
+  .btn-dark span[aria-hidden],
+  .btn-light span[aria-hidden] { transition: transform 0.25s ease; }
+  .btn-dark:hover span[aria-hidden],
+  .btn-light:hover span[aria-hidden] { transform: translateX(3px); }
+
+  /* Underline that draws in on hover */
+  .link-draw {
+    background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+    transition: background-size 0.35s ease;
+  }
+  .link-draw:hover { background-size: 100% 1px; }
 }
 
-@keyframes rise-in {
-  from {
-    opacity: 0;
-    transform: translateY(1.25rem);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
+/* ── Gentle motion ──────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+  transition-delay: var(--d, 0ms);
 }
+.reveal.in { opacity: 1; transform: none; }
 
+@keyframes page-in { from { opacity: 0; } to { opacity: 1; } }
+.page-in { animation: page-in 0.4s ease both; }
+
+/* Legacy: kept for subpages still using .rise */
+@keyframes rise-in { from { opacity: 0; transform: translateY(1.25rem); } to { opacity: 1; transform: none; } }
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
-    .rise {
-      animation: rise-in linear both;
-      animation-timeline: view();
-      animation-range: entry 4% cover 22%;
-    }
+    .rise { animation: rise-in linear both; animation-timeline: view(); animation-range: entry 4% cover 22%; }
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .page-in { animation: none; }
+  .btn-dark, .btn-light, .btn-line { transition: none; }
 }
+
+
+
+

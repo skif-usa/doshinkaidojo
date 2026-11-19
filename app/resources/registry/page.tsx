@@ -5,7 +5,7 @@ import PageHeader from '@/components/PageHeader';
 
 export const metadata: Metadata = pageMetadata({
   title: 'Dan & Kyu Registry',
-  description: 'Official registry of Dan (Black Belt) and Kyu (Color Belt) ranked members at Doshinkai Dojo.',
+  description: 'Official registry of Dan (Black Belt) and Kyu (Color Belt) ranked members at Doshinkai Dojo, a SKIF-USA member dojo in Cincinnati, Ohio.',
   path: '/resources/registry',
 });
 

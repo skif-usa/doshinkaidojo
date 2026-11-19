@@ -28,6 +28,8 @@ RESEND_API_KEY=re_xxxxxxxxxxxx
 | `RESEND_API_KEY` | yes | Resend API key. Without it the three forms cannot send. |
 | `RESEND_FROM` | recommended | Sender, e.g. `Doshinkai Dojo <hello@doshinkaidojo.com>`. Defaults to `onboarding@resend.dev`, which **only delivers to the Resend account owner** and hurts deliverability. Verify the domain in Resend and set this. |
 | `RESEND_TO` | no | Where submissions land. Defaults to `dskdojo1@gmail.com`. |
+| `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` | for Search Console | The `content` value of the HTML-tag verification Google Search Console gives you. Adds `<meta name="google-site-verification">` to every page. |
+| `NEXT_PUBLIC_BING_SITE_VERIFICATION` | optional | Same, for Bing Webmaster Tools (`msvalidate.01`). |
 
 ## Design system
 
