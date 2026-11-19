@@ -117,7 +117,7 @@ export default function HeroSlider() {
                   fill
                   sizes="100vw"
                   priority={i === 0}
-                  className="object-cover"
+                  className="object-cover photo-faces"
                 />
                 <div
                   aria-hidden="true"

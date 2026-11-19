@@ -47,8 +47,11 @@ export default function ShrinkOnScroll({ src, alt, title, text, cta }: Props) {
       // Start: nearly the whole pane. End: a rounded card.
       const w0 = W;
       const h0 = Math.min(H * 0.92, H - room);
-      const w1 = small ? W * 0.92 : W * 0.68;
-      const h1 = small ? Math.min(w1 / IMAGE_RATIO, H - room) : Math.min(H * 0.62, H - room);
+      // The finished card keeps the photograph's own 3:2 shape, so the
+      // whole group is in view once the shrink is done — on a short, wide
+      // window the height is what runs out first, so the width follows it.
+      const h1 = small ? Math.min((W * 0.92) / IMAGE_RATIO, H - room) : Math.min(H * 0.62, H - room);
+      const w1 = Math.min(small ? W * 0.92 : W * 0.68, h1 * IMAGE_RATIO);
 
       box.style.width = `${w0 - (w0 - w1) * e}px`;
       box.style.height = `${h0 - (h0 - h1) * e}px`;
@@ -94,7 +97,7 @@ export default function ShrinkOnScroll({ src, alt, title, text, cta }: Props) {
         className="sticky top-[var(--nav-h)] h-[calc(100svh-var(--nav-h))] motion-reduce:static motion-reduce:h-[85svh] flex flex-col items-center justify-center gap-6 overflow-hidden"
       >
         <div ref={card} className="relative w-full h-[70%] overflow-hidden bg-bone-deep shrink-0">
-          <Image src={src} alt={alt} fill sizes="100vw" className="object-cover" />
+          <Image src={src} alt={alt} fill sizes="100vw" className="object-cover object-[50%_8%]" />
         </div>
 
         <div ref={caption} className="text-center px-5 max-w-md" style={{ opacity: 0 }}>

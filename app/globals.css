@@ -184,3 +184,32 @@
 
 
 
+
+/* ── Cropping that keeps faces in frame ─────────────────────
+   The training photos are full-figure studio shots: the subjects
+   fill the frame from head to feet with almost no headroom, so a
+   container any wider than the photo's own 3:2 shape has to cut
+   something, and a centred crop takes the heads off first.
+
+   These classes pull the crop towards the top of the photo, and
+   the wider-and-shorter the window gets, the closer to the top
+   edge it sits. The legs go instead of the faces, which is what
+   the headline and the dark gradient cover anyway. */
+.photo-faces { object-position: 50% 20%; }
+
+/* ~16:10 and wider: the window is short enough to start biting */
+@media (min-aspect-ratio: 8/5) {
+  .photo-faces { object-position: 50% 12%; }
+}
+/* 16:9 — the common laptop shape */
+@media (min-aspect-ratio: 16/9) {
+  .photo-faces { object-position: 50% 6%; }
+}
+/* Ultrawide, or any short window: hold the crop at the hairline */
+@media (min-aspect-ratio: 21/9) {
+  .photo-faces { object-position: 50% 3%; }
+}
+
+/* A banner strip is wider than any window ratio, so it always
+   crops hard: keep it high in the frame at every size. */
+.photo-faces-band { object-position: 50% 12%; }

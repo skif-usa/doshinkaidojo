@@ -39,14 +39,14 @@ export default function ShotokanKarate() {
       />
 
       {/* ── BANNER IMAGE ─────────────────────────────────────── */}
-      <div className="relative h-64 sm:h-80 lg:h-[26rem]">
+      <div className="relative h-72 sm:h-96 lg:h-[28rem] xl:h-[32rem]">
         <Image
           src="/pexels-cottonbro-studio-8038508_web.webp"
           alt="A student watching the Sensei demonstrate technique in the dojo"
           fill
           sizes="100vw"
           priority
-          className="object-cover"
+          className="object-cover photo-faces-band"
         />
       </div>
 

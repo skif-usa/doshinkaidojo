@@ -97,7 +97,7 @@ export default function ClassTabs() {
               alt={i === active ? c.alt : ''}
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
-              className={`object-cover transition-opacity duration-500 ${i === active ? 'opacity-100' : 'opacity-0'}`}
+              className={`object-cover object-[50%_22%] transition-opacity duration-500 ${i === active ? 'opacity-100' : 'opacity-0'}`}
             />
           ))}
         </div>
