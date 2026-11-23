@@ -12,7 +12,7 @@ export const metadata: Metadata = pageMetadata({
 const photos: Photo[] = [
   { src: '/seminar_kanazawa_kancho.webp', alt: 'Seminar group photo with Kanazawa Kancho', caption: 'Group photo with Kanazawa Kancho', width: 1440, height: 1080 },
   { src: '/seminar_kanazawa_kancho2.webp', alt: 'Large seminar group photo with Kanazawa Kancho', caption: 'Seminar group photo with Kanazawa Kancho', width: 1434, height: 1080 },
-  { src: '/seminar_kanazawa_yuki.webp', alt: 'Seminar group photo with Yuki Kanazawa', caption: 'Group photo with Yuki Kanazawa', width: 1512, height: 1080 },
+  { src: '/seminar_kanazawa_yuki.webp', alt: 'Group picture of 2024 with Hiyori Kanazawa', caption: 'Group picture of 2024 with Hiyori Kanazawa', width: 1512, height: 1080 },
   { src: '/seminar_murakami_shihan.webp', alt: 'Seminar group photo with Murakami Shihan', caption: 'Group photo with Murakami Shihan', width: 1620, height: 1080 },
 ];
 

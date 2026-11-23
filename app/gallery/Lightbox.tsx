@@ -1,12 +1,31 @@
 'use client';
 
 import Image from 'next/image';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 export type Photo = { src: string; alt: string; caption: string; width: number; height: number };
 
 export default function Lightbox({ photos }: { photos: Photo[] }) {
   const [index, setIndex] = useState<number | null>(null);
+
+  const touch = useRef<{ x: number; y: number } | null>(null);
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    const t = e.touches[0];
+    touch.current = { x: t.clientX, y: t.clientY };
+  };
+  const onTouchEnd = (e: React.TouchEvent) => {
+    const start = touch.current;
+    touch.current = null;
+    if (!start) return;
+    const t = e.changedTouches[0];
+    const dx = t.clientX - start.x;
+    const dy = t.clientY - start.y;
+    // Horizontal swipe only: ignore short moves and mostly-vertical drags.
+    if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy) * 1.2) return;
+    if (dx < 0) next();
+    else prev();
+  };
 
   const close = useCallback(() => setIndex(null), []);
   const prev = useCallback(
@@ -88,7 +107,9 @@ export default function Lightbox({ photos }: { photos: Photo[] }) {
           role="dialog"
           aria-modal="true"
           aria-label={current.caption}
-          className="fixed inset-0 z-[100] bg-black/90 flex items-center justify-center p-4 sm:p-10"
+          className="fixed inset-0 z-[100] bg-black/90 flex items-center justify-center p-4 sm:p-10 touch-pan-y"
+          onTouchStart={onTouchStart}
+          onTouchEnd={onTouchEnd}
           onClick={close}
         >
           <button type="button" aria-label="Close" onClick={close} className={`${btn} top-4 right-4`}>
