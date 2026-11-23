@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { pageMetadata } from '@/lib/seo';
 import Link from 'next/link';
+import Image from 'next/image';
 import PageHeader from '@/components/PageHeader';
 
 export const metadata: Metadata = pageMetadata({
@@ -96,8 +97,49 @@ export default function Schedule() {
         </div>
       </section>
 
+      {/* ── INSIDE THE DOJO ──────────────────────────────────── */}
+      <section className="py-16 lg:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-xl mb-10">
+            <p className="label text-ink-faint mb-6">Our space</p>
+            <h2 className="font-display font-extrabold text-3xl lg:text-[2.5rem] leading-[1.1]">
+              Where you will train
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-4 lg:gap-6">
+            <div className="relative md:col-span-8 aspect-[16/7] overflow-hidden rounded-[2rem]">
+              <Image
+                src="/dojo_inside.webp"
+                alt="Spacious training floor with green mats and a wooden kamiza at Doshinkai Dojo"
+                fill
+                sizes="(max-width: 768px) 100vw, 66vw"
+                className="object-cover"
+              />
+            </div>
+            <div className="relative md:col-span-4 aspect-[4/3] md:aspect-auto overflow-hidden rounded-[2rem]">
+              <Image
+                src="/doskinkai_sign.webp"
+                alt="Entrance sign and Doshinkai traditional karate banner outside the dojo"
+                fill
+                sizes="(max-width: 768px) 100vw, 33vw"
+                className="object-cover"
+              />
+            </div>
+            <div className="relative md:col-span-12 aspect-[16/7] overflow-hidden rounded-[2rem]">
+              <Image
+                src="/dojo_inside_2.webp"
+                alt="Wide view of the dojo mats and training hall"
+                fill
+                sizes="100vw"
+                className="object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ── TIMETABLE ────────────────────────────────────────── */}
-      <section className="bg-bone border-b border-line py-16 lg:py-24">
+      <section className="mx-3 sm:mx-4 lg:mx-6 my-3 lg:my-4 rounded-[2rem] lg:rounded-[2.5rem] overflow-hidden bg-bone py-16 lg:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-xl mb-10">
             <p className="label text-ink-faint mb-6">Weekly timetable</p>
@@ -106,7 +148,7 @@ export default function Schedule() {
             </h2>
           </div>
 
-          <div className="bg-white border border-line overflow-x-auto">
+          <div className="bg-white border border-line rounded-3xl overflow-x-auto">
             <table className="w-full min-w-[36rem] text-left border-collapse">
               <caption className="sr-only">Weekly class schedule at Doshinkai Dojo</caption>
               <thead>
@@ -232,7 +274,7 @@ export default function Schedule() {
       </section>
 
       {/* ── CTA ──────────────────────────────────────────────── */}
-      <section className="bg-steel text-white">
+      <section className="mx-3 sm:mx-4 lg:mx-6 my-3 lg:my-4 rounded-[2rem] lg:rounded-[2.5rem] overflow-hidden bg-steel text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
             <div className="lg:col-span-7">
@@ -246,14 +288,14 @@ export default function Schedule() {
             <div className="lg:col-span-5 flex flex-wrap gap-3 lg:justify-end">
               <Link
                 href="/join/class-registration"
-                className="inline-flex items-center gap-2.5 bg-dojo text-white font-semibold px-7 py-4 rounded-md hover:bg-dojo-deep transition-colors duration-200"
+                className="inline-flex items-center gap-2.5 bg-dojo text-white font-semibold px-7 py-4 rounded-full hover:bg-dojo-deep transition-colors duration-200"
               >
                 Register now
                 <span aria-hidden="true">→</span>
               </Link>
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2.5 border border-white/25 text-white font-semibold px-7 py-4 rounded-md hover:border-white transition-colors duration-200"
+                className="inline-flex items-center gap-2.5 border border-white/25 text-white font-semibold px-7 py-4 rounded-full hover:border-white transition-colors duration-200"
               >
                 Ask a question
               </Link>

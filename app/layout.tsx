@@ -90,7 +90,7 @@ export const viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${sora.variable} ${outfit.variable} ${brush.variable}`}>
+    <html lang="en" data-scroll-behavior="smooth" className={`${sora.variable} ${outfit.variable} ${brush.variable}`}>
       {/* suppressHydrationWarning: browser extensions (e.g. ColorZilla) inject attributes into <body> before React loads */}
       <body suppressHydrationWarning className="min-h-screen flex flex-col bg-white text-ink antialiased">
         <Navbar />

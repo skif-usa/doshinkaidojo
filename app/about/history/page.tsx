@@ -68,11 +68,11 @@ export default function KarateHistory() {
       </section>
 
       {/* ── GICHIN FUNAKOSHI ─────────────────────────────────── */}
-      <section className="bg-bone border-y border-line py-16 lg:py-24">
+      <section className="mx-3 sm:mx-4 lg:mx-6 my-3 lg:my-4 rounded-[2rem] lg:rounded-[2.5rem] overflow-hidden bg-bone py-16 lg:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
             <div className="lg:col-span-5">
-              <div className="relative aspect-4/5">
+              <div className="relative aspect-4/5 rounded-[2rem] overflow-hidden">
                 <Image
                   src="/gichin_funakoshi.webp"
                   alt="Gichin Funakoshi, Sensei, founder of Shotokan Karate"
@@ -127,7 +127,7 @@ export default function KarateHistory() {
       </section>
 
       {/* ── THE THREE LAYERS ─────────────────────────────────── */}
-      <section className="bg-steel text-white py-16 lg:py-24">
+      <section className="mx-3 sm:mx-4 lg:mx-6 my-3 lg:my-4 rounded-[2rem] lg:rounded-[2.5rem] overflow-hidden bg-steel text-white py-16 lg:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl mb-12">
             <p className="label text-white/50 mb-6">Philosophy</p>
@@ -201,7 +201,7 @@ export default function KarateHistory() {
             </div>
 
             <div className="lg:col-span-5">
-              <div className="relative aspect-4/5 lg:sticky lg:top-28">
+              <div className="relative aspect-4/5 lg:sticky lg:top-28 rounded-[2rem] overflow-hidden">
                 <Image
                   src="/hirokazu_kanazawa.webp"
                   alt="Hirokazu Kanazawa, Soke, founder of the Shotokan Karate-Do International Federation"
@@ -216,7 +216,7 @@ export default function KarateHistory() {
       </section>
 
       {/* ── FEDERATION LEADERSHIP ────────────────────────────── */}
-      <section className="bg-bone border-y border-line py-16 lg:py-24">
+      <section className="mx-3 sm:mx-4 lg:mx-6 my-3 lg:my-4 rounded-[2rem] lg:rounded-[2.5rem] overflow-hidden bg-bone py-16 lg:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
             <div className="lg:col-span-5">
@@ -238,7 +238,7 @@ export default function KarateHistory() {
             </div>
 
             <div className="lg:col-span-7">
-              <div className="relative aspect-16/10">
+              <div className="relative aspect-16/10 rounded-[2rem] overflow-hidden">
                 <Image
                   src="/skif_instructor_japan.webp"
                   alt="SKIF-USA federation leadership in the dojo"
@@ -264,7 +264,7 @@ export default function KarateHistory() {
           </h2>
           <Link
             href="/join/class-registration"
-            className="inline-flex items-center gap-2.5 bg-dojo text-white font-semibold px-7 py-4 rounded-md hover:bg-dojo-deep transition-colors duration-200"
+            className="inline-flex items-center gap-2.5 bg-dojo text-white font-semibold px-7 py-4 rounded-full hover:bg-dojo-deep transition-colors duration-200"
           >
             Begin your training
             <span aria-hidden="true">→</span>

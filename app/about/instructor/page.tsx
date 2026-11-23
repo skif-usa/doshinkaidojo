@@ -61,7 +61,7 @@ export default function InstructorProfile() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
             <div className="lg:col-span-5">
-              <div className="relative aspect-4/5">
+              <div className="relative aspect-4/5 rounded-[2rem] overflow-hidden">
                 <Image
                   src="/ruben_profil.webp"
                   alt="Sensei Rubén Fung, head instructor and founder of Doshinkai Dojo"
@@ -89,7 +89,7 @@ export default function InstructorProfile() {
       </section>
 
       {/* ── STATS BAR ────────────────────────────────────────── */}
-      <section className="bg-steel">
+      <section className="mx-3 sm:mx-4 lg:mx-6 my-3 lg:my-4 rounded-[2rem] lg:rounded-[2.5rem] overflow-hidden bg-steel">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <dl className="grid grid-cols-1 md:grid-cols-3">
             {stats.map((stat, i) => (
@@ -139,7 +139,7 @@ export default function InstructorProfile() {
       </section>
 
       {/* ── CTA ──────────────────────────────────────────────── */}
-      <section className="bg-bone border-t border-line py-16 lg:py-20">
+      <section className="mx-3 sm:mx-4 lg:mx-6 my-3 lg:my-4 rounded-[2rem] lg:rounded-[2.5rem] overflow-hidden bg-bone py-16 lg:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
             <div className="lg:col-span-7">
@@ -154,14 +154,14 @@ export default function InstructorProfile() {
             <div className="lg:col-span-5 flex flex-wrap gap-3 lg:justify-end">
               <Link
                 href="/join/class-registration"
-                className="inline-flex items-center gap-2.5 bg-dojo text-white font-semibold px-7 py-4 rounded-md hover:bg-dojo-deep transition-colors duration-200"
+                className="inline-flex items-center gap-2.5 bg-dojo text-white font-semibold px-7 py-4 rounded-full hover:bg-dojo-deep transition-colors duration-200"
               >
                 Register for classes
                 <span aria-hidden="true">→</span>
               </Link>
               <Link
                 href="/join/private-class"
-                className="inline-flex items-center gap-2.5 border border-line bg-white text-ink font-semibold px-7 py-4 rounded-md hover:border-dojo hover:text-dojo transition-colors duration-200"
+                className="inline-flex items-center gap-2.5 border border-line bg-white text-ink font-semibold px-7 py-4 rounded-full hover:border-dojo hover:text-dojo transition-colors duration-200"
               >
                 Book private class
               </Link>

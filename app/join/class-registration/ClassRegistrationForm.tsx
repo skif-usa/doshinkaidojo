@@ -106,7 +106,7 @@ export default function ClassRegistrationForm() {
                 return (
                   <label
                     key={plan.id}
-                    className={`relative flex flex-col cursor-pointer rounded-md border p-6 transition-colors duration-200 ${
+                    className={`relative flex flex-col cursor-pointer rounded-3xl border p-6 transition-colors duration-200 ${
                       active ? 'border-dojo bg-dojo-soft' : 'border-line hover:border-dojo'
                     }`}
                   >
@@ -155,7 +155,7 @@ export default function ClassRegistrationForm() {
       </section>
 
       {/* ── STEP 02 — STUDENT DETAILS ────────────────────────── */}
-      <section className="bg-bone border-t border-line py-16 lg:py-20">
+      <section className="mx-3 sm:mx-4 lg:mx-6 my-3 lg:my-4 rounded-[2rem] lg:rounded-[2.5rem] overflow-hidden bg-bone py-16 lg:py-20">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-10">
             <p className="label text-ink-faint mb-6">Step 02</p>
@@ -235,7 +235,7 @@ export default function ClassRegistrationForm() {
               <button
                 type="submit"
                 disabled={status === 'submitting'}
-                className={`w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-dojo text-white font-semibold px-8 py-4 rounded-md transition-colors duration-200 ${
+                className={`w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-dojo text-white font-semibold px-8 py-4 rounded-full transition-colors duration-200 ${
                   status === 'submitting' ? 'opacity-70 cursor-not-allowed' : 'hover:bg-dojo-deep cursor-pointer'
                 }`}
               >

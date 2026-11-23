@@ -32,7 +32,7 @@ export default function Accessories() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
             <div className="lg:col-span-6">
-              <div className="relative aspect-square bg-bone border border-line flex items-center justify-center p-10">
+              <div className="relative aspect-square bg-bone rounded-[2rem] overflow-hidden flex items-center justify-center p-10">
                 <Image
                   src="/t-shirts.webp"
                   alt="Official Doshinkai Dojo t-shirts featuring the Tiger and Kanji crest"
@@ -66,7 +66,7 @@ export default function Accessories() {
                 href={ORDER_FORM}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2.5 bg-dojo text-white font-semibold px-7 py-4 rounded-md hover:bg-dojo-deep transition-colors duration-200"
+                className="inline-flex items-center gap-2.5 bg-dojo text-white font-semibold px-7 py-4 rounded-full hover:bg-dojo-deep transition-colors duration-200"
               >
                 Order now
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -88,7 +88,7 @@ export default function Accessories() {
       </section>
 
       {/* ── FEDERATION SHOP ──────────────────────────────────── */}
-      <section className="bg-bone border-y border-line py-14 lg:py-16">
+      <section className="mx-3 sm:mx-4 lg:mx-6 my-3 lg:my-4 rounded-[2rem] lg:rounded-[2.5rem] overflow-hidden bg-bone py-14 lg:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-16 items-center">
             <div className="lg:col-span-8">
@@ -103,7 +103,7 @@ export default function Accessories() {
                 href="https://skifusa.org/shop"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2.5 border border-line bg-white text-ink font-semibold px-7 py-4 rounded-md hover:border-dojo hover:text-dojo transition-colors duration-200"
+                className="inline-flex items-center gap-2.5 border border-line bg-white text-ink font-semibold px-7 py-4 rounded-full hover:border-dojo hover:text-dojo transition-colors duration-200"
               >
                 Visit SKIFUSA shop
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -126,7 +126,7 @@ export default function Accessories() {
           <p className="label label-center text-ink-faint justify-center mb-6">Not training with us yet?</p>
           <Link
             href="/join/class-registration"
-            className="inline-flex items-center gap-2.5 bg-dojo text-white font-semibold px-7 py-4 rounded-md hover:bg-dojo-deep transition-colors duration-200"
+            className="inline-flex items-center gap-2.5 bg-dojo text-white font-semibold px-7 py-4 rounded-full hover:bg-dojo-deep transition-colors duration-200"
           >
             Register for a free class
             <span aria-hidden="true">→</span>

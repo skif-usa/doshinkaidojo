@@ -21,14 +21,14 @@ export default function NotFound() {
         <div className="flex flex-col sm:flex-row justify-center gap-3">
           <Link
             href="/"
-            className="inline-flex items-center justify-center gap-2.5 bg-dojo text-white font-semibold px-7 py-4 rounded-md hover:bg-dojo-deep transition-colors duration-200"
+            className="inline-flex items-center justify-center gap-2.5 bg-dojo text-white font-semibold px-7 py-4 rounded-full hover:bg-dojo-deep transition-colors duration-200"
           >
             Return home
             <span aria-hidden="true">→</span>
           </Link>
           <Link
             href="/schedule"
-            className="inline-flex items-center justify-center gap-2.5 border border-line text-ink font-semibold px-7 py-4 rounded-md hover:border-dojo hover:text-dojo transition-colors duration-200"
+            className="inline-flex items-center justify-center gap-2.5 border border-line text-ink font-semibold px-7 py-4 rounded-full hover:border-dojo hover:text-dojo transition-colors duration-200"
           >
             View schedule
           </Link>

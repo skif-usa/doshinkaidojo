@@ -47,7 +47,7 @@ export default function Registry() {
             <p className="text-ink-soft">Black belt ranks recognized by SKIF.</p>
           </div>
 
-          <div className="border border-line overflow-x-auto">
+          <div className="border border-line rounded-3xl overflow-x-auto">
             <table className="w-full min-w-[30rem] text-left border-collapse">
               <caption className="sr-only">Dan (black belt) ranked members of Doshinkai Dojo</caption>
               <thead>
@@ -84,7 +84,7 @@ export default function Registry() {
       </section>
 
       {/* ── KYU RANKS ────────────────────────────────────────── */}
-      <section className="bg-bone border-y border-line py-16 lg:py-24">
+      <section className="mx-3 sm:mx-4 lg:mx-6 my-3 lg:my-4 rounded-[2rem] lg:rounded-[2.5rem] overflow-hidden bg-bone py-16 lg:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-xl mb-10">
             <p className="label text-ink-faint mb-6">Mudansha</p>
@@ -92,7 +92,7 @@ export default function Registry() {
             <p className="text-ink-soft">Dedicated students advancing through the color belt ranks.</p>
           </div>
 
-          <div className="bg-white border border-line overflow-x-auto">
+          <div className="bg-white border border-line rounded-3xl overflow-x-auto">
             <table className="w-full min-w-[30rem] text-left border-collapse">
               <caption className="sr-only">Kyu (color belt) ranked members of Doshinkai Dojo</caption>
               <thead>

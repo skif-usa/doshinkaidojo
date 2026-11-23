@@ -39,7 +39,7 @@ export default function ShotokanKarate() {
       />
 
       {/* ── BANNER IMAGE ─────────────────────────────────────── */}
-      <div className="relative h-72 sm:h-96 lg:h-[28rem] xl:h-[32rem]">
+      <div className="relative h-72 sm:h-96 lg:h-[28rem] xl:h-[32rem] mx-3 sm:mx-4 lg:mx-6 mt-3 lg:mt-4 rounded-[2rem] lg:rounded-[2.5rem] overflow-hidden">
         <Image
           src="/pexels-cottonbro-studio-8038508_web.webp"
           alt="A student watching the Sensei demonstrate technique in the dojo"
@@ -83,7 +83,7 @@ export default function ShotokanKarate() {
       </section>
 
       {/* ── PULL QUOTE — solid band ──────────────────────────── */}
-      <section className="bg-steel text-white py-16 lg:py-24">
+      <section className="mx-3 sm:mx-4 lg:mx-6 my-3 lg:my-4 rounded-[2rem] lg:rounded-[2.5rem] overflow-hidden bg-steel text-white py-16 lg:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="label text-white/50 mb-7">Your next step</p>
           <p className="font-display font-extrabold text-3xl lg:text-[2.75rem] leading-[1.12] max-w-4xl">
@@ -94,7 +94,7 @@ export default function ShotokanKarate() {
       </section>
 
       {/* ── WHY CHOOSE OUR DOJO ──────────────────────────────── */}
-      <section className="bg-bone border-b border-line py-16 lg:py-24">
+      <section className="mx-3 sm:mx-4 lg:mx-6 my-3 lg:my-4 rounded-[2rem] lg:rounded-[2.5rem] overflow-hidden bg-bone py-16 lg:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-xl mb-12">
             <p className="label text-ink-faint mb-6">Why us</p>
@@ -107,7 +107,7 @@ export default function ShotokanKarate() {
             {whyUs.map((item) => (
               <div
                 key={item.title}
-                className="rise bg-white border border-line rounded-md p-6 lg:p-7 hover:border-dojo transition-colors duration-200"
+                className="rise bg-white border border-line rounded-3xl p-6 lg:p-7 hover:border-dojo transition-colors duration-200"
               >
                 <h3 className="font-display font-extrabold text-xl mb-3">{item.title}</h3>
                 <p className="text-ink-soft leading-relaxed">{item.desc}</p>
@@ -133,14 +133,14 @@ export default function ShotokanKarate() {
             <div className="lg:col-span-5 flex flex-wrap gap-3 lg:justify-end">
               <Link
                 href="/join/class-registration"
-                className="inline-flex items-center gap-2.5 bg-dojo text-white font-semibold px-7 py-4 rounded-md hover:bg-dojo-deep transition-colors duration-200"
+                className="inline-flex items-center gap-2.5 bg-dojo text-white font-semibold px-7 py-4 rounded-full hover:bg-dojo-deep transition-colors duration-200"
               >
                 Join us today
                 <span aria-hidden="true">→</span>
               </Link>
               <Link
                 href="/schedule"
-                className="inline-flex items-center gap-2.5 border border-line text-ink font-semibold px-7 py-4 rounded-md hover:border-dojo hover:text-dojo transition-colors duration-200"
+                className="inline-flex items-center gap-2.5 border border-line text-ink font-semibold px-7 py-4 rounded-full hover:border-dojo hover:text-dojo transition-colors duration-200"
               >
                 View the schedule
               </Link>

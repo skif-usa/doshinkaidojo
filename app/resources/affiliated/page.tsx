@@ -5,13 +5,14 @@ import PageHeader from '@/components/PageHeader';
 
 export const metadata: Metadata = pageMetadata({
   title: 'Affiliated Dojos',
-  description: 'Explore the official network of SKIF affiliated dojos in Kentucky and Panama City, part of the Shotokan Karate-Do International Federation.',
+  description: 'Explore the official network of SKIF affiliated dojos in Texas, Kentucky and Panama City, part of the Shotokan Karate-Do International Federation.',
   path: '/resources/affiliated',
 });
 
 type Dojo = {
   name: string;
   instructor: string;
+  tagline?: string;
   address: string;
   phone?: string;
   website?: string;
@@ -19,6 +20,17 @@ type Dojo = {
   email?: string;
   instagram?: string;
 };
+
+const texasDojos: Dojo[] = [
+  {
+    name: 'Shotokan Karate-Do Center, Houston, TX',
+    instructor: 'Sensei Kayarash Daylami',
+    tagline: '松濤館 · S.K.I.F. Member Dojo',
+    address: 'Trotter Family YMCA of Greater Houston\n1331 Augusta Dr\nHouston, TX 77057',
+    website: 'shotokanhouston.org',
+    link: 'https://shotokanhouston.org/',
+  },
+];
 
 const kentuckyDojos: Dojo[] = [
   {
@@ -85,9 +97,11 @@ function Row({ icon, children }: { icon: string; children: React.ReactNode }) {
 
 function DojoCard({ dojo }: { dojo: Dojo }) {
   return (
-    <article className="rise border border-line rounded-md p-6 lg:p-8 hover:border-dojo transition-colors duration-200">
+    <article className="rise border border-line rounded-3xl p-6 lg:p-8 hover:border-dojo transition-colors duration-200">
       <h3 className="font-display font-extrabold text-xl lg:text-2xl leading-tight mb-1.5">{dojo.name}</h3>
-      <p className="text-sm font-semibold text-dojo mb-6">{dojo.instructor}</p>
+      <p className="text-sm font-semibold text-dojo mb-1">{dojo.instructor}</p>
+      {dojo.tagline && <p className="text-sm text-ink-faint">{dojo.tagline}</p>}
+      <div className="mb-5" />
 
       <ul className="space-y-3 text-[15px]">
         <Row icon={icons.pin}>
@@ -151,8 +165,24 @@ export default function AffiliatedDojos() {
         path="/resources/affiliated"
       />
 
-      {/* ── KENTUCKY ─────────────────────────────────────────── */}
+      {/* ── TEXAS ────────────────────────────────────────────── */}
       <section className="py-16 lg:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-10">
+            <p className="label text-ink-faint mb-6">United States</p>
+            <h2 className="font-display font-extrabold text-3xl lg:text-[2.5rem] leading-[1.1]">Texas</h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {texasDojos.map((dojo) => (
+              <DojoCard key={dojo.name} dojo={dojo} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── KENTUCKY ─────────────────────────────────────────── */}
+      <section className="mx-3 sm:mx-4 lg:mx-6 my-3 lg:my-4 rounded-[2rem] lg:rounded-[2.5rem] overflow-hidden bg-bone py-16 lg:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-10">
             <p className="label text-ink-faint mb-6">United States</p>
@@ -161,14 +191,16 @@ export default function AffiliatedDojos() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {kentuckyDojos.map((dojo) => (
-              <DojoCard key={dojo.name} dojo={dojo} />
+              <div key={dojo.name} className="bg-white rounded-3xl">
+                <DojoCard dojo={dojo} />
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* ── PANAMA ───────────────────────────────────────────── */}
-      <section className="bg-bone border-y border-line py-16 lg:py-24">
+      <section className="py-16 lg:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-10">
             <p className="label text-ink-faint mb-6">Republic of Panama</p>
@@ -177,9 +209,7 @@ export default function AffiliatedDojos() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
             {panamaDojos.map((dojo) => (
-              <div key={dojo.name} className="bg-white">
-                <DojoCard dojo={dojo} />
-              </div>
+              <DojoCard key={dojo.name} dojo={dojo} />
             ))}
           </div>
         </div>

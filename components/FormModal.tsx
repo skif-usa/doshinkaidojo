@@ -33,7 +33,7 @@ export default function FormModal({ tone, title, body, actionLabel, onClose }: P
       aria-labelledby="form-modal-title"
       className="fixed inset-0 z-100 flex items-center justify-center bg-steel/80 backdrop-blur-sm p-4"
     >
-      <div className="bg-white rounded-md shadow-lift max-w-md w-full p-8 lg:p-10 text-center">
+      <div className="bg-white rounded-[2rem] shadow-lift max-w-md w-full p-8 lg:p-10 text-center">
         <span
           aria-hidden="true"
           className={`inline-flex w-14 h-14 rounded-full items-center justify-center mb-6 ${
@@ -58,7 +58,7 @@ export default function FormModal({ tone, title, body, actionLabel, onClose }: P
         <button
           ref={closeRef}
           onClick={onClose}
-          className="w-full bg-dojo text-white font-semibold py-4 rounded-md hover:bg-dojo-deep transition-colors duration-200 cursor-pointer"
+          className="w-full bg-dojo text-white font-semibold py-4 rounded-full hover:bg-dojo-deep transition-colors duration-200 cursor-pointer"
         >
           {actionLabel}
         </button>

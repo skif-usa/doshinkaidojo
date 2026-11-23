@@ -78,7 +78,7 @@ export default function Resources() {
                   </span>
                   <span
                     aria-hidden="true"
-                    className="w-10 h-10 shrink-0 border border-line rounded-md flex items-center justify-center text-ink-faint group-hover:border-dojo group-hover:text-dojo transition-colors"
+                    className="w-10 h-10 shrink-0 border border-line rounded-xl flex items-center justify-center text-ink-faint group-hover:border-dojo group-hover:text-dojo transition-colors"
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path
@@ -97,7 +97,7 @@ export default function Resources() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-12">
             <Link
               href="/resources/registry"
-              className="group border border-line rounded-md p-6 hover:border-dojo transition-colors"
+              className="group border border-line rounded-3xl p-6 hover:border-dojo transition-colors"
             >
               <p className="label text-ink-faint mb-3">Also in this section</p>
               <p className="font-display font-extrabold text-xl group-hover:text-dojo transition-colors">
@@ -106,7 +106,7 @@ export default function Resources() {
             </Link>
             <Link
               href="/resources/affiliated"
-              className="group border border-line rounded-md p-6 hover:border-dojo transition-colors"
+              className="group border border-line rounded-3xl p-6 hover:border-dojo transition-colors"
             >
               <p className="label text-ink-faint mb-3">Also in this section</p>
               <p className="font-display font-extrabold text-xl group-hover:text-dojo transition-colors">
@@ -118,7 +118,7 @@ export default function Resources() {
       </section>
 
       {/* ── CTA ──────────────────────────────────────────────── */}
-      <section className="bg-steel text-white">
+      <section className="mx-3 sm:mx-4 lg:mx-6 my-3 lg:my-4 rounded-[2rem] lg:rounded-[2.5rem] overflow-hidden bg-steel text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
             <div className="lg:col-span-7">
@@ -132,7 +132,7 @@ export default function Resources() {
             <div className="lg:col-span-5 flex flex-wrap gap-3 lg:justify-end">
               <Link
                 href="/schedule"
-                className="inline-flex items-center gap-2.5 bg-dojo text-white font-semibold px-7 py-4 rounded-md hover:bg-dojo-deep transition-colors duration-200"
+                className="inline-flex items-center gap-2.5 bg-dojo text-white font-semibold px-7 py-4 rounded-full hover:bg-dojo-deep transition-colors duration-200"
               >
                 View class schedule
                 <span aria-hidden="true">→</span>

@@ -23,6 +23,7 @@ const linkColumns = [
     links: [
       { label: 'Upcoming Events', href: '/events' },
       { label: 'Event Archive', href: '/events/archive' },
+      { label: 'Photo Gallery', href: '/gallery' },
       { label: 'Global Network', href: '/resources' },
       { label: 'Dan & Kyu Registry', href: '/resources/registry' },
       { label: 'Affiliated Dojos', href: '/resources/affiliated' },

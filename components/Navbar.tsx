@@ -237,6 +237,20 @@ export default function Navbar() {
                   </div>
                 );
               })}
+              <Link
+                href="/gallery"
+                className={`relative group flex items-center px-4 py-2.5 text-[15px] font-medium transition-opacity ${
+                  clear ? 'text-white/90 hover:text-white' : 'text-ink-soft hover:text-ink'
+                } ${pathname.startsWith('/gallery') ? (clear ? '!text-white' : '!text-ink') : ''}`}
+              >
+                Gallery
+                <span
+                  aria-hidden="true"
+                  className={`absolute left-4 right-4 bottom-1 h-px bg-current origin-left transition-transform duration-300 ${
+                    pathname.startsWith('/gallery') ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+                  }`}
+                />
+              </Link>
             </nav>
 
             {/* Actions */}
@@ -331,6 +345,14 @@ export default function Navbar() {
                   </div>
                 </div>
               ))}
+
+              <Link
+                href="/gallery"
+                onClick={close}
+                className="block py-4 font-display font-semibold text-lg border-t border-line-soft"
+              >
+                Gallery
+              </Link>
 
               <Link
                 href="/contact"

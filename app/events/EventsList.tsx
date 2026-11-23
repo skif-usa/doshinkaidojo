@@ -32,7 +32,7 @@ export default function EventsList() {
       <section className="py-16 lg:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {upcomingEvents.length === 0 && (
-            <div className="border border-line bg-bone py-16 px-8 text-center rounded-md">
+            <div className="bg-bone py-16 px-8 text-center rounded-[2rem]">
               <h2 className="font-display font-extrabold text-2xl lg:text-3xl mb-4">No upcoming events right now</h2>
               <p className="text-lg text-ink-soft max-w-xl mx-auto leading-relaxed">
                 We&apos;re busy planning our next seminars and training camps. Check back soon, or explore our past
@@ -49,7 +49,7 @@ export default function EventsList() {
               const t = (lang === 'es' && event.content.es) || event.content.en;
 
               return (
-                <article key={event.id} className="border border-line rounded-md overflow-hidden">
+                <article key={event.id} className="border border-line rounded-[2rem] overflow-hidden">
                   <div className="grid grid-cols-1 lg:grid-cols-12">
                     {/* Poster */}
                     <div className="lg:col-span-5 relative aspect-3/4 sm:aspect-4/3 lg:aspect-auto lg:min-h-[30rem] bg-steel">
@@ -72,7 +72,7 @@ export default function EventsList() {
                           <button
                             onClick={() => setEventLang((prev) => ({ ...prev, [event.id]: 'es' }))}
                             aria-pressed={lang === 'es'}
-                            className={`px-2 py-1 rounded cursor-pointer transition-colors ${
+                            className={`px-3 py-1 rounded-full cursor-pointer transition-colors ${
                               lang === 'es' ? 'bg-dojo text-white' : 'text-ink-faint hover:text-ink'
                             }`}
                           >
@@ -81,7 +81,7 @@ export default function EventsList() {
                           <button
                             onClick={() => setEventLang((prev) => ({ ...prev, [event.id]: 'en' }))}
                             aria-pressed={lang === 'en'}
-                            className={`px-2 py-1 rounded cursor-pointer transition-colors ${
+                            className={`px-3 py-1 rounded-full cursor-pointer transition-colors ${
                               lang === 'en' ? 'bg-dojo text-white' : 'text-ink-faint hover:text-ink'
                             }`}
                           >
@@ -99,7 +99,7 @@ export default function EventsList() {
                         <button
                           onClick={() => toggleEvent(event.id)}
                           aria-expanded={false}
-                          className="mt-7 self-start inline-flex items-center gap-2.5 border border-line text-ink font-semibold px-6 py-3.5 rounded-md hover:border-dojo hover:text-dojo transition-colors duration-200 cursor-pointer"
+                          className="mt-7 self-start inline-flex items-center gap-2.5 border border-line text-ink font-semibold px-6 py-3.5 rounded-full hover:border-dojo hover:text-dojo transition-colors duration-200 cursor-pointer"
                         >
                           Read more
                           <span aria-hidden="true">→</span>
@@ -136,7 +136,7 @@ export default function EventsList() {
                             </div>
                           </div>
 
-                          <div className="bg-bone border border-line rounded-md p-6 mb-8">
+                          <div className="bg-bone rounded-3xl p-6 mb-8">
                             <h3 className="label text-ink-faint mb-5">{t.labels.cost}</h3>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                               <ul className="space-y-1.5">
@@ -180,7 +180,7 @@ export default function EventsList() {
                               href={event.registerLink}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-flex items-center justify-center gap-2.5 bg-dojo text-white font-semibold px-7 py-4 rounded-md hover:bg-dojo-deep transition-colors duration-200"
+                              className="inline-flex items-center justify-center gap-2.5 bg-dojo text-white font-semibold px-7 py-4 rounded-full hover:bg-dojo-deep transition-colors duration-200"
                             >
                               {t.labels.register}
                               <span aria-hidden="true">→</span>
@@ -206,7 +206,7 @@ export default function EventsList() {
       </section>
 
       {/* ── ARCHIVE CTA ──────────────────────────────────────── */}
-      <section className="bg-bone border-t border-line py-16 lg:py-20">
+      <section className="mx-3 sm:mx-4 lg:mx-6 my-3 lg:my-4 rounded-[2rem] lg:rounded-[2.5rem] overflow-hidden bg-bone py-16 lg:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
             <div className="lg:col-span-7">
@@ -218,7 +218,7 @@ export default function EventsList() {
             <div className="lg:col-span-5 lg:text-right">
               <Link
                 href="/events/archive"
-                className="inline-flex items-center gap-2.5 border border-line bg-white text-ink font-semibold px-7 py-4 rounded-md hover:border-dojo hover:text-dojo transition-colors duration-200"
+                className="inline-flex items-center gap-2.5 border border-line bg-white text-ink font-semibold px-7 py-4 rounded-full hover:border-dojo hover:text-dojo transition-colors duration-200"
               >
                 View event archive
                 <span aria-hidden="true">→</span>

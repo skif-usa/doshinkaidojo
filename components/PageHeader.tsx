@@ -47,7 +47,7 @@ export default function PageHeader({ label, title, intro, crumbs, path, children
       : null;
 
   return (
-    <section className="bg-bone border-b border-line text-ink py-14 lg:py-24">
+    <section className="mx-3 sm:mx-4 lg:mx-6 my-3 lg:my-4 rounded-[2rem] lg:rounded-[2.5rem] overflow-hidden bg-bone text-ink py-14 lg:py-24">
       {breadcrumbLd && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       )}

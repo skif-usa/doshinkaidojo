@@ -325,30 +325,45 @@ export default function Home() {
 
       {/* ── FAQ ──────────────────────────────────────────────── */}
       <section className="pb-24 lg:pb-36">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Reveal>
-            <h2 className="font-display font-semibold text-3xl lg:text-5xl leading-[1.1] text-center mb-12">
-              Questions, answered.
-            </h2>
-          </Reveal>
-          <Reveal delay={80}>
-            <div className="border-t border-line">
-              {faqs.map((f) => (
-                <details key={f.q} className="group border-b border-line">
-                  <summary className="flex items-center justify-between gap-6 py-6 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
-                    <span className="font-display font-medium text-lg lg:text-xl">{f.q}</span>
-                    <span
-                      aria-hidden="true"
-                      className="text-2xl leading-none text-ink-faint transition-transform duration-300 group-open:rotate-45"
-                    >
-                      +
-                    </span>
-                  </summary>
-                  <p className="pb-7 pr-10 text-ink-soft leading-relaxed">{f.a}</p>
-                </details>
-              ))}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+            <Reveal className="lg:col-span-5 lg:sticky lg:top-28">
+              <div className="relative aspect-4/3 lg:aspect-3/4 overflow-hidden rounded-[1.5rem]">
+                <Image
+                  src="/doskinkai_sign.webp"
+                  alt="Entrance sign and Doshinkai traditional karate banner outside the dojo"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 40vw"
+                  className="object-cover"
+                />
+              </div>
+            </Reveal>
+            <div className="lg:col-span-7">
+              <Reveal>
+                <h2 className="font-display font-semibold text-3xl lg:text-5xl leading-[1.1] mb-12">
+                  Questions, answered.
+                </h2>
+              </Reveal>
+              <Reveal delay={80}>
+                <div className="border-t border-line">
+                  {faqs.map((f) => (
+                    <details key={f.q} className="group border-b border-line">
+                      <summary className="flex items-center justify-between gap-6 py-6 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+                        <span className="font-display font-medium text-lg lg:text-xl">{f.q}</span>
+                        <span
+                          aria-hidden="true"
+                          className="text-2xl leading-none text-ink-faint transition-transform duration-300 group-open:rotate-45"
+                        >
+                          +
+                        </span>
+                      </summary>
+                      <p className="pb-7 pr-10 text-ink-soft leading-relaxed">{f.a}</p>
+                    </details>
+                  ))}
+                </div>
+              </Reveal>
             </div>
-          </Reveal>
+          </div>
         </div>
       </section>
 

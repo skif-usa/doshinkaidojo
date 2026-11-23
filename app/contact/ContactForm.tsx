@@ -129,7 +129,7 @@ export default function ContactForm() {
                   <button
                     type="submit"
                     disabled={status === 'submitting'}
-                    className={`inline-flex items-center justify-center gap-2.5 bg-dojo text-white font-semibold px-8 py-4 rounded-md transition-colors duration-200 ${
+                    className={`inline-flex items-center justify-center gap-2.5 bg-dojo text-white font-semibold px-8 py-4 rounded-full transition-colors duration-200 ${
                       status === 'submitting' ? 'opacity-70 cursor-not-allowed' : 'hover:bg-dojo-deep cursor-pointer'
                     }`}
                   >
@@ -142,7 +142,7 @@ export default function ContactForm() {
 
             {/* INFO */}
             <div className="lg:col-span-5">
-              <div className="bg-steel text-white p-8 lg:p-10 rounded-md h-full">
+              <div className="bg-steel text-white p-8 lg:p-10 rounded-[2rem] h-full">
                 <div className="space-y-10">
                   <div>
                     <h2 className="label text-white/50 mb-4">Dojo location</h2>

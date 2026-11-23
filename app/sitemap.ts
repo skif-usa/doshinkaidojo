@@ -21,6 +21,7 @@ const routes: Route[] = [
   { path: '/about/instructor', priority: 0.7, changeFrequency: 'monthly', lastModified: '2026-08-19' },
   { path: '/events', priority: 0.8, changeFrequency: 'weekly', lastModified: '2026-08-19' },
   { path: '/events/archive', priority: 0.5, changeFrequency: 'monthly', lastModified: '2026-08-19' },
+  { path: '/gallery', priority: 0.5, changeFrequency: 'monthly', lastModified: '2026-11-22' },
   { path: '/resources', priority: 0.6, changeFrequency: 'monthly', lastModified: '2026-08-19' },
   { path: '/resources/registry', priority: 0.5, changeFrequency: 'monthly', lastModified: '2026-08-19' },
   { path: '/resources/affiliated', priority: 0.5, changeFrequency: 'monthly', lastModified: '2026-08-19' },

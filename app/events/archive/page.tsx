@@ -40,7 +40,7 @@ export default function EventArchive() {
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8">
             {events.map((event, i) => (
               <article key={event.title} className="rise group flex flex-col">
-                <div className="relative aspect-3/4 bg-bone border border-line overflow-hidden group-hover:border-dojo transition-colors duration-300">
+                <div className="relative aspect-3/4 bg-bone border border-line rounded-[2rem] overflow-hidden group-hover:border-dojo transition-colors duration-300">
                   <Image
                     src={event.image}
                     alt={`Poster for ${event.title}`}
@@ -55,7 +55,7 @@ export default function EventArchive() {
                   <h2 className="font-display font-extrabold text-lg leading-snug group-hover:text-dojo transition-colors">
                     {event.title}
                   </h2>
-                  <span className="shrink-0 text-[11px] font-semibold tracking-[0.14em] text-ink-faint border border-line rounded px-2 py-1 tnum">
+                  <span className="shrink-0 text-[11px] font-semibold tracking-[0.14em] text-ink-faint border border-line rounded-full px-3 py-1 tnum">
                     {event.year}
                   </span>
                 </div>
@@ -68,7 +68,7 @@ export default function EventArchive() {
       </section>
 
       {/* ── CTA ──────────────────────────────────────────────── */}
-      <section className="bg-steel text-white">
+      <section className="mx-3 sm:mx-4 lg:mx-6 my-3 lg:my-4 rounded-[2rem] lg:rounded-[2.5rem] overflow-hidden bg-steel text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
             <div className="lg:col-span-7">
@@ -82,14 +82,14 @@ export default function EventArchive() {
             <div className="lg:col-span-5 flex flex-wrap gap-3 lg:justify-end">
               <Link
                 href="/events"
-                className="inline-flex items-center gap-2.5 bg-dojo text-white font-semibold px-7 py-4 rounded-md hover:bg-dojo-deep transition-colors duration-200"
+                className="inline-flex items-center gap-2.5 bg-dojo text-white font-semibold px-7 py-4 rounded-full hover:bg-dojo-deep transition-colors duration-200"
               >
                 Upcoming events
                 <span aria-hidden="true">→</span>
               </Link>
               <Link
                 href="/join/class-registration"
-                className="inline-flex items-center gap-2.5 border border-white/25 text-white font-semibold px-7 py-4 rounded-md hover:border-white transition-colors duration-200"
+                className="inline-flex items-center gap-2.5 border border-white/25 text-white font-semibold px-7 py-4 rounded-full hover:border-white transition-colors duration-200"
               >
                 Register for classes
               </Link>

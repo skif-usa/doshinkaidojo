@@ -76,7 +76,7 @@ export default function PrivateClassForm() {
       />
 
       {/* ── THE ADVANTAGE ────────────────────────────────────── */}
-      <section className="bg-steel text-white py-16 lg:py-24">
+      <section className="mx-3 sm:mx-4 lg:mx-6 my-3 lg:my-4 rounded-[2rem] lg:rounded-[2.5rem] overflow-hidden bg-steel text-white py-16 lg:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 mb-12">
             <div className="lg:col-span-5">
@@ -192,7 +192,7 @@ export default function PrivateClassForm() {
               <button
                 type="submit"
                 disabled={status === 'submitting'}
-                className={`w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-dojo text-white font-semibold px-8 py-4 rounded-md transition-colors duration-200 ${
+                className={`w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-dojo text-white font-semibold px-8 py-4 rounded-full transition-colors duration-200 ${
                   status === 'submitting' ? 'opacity-70 cursor-not-allowed' : 'hover:bg-dojo-deep cursor-pointer'
                 }`}
               >
